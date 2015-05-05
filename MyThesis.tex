@@ -141,11 +141,18 @@ In other words, the program must be able to control the replication program such
 	
 	The cell cycle defines the steps taken during cellulare reproduction.
 	There are many ways to define the differenst steps, or phases, taken during the cell cycle, depending on the depth and resolution needed.
-	For the purpose of communicating this research, the cell cycle will be divided into four steps: The first gap (G1) phase, the synthesis (S) phase, the second gap (G2) phase, and the mitosis (M) phase.
+	For the purpose of communicating this research, the cell cycle will be divided into four steps (see Figure \ref{CellCylce}: The first gap (G1) phase, the synthesis (S) phase, the second gap (G2) phase, and the mitosis (M) phase.
 	The first two phases of the cell cycle (G1 and S) are described by key processes for DNA replication.
 	The third phase of the cell cycle (G2) primarily acts as a buffer to ensure complete DNA replication.
 	The forth phase of the cell cycle (M) encompasses the physical division of the cell into two daughter cells.
 	The G2 and M phases are very important for robust cellular reproduction, but do not play a large role in DNA replication, and will therefore remain undiscussed.
+	
+\begin{figure}[b]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/CellCycle.png}
+	\end{center}
+	\caption[CellCycle]{\label{CellCycle} The complete cell cycle is made up of four phases: The Mitosis (M) phase, when a mother cell separates into two daughter cells. The first Gap (G1) phase, when the daughter cell undergoes growth and chemical preperation for DNA replication. The Synthesis (S) phase, when the DNA is replicated. And the second Gap (G2) phase which acts as a buffer to ensure complete replication before the M phase.}
+\end{figure}
 	
 		\subsection{The G1 Phase}
 		
@@ -155,9 +162,10 @@ In other words, the program must be able to control the replication program such
 		
 		Licensing occurs at the origin recognition complex (ORC).
 		The ORC is made up of a single group of six protiens that bind to the DNA at an origin.
-		Two additional protiens (Cdc6 and Cdt1) assist the ORC in recruiting minichromosome maintenance (MCM) 2-7 hexamer rings onto the DNA.
+		Two additional protiens (Cdc6 and Cdt1) assist the ORC in recruiting minichromosome maintenance (Mcm) 2-7 hexamer rings onto the DNA.
+		Loaded hexamers form pairs oreiented away from each other, each such pair will later be referred to as potential initiators, or just initiators.
 		After licensing, the resulting set of protiens associated with the origin is call the pre-replication complex (pre-RC).
-		Licensing is surpressed during the S and G2 phases by cyclin-dependant kinases.\cite{MolecularCellBiology}
+		Licensing is surpressed during the S and G2 phases by cyclin-dependant kinases, this effectively limits the cell cycle to a single replication event.\cite{MolecularCellBiology}
 		
 		\subsection{The S Phase}
 		
@@ -165,7 +173,31 @@ In other words, the program must be able to control the replication program such
 		After lisencing is completed in the G1 phase, the S phase encompases the division of the genome into two identical copies.
 		There are three main processes that happen during the S phase: Initiation, elongation, and coalescense.
 		
+		An origin initiatiates (or activates, or fires) during S phase when five other proteins bind to each in a pair of Mcm2-7 rings: Cdc45 and the tetrameric GINS complex.
+		The total system of protiens is called the CMG complex (\emph{c}dc45, \emph{M}cm2-7, \emph{G}INS complex) and composes a helicase which traverses the genome during the S phase.
+		As an origin fires, the pre-RC disassembles and the activated pair of helicases unwind and separate the double helix of the double-stranded DNA (dsDNA) into two complimentary single-stranded DNA (ssDNA) chains. \cite{GINSComplex}
 		
+		After an origin has been initiated, there is a small region of ssDNA bounded on either side by the CGM complex helicases.
+		The points where the dsDNA is separated into two ssDNA chains are called replication forks (or just ``forks'').
+		Elongation is the process by which the replication forks, with the help of the biological machinery stored in the CGM complex, propogate bydirectionally from the origin, separating the dsDNA.
+		As the forks propogate, DNA polymerases bind with the ssDNA between them.
+		DNA polymerases use the ssDNA as a template and backbone for synthesising dsDNA; essentially it adds the missing half back onto the separated strand.
+		DNA polymerase can only propogate in the 3' direction.
+		This poses a problem, because the two strands in dsDNA are orriented in opposing directions, so the polymerase can only smoothly traverse one of the ssDNA chains (the ``leading strand'') at each fork.
+		On the other strand (the ``lagging strand''), the polymerase ``stutters:'' It replicates a small region in the direction opposite to that of fork propogation until it hits a replicated region, leapfroggs over and past that region in the direction of fork propogation, and repeats.
+		These small fragments are called Okizaki fragments.
+		On the lagging strand, the Okizaki fragments are connected by DNA ligases.
+		
+		Finally, when two forks meet, coalescense occurs: The helicases dissasemble, and the two regions of dsDNA are connected by DNA ligase. \cite{MolecularCellBiology}
+		
+		For full definitions of which protiens take part in the replication process and how they interact, see \cite{PurifiedProteins}
+		
+	Figure [MAKE THIS] shows a distilled version of these processes. It effectively communicates the important parts of the cell cycle and removes many of the fine details that can be ignored.
+	
+	
+	\section{Origins of Replication}
+	
+	
 		
 %	The cell cycle is composed of four phases which broadly describe reproduction for all cell types.  They are the \textbf{G1} (gap-1) \textbf{phase}, the \textbf{S} (synthesis) \textbf{phase}, the \textbf{G2} (gap 2) \textbf{phase}, and the \textbf{M} (mitosis) \textbf{phase}.  The G1 phase consists of cell growth chemical preperation for DNA replication, this phase will be discussed more later.  The S phase is defined as the time during which the DNA is replicated.  The S phase will be duscussed more later.  After the S phase, the G2 phase consists of continued cell growth and chemical preperation for cell division.  Finally, the M phase is the time the cell spends going through division into two daughter cells.  The G2 phase and the M phase do not play a major role in the research presented and are presented here to complete the cell cycle, but will not be discussed further.
 
