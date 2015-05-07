@@ -341,7 +341,7 @@
 \RequirePackage{pdfpages}
 \newcommand{\makecopyrightdeclaration}{%
     \addtoToC{Partial Copyright Licence}
-    \includepdf{declaration_of_partial_copyright_licence.pdf}
+    \includepdf{images/declaration_of_partial_copyright_licence.pdf}
 }
 
 

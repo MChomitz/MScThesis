@@ -1,0 +1,168 @@
+\chapter{Introduction}
+
+Ubiquitous to all life is the timely and accurate replication of DNA.
+In simple cells (called prokaryotes), the process used to replicate the genome (called the ``replication program'') is well understood.
+Starting a sequence-defined location (the ``origin''), the double stranded DNA of the prokaryote genome separates into two single-stranded segments.
+From the origins, replicates bidirectionally as the single-stranded segments grow and are used as templates for the creation of two copies of the original genome.
+The boundaries between replicated and non-replicated DNA, called ``forks,'' continue to propogate throught the genome until it has been entirely separated and replicated.
+Prokaryotic organisms have such small genomes that replication can be completed using a single origin.\cite{MolecularCellBiology}
+
+More complex organisms (called eukaryotes), have genomes which are aproximately 1000 times longer and have forks that propogate about 10 times slower than prokaryotes [FIND SOURCE].
+Therefore, a single origin cannot fully replicate eukaryotic DNA quickly enough to sustain life.
+To overcome this limitation, eukaryotic DNA is replicated using a parallel process, with many origins firing throughout the genome [\textbf{FIND SOURCE}].
+
+Using many origins in the replication program creates several non-obvious issues that must be addressed for the program to work effectively.
+One such issue is the existance of separate replicated regions during the replication process.
+When the forks of two neighbouring replicated regions meet, the two coalesce into a single, larger replicated region.
+Another hurdle the program must overcome is the need to coordinate multiple origin activations events that are driven by stochastic processes.
+In other words, the program must be able to control the replication program such that the stochastic events that drive replication do not cause errors that can potentially harm the organism.\cite{eukaryotereview}
+
+
+	\section{The Cell Cycle}
+	
+	The cell cycle defines the steps taken during cellulare reproduction.
+	There are many ways to define the differenst steps, or phases, taken during the cell cycle, depending on the depth and resolution needed.
+	For the purpose of communicating this research, the cell cycle will be divided into four steps (see Figure \ref{CellCylce}:
+	The first gap (G1) phase, the synthesis (S) phase, the second gap (G2) phase, and the mitosis (M) phase.
+	The first two phases of the cell cycle (G1 and S) are described by key processes for DNA replication.
+	The third phase of the cell cycle (G2) primarily acts as a buffer to ensure complete DNA replication.
+	The forth phase of the cell cycle (M) encompasses the physical division of the cell into two daughter cells.
+	The G2 and M phases are very important for robust cellular reproduction, but do not play a large role in DNA replication, and will therefore remain undiscussed.
+	
+	\begin{figure}[b]
+		\begin{center}
+			\includegraphics[width=0.5\textwidth]{images/CellCycle.png}
+		\end{center}
+			\caption[CellCycle]{\label{CellCycle} The complete cell cycle is made up of four phases: 
+				The Mitosis (M) phase, when a mother cell separates into two daughter cells. 
+				The first Gap (G1) phase, when the daughter cell undergoes growth and chemical preperation for DNA replication.
+				The Synthesis (S) phase, when the DNA is replicated.
+				And the second Gap (G2) phase which acts as a buffer to ensure complete replication before the M phase.}
+	\end{figure}
+	
+		\subsection{The G1 Phase}
+		
+		As with any cycle, the cell cycle begins at the end of the previous cell cycle.
+		The G1 phase begins early in the life of a daughter cell, after the mother cell has divided in the previous M phase.
+		During this time, the cell grows and, more importantly, an important chemical process called licensing is carried out to prepare for replication during S phase.
+		
+		Licensing occurs at the origin recognition complex (ORC).
+		The ORC is made up of a single group of six protiens that bind to the DNA at an origin.
+		Two additional protiens (Cdc6 and Cdt1) assist the ORC in recruiting minichromosome maintenance (Mcm) 2-7 hexamer rings onto the DNA.
+		Loaded hexamers form pairs oreiented away from each other, each such pair will later be referred to as potential initiators, or just initiators.
+		After licensing, the resulting set of protiens associated with the origin is call the pre-replication complex (pre-RC).
+		Licensing is surpressed during the S and G2 phases by cyclin-dependant kinases, this effectively limits the cell cycle to a single replication event.\cite{MolecularCellBiology}
+		
+		\subsection{The S Phase}
+		
+		The second phase in the cell cycle is the S phase.
+		After lisencing is completed in the G1 phase, the S phase encompases the division of the genome into two identical copies.
+		There are three main processes that happen during the S phase:
+		Initiation, elongation, and coalescense.
+		
+		An origin initiatiates (or activates, or fires) during S phase when five other proteins bind to each in a pair of Mcm2-7 rings:
+		Cdc45 and the tetrameric GINS complex.
+		The total system of protiens is called the CMG complex (\emph{c}dc45, \emph{M}cm2-7, \emph{G}INS complex) and composes a helicase which traverses the genome during the S phase.
+		As an origin fires, the pre-RC disassembles and the activated pair of helicases unwind and separate the double helix of the double-stranded DNA (dsDNA) into two complimentary single-stranded DNA (ssDNA) chains. \cite{GINSComplex}
+		
+		After an origin has been initiated, there is a small region of ssDNA bounded on either side by the CGM complex helicases.
+		The points where the dsDNA is separated into two ssDNA chains are called replication forks (or just ``forks'').
+		Elongation is the process by which the replication forks, with the help of the biological machinery stored in the CGM complex, propogate bydirectionally from the origin, separating the dsDNA.
+		As the forks propogate, DNA polymerases bind with the ssDNA between them.
+		DNA polymerases use the ssDNA as a template and backbone for synthesising dsDNA; essentially it adds the missing half back onto the separated strand.
+		DNA polymerase can only propogate in the 3' direction.
+		This poses a problem, because the two strands in dsDNA are orriented in opposing directions, so the polymerase can only smoothly traverse one of the ssDNA chains (the ``leading strand'') at each fork.
+		On the other strand (the ``lagging strand''), the polymerase ``stutters:''
+		It replicates a small region in the direction opposite to that of fork propogation until it hits a replicated region, leapfroggs over and past that region in the direction of fork propogation, and repeats.
+		These small fragments are called Okizaki fragments.
+		On the lagging strand, the Okizaki fragments are connected by DNA ligases.
+		
+		Finally, when two forks meet, coalescense occurs:
+		The helicases dissasemble, and the two regions of dsDNA are connected by DNA ligase. \cite{MolecularCellBiology}
+		
+		For full definitions of which protiens take part in the replication process and how they interact, see \cite{PurifiedProteins}
+		
+	Figure [\textbf{MAKE THIS}] shows a distilled version of these processes. It effectively communicates the important parts of the cell cycle and removes many of the fine details that can be ignored.
+	
+	
+	\section{Origins of Replication}
+	
+	When prokaryotic DNA is replicated, a single origin is sufficient for a competent replicative program.
+	In this case the origin is located at a sequence specific site, and there is no need to worry about the firing-time except to ensure it is early enough for complete replication.
+	However, eukaryotic DNA requires many origins of replication for a competent replicative program (the number varries by species) [\textbf{FIND EXAMPLES}].
+	When multiple origins exist on the genome, there are more questions one can ask about their behaviour:
+	\begin{itemize}
+		\item \emph{What determines the locations of the origins?}
+		\item \emph{What controls the timing of when an origin fires?}
+	\end{itemize}
+	
+		\subsection{Origin Locations}
+		
+		The question ``\emph{What determines the locations of the origins},'' can be difficult to answer.
+		Depending on what organism your discussing, the answer can change significantly.
+		[\textbf{FIND EXAMPLES}].
+		
+		For the research presented, \emph{S. cerevisiae} (budding yeast) was considered.
+		Budding yeast is an ideal model species because, unlike the other examples provided [\textbf{when I find some}], the origins of \emph{S. cerevisiae} are localized.
+		In each cell cycle, origins of budding yeast may only be licensed in very narrow windows (~11 base pairs (bp)).
+		These windows are defined by specific sequences in the genome, called \emph{a}utonomously \emph{r}eplicatin \emph{s}equences or ARS elements, have been identified and catalogued [\textbf{FIND SOURCE}].
+		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
+		
+		\subsection{Origin Firing-Times}
+		
+		Origin initiation is a chemical process, and therefore is governed in part by the diffusive flow of chemicals within the cell.
+		This means the initiation process must be stochastic at some level.
+		Previous studies of the firing-times of individual origins in budding yeast have found evidence that the process has some driving force. [scott and de Moura]
+		Both studies measured the average firing-time and the spread in firing-times for each origin in budding yeast and discovered a correlation between them.
+		Essentially, origins that tend to fire early have narrowly defined fire-times, while those that tend to fire late have loosely defined firing times.
+		This trend implies the existance of a mechanism that strongly controls the fire-time of origins at the start of S phase, but loses its potency as S phase progresses.
+		
+		A theory for what physical components of the replicative machinery create this timing mechanism will be discussed in detail later [\textbf{Section number or name?}].
+		
+		
+	\section{Modelling Replication}
+	
+	To recap, DNA replication begins at origins which, in budding yeast, are localized spacially but whose firing-times exhibit stochasticity.
+	Once an origin has fired, replication forks traverse the DNA bidirectionaly, enclosing a growing region of replicated DNA between them.
+	When two regions of replicated DNA meet, they coalesce into one larger region.
+	
+	This process can very easily be mapped to a crystalization process in 1 dimension:
+	Crystalization starts when the crystal nucleates at nucleation sites, which map to origins of replication.
+	From nucleation sites, the crystal grows bidirectionally and the crystal domain is surrounded by boundaries that can be mapped to the replicative forks.
+	Finally, when two crystal regions meet they coalesce into a larger region, which matches the coalescense of neighbouring regions of replicated DNA.
+	This mapping of DNA replication to crystal growth is quite convenient.
+	
+	Early in the 20th century the KJMA model was developed as a stochastic model that describes crystalization growth in three dimensions.
+	Since its inception, the KJMA model has been used for many studies that range from phase transition kinetics to Renyi's car-parking problem in one dimension [\textbf{SOURCES IN P847 PAPER}].
+	With the wealth of work done in the KJMA, it shouldn't be surprising that in 2005 S.~Jun, H.~Zhang, and J.~Bechhoefer successfully synthesised a KJM-like model of DNA replication [\textbf{SOURCE THIS}].
+	In the work of 2005, a formalism was developed which can be used to infer the replication profile of a genome given a set of parameters that describe the speed of replication forks and the origins' locations in time and space.
+	
+	One of the quantities that can be infered using the KJMA formalism is the replicated fraction, $f(x,t)$.
+	The replicated fraction can be interpretted as the probability that the genome at position $x$ has been replicated by the time $t$ after the start of S phase.
+	The replicated fraction is an important quantity that will be discussed more later.
+	
+	
+	\section{Experiments Measuring Replication}
+	
+	So far, the mechanisms of DNA replication and a quick intoduction to modelling that process have been discussed.
+	The question still remains:
+	\emph{How can DNA replication be observed experimentally?}
+	As it turns out, there are several techniques available to scientists that answer this question, including DNA combing, chip Seq, microarray, and sequencing experiments [\emph{FIND SOURCE(S)}].
+	Because they play an important role in this research, Microarray and sequencing experiments will be discussed in more detail here.
+	
+		\subsection{Microarray Experiments}
+		
+		[\textbf{READ ABOUT THIS}] Where did it originate? By what mechanism does it work? What set it apart when it was developed? What are the current pros and cons?
+		
+		\subsection{Sequencing Experiments}
+		
+		Where did it originate? By What mechanism does it work? What set it apart when it was developed? What are the current pros and cons?
+		
+		
+		
+		
+		
+		
+		
+		
+		
