@@ -22,23 +22,21 @@ In other words, the program must be able to control the replication program such
 	
 	The cell cycle defines the steps taken during cellulare reproduction.
 	There are many ways to define the differenst steps, or phases, taken during the cell cycle, depending on the depth and resolution needed.
-	For the purpose of communicating this research, the cell cycle will be divided into four steps (see Figure \ref{CellCylce}:
+	For the purpose of communicating this research, the cell cycle will be divided into four steps (see Figure \ref{CellCycle}::
 	The first gap (G1) phase, the synthesis (S) phase, the second gap (G2) phase, and the mitosis (M) phase.
 	The first two phases of the cell cycle (G1 and S) are described by key processes for DNA replication.
 	The third phase of the cell cycle (G2) primarily acts as a buffer to ensure complete DNA replication.
 	The forth phase of the cell cycle (M) encompasses the physical division of the cell into two daughter cells.
 	The G2 and M phases are very important for robust cellular reproduction, but do not play a large role in DNA replication, and will therefore remain undiscussed.
 	
-	\begin{figure}[b]
-		\begin{center}
-			\includegraphics[width=0.5\textwidth]{images/CellCycle.png}
-		\end{center}
-			\caption[CellCycle]{\label{CellCycle} The complete cell cycle is made up of four phases: 
-				The Mitosis (M) phase, when a mother cell separates into two daughter cells. 
-				The first Gap (G1) phase, when the daughter cell undergoes growth and chemical preperation for DNA replication.
-				The Synthesis (S) phase, when the DNA is replicated.
-				And the second Gap (G2) phase which acts as a buffer to ensure complete replication before the M phase.}
-	\end{figure}
+	\begin{SCfigure}[1][thb]
+		\includegraphics[width=0.45\textwidth]{images/CellCycle.png}
+		\caption[Cell Cycle]{\label{CellCycle} The complete cell cycle is made up of four phases: 
+			The Mitosis (M) phase, when a mother cell separates into two daughter cells. 
+			The first Gap (G1) phase, when the daughter cell undergoes growth and chemical preperation for DNA replication.
+			The Synthesis (S) phase, when the DNA is replicated.
+			And the second Gap (G2) phase which acts as a buffer to ensure complete replication before the M phase.}
+	\end{SCfigure}
 	
 		\subsection{The G1 Phase}
 		
@@ -80,9 +78,25 @@ In other words, the program must be able to control the replication program such
 		Finally, when two forks meet, coalescense occurs:
 		The helicases dissasemble, and the two regions of dsDNA are connected by DNA ligase. \cite{MolecularCellBiology}
 		
-		For full definitions of which protiens take part in the replication process and how they interact, see \cite{PurifiedProteins}
+		For full definitions of those protiens that take part in the replication process and how they interact, see \cite{PurifiedProteins}.
 		
-	Figure [\textbf{MAKE THIS}] shows a distilled version of these processes. It effectively communicates the important parts of the cell cycle and removes many of the fine details that can be ignored.
+	Figure \ref{EarlyReplicationConcept} shows a distilled version of these processes. It effectively communicates the important parts of the cell cycle and removes many of the fine details that can be ignored.
+	
+	\begin{figure}[tbh]
+		\begin{center}
+			\includegraphics[width=\textwidth]{images/EarlyReplicationConcept.png}
+		\end{center}
+			\caption[Events During Replication]{\label{EarlyReplicationConcept} During replication many processes encompassing many protiens and protien structures are carried out.
+				This graphic illustrates a digested version of the G1 and S phases of the cell cycle, with only those parts that are necessary to understand the model present.
+				\textbf{A} In the G1 phase, origins are located and licensed when the ORC recruits pairs of MCM2-7 hexamers onto the dsDNA.
+					During S phase, pairs of MCM2-7 hexamers are activated by the addition of the cdc45 protien.
+					After activation, the resulting structures become the replicative forks which travers the DNA unwinding the dsDNA allowing the DNA to be replicated.
+				\textbf{B} Due to the existance of multiple origins in eukaryotes, there are several other events that happen during the S phase.
+					At the start of S phase, there are several origins liscensed along the genome (top of image).
+					As time progresses (down), origins fire independantly and replicative forks propogate along the genome.
+					It is common for some number of origins to be passively replicated, that is, they can be replicated by the replicative fork from a neighbouring origin before firing themselves.
+					At the end of the S phase, two identical and complete sets of dsDNA will be present (bottom of image).}
+	\end{figure}
 	
 	
 	\section{Origins of Replication}
@@ -104,8 +118,8 @@ In other words, the program must be able to control the replication program such
 		
 		For the research presented, \emph{S. cerevisiae} (budding yeast) was considered.
 		Budding yeast is an ideal model species because, unlike the other examples provided [\textbf{when I find some}], the origins of \emph{S. cerevisiae} are localized.
-		In each cell cycle, origins of budding yeast may only be licensed in very narrow windows (\~11 base pairs (bp)).
-		These windows are defined by specific sequences in the genome, called \emph{a}utonomously \emph{r}eplicatin \emph{s}equences or ARS elements, have been identified and catalogued [\textbf{FIND SOURCE}].
+		In each cell cycle, origins of budding yeast may only be licensed in very narrow windows (aproximately 11 base pairs (bp)).
+		These windows are defined by specific sequences in the genome, called \emph{a}utonomously \emph{r}eplicatin \emph{s}equences (ARS) elements, have been identified and catalogued [\textbf{FIND SOURCE}].
 		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
 		
 		\subsection{Origin Firing-Times}
@@ -152,11 +166,13 @@ In other words, the program must be able to control the replication program such
 	
 		\subsection{Microarray Experiments}
 		
-		[\textbf{READ ABOUT THIS}] Where did it originate? By what mechanism does it work? What set it apart when it was developed? What are the current pros and cons?
+		\emph{[\textbf{READ ABOUT THIS}] Where did it originate? By what mechanism does it work? What set it apart when it was developed? What are the current pros and cons?}
 		
 		\subsection{Sequencing Experiments}
 		
-		Where did it originate? By What mechanism does it work? What set it apart when it was developed? What are the current pros and cons?
+		\emph{Where did it originate? By What mechanism does it work? What set it apart when it was developed? What are the current pros and cons?}
+		
+		A sequencing experiment is any experiment that is able to identify the sequence of basepairs in a DNA molecule.
 		
 		
 		
