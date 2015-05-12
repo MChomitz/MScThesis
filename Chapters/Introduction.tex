@@ -5,7 +5,7 @@ In simple cells (called prokaryotes), the process used to replicate the genome (
 Starting a sequence-defined location (the ``origin''), the double stranded DNA of the prokaryote genome separates into two single-stranded segments.
 From the origins, replicates bidirectionally as the single-stranded segments grow and are used as templates for the creation of two copies of the original genome.
 The boundaries between replicated and non-replicated DNA, called ``forks,'' continue to propogate throught the genome until it has been entirely separated and replicated.
-Prokaryotic organisms have such small genomes that replication can be completed using a single origin.\cite{MolecularCellBiology}
+Prokaryotic organisms have such small genomes that replication can be completed using a single origin. \cite{MolecularCellBiology}
 
 More complex organisms (called eukaryotes), have genomes which are aproximately 1000 times longer and have forks that propogate about 10 times slower than prokaryotes.
 Therefore, a single origin cannot fully replicate eukaryotic DNA quickly enough to sustain life.
@@ -15,14 +15,14 @@ Using many origins in the replication program creates several non-obvious issues
 One such issue is the existance of separate replicated regions during the replication process.
 When the forks of two neighbouring replicated regions meet, the two coalesce into a single, larger replicated region.
 Another hurdle the program must overcome is the need to coordinate multiple origin activations events that are driven by stochastic processes.
-In other words, the program must be able to control the replication program such that the stochastic events that drive replication do not cause errors that can potentially harm the organism.\cite{eukaryotereview}
+In other words, the program must be able to control the replication program such that the stochastic events that drive replication do not cause errors that can potentially harm the organism. \cite{eukaryotereview}
 
 
 	\section{The Cell Cycle}
 	
 	The cell cycle defines the steps taken during cellulare reproduction.
 	There are many ways to define the differenst steps, or phases, taken during the cell cycle, depending on the depth and resolution needed.
-	For the purpose of communicating this research, the cell cycle will be divided into four steps (see Figure \ref{CellCycle}::
+	For the purpose of communicating this research, the cell cycle will be divided into four steps (see Figure \ref{CellCycle}):
 	The first gap (G1) phase, the synthesis (S) phase, the second gap (G2) phase, and the mitosis (M) phase.
 	The first two phases of the cell cycle (G1 and S) are described by key processes for DNA replication.
 	The third phase of the cell cycle (G2) primarily acts as a buffer to ensure complete DNA replication.
@@ -49,7 +49,7 @@ In other words, the program must be able to control the replication program such
 		Two additional protiens (Cdc6 and Cdt1) assist the ORC in recruiting minichromosome maintenance (Mcm) 2-7 hexamer rings onto the DNA.
 		Loaded hexamers form pairs oreiented away from each other, each such pair will later be referred to as potential initiators, or just initiators.
 		After licensing, the resulting set of protiens associated with the origin is call the pre-replication complex (pre-RC).
-		Licensing is surpressed during the S and G2 phases by cyclin-dependant kinases, this effectively limits the cell cycle to a single replication event.\cite{MolecularCellBiology}
+		Licensing is surpressed during the S and G2 phases by cyclin-dependant kinases, this effectively limits the cell cycle to a single replication event. \cite{MolecularCellBiology}
 		
 		\subsection{The S Phase}
 		
@@ -104,7 +104,7 @@ In other words, the program must be able to control the replication program such
 	When prokaryotic DNA is replicated, a single origin is sufficient for a competent replicative program.
 	In this case the origin is located at a sequence specific site, and there is no need to worry about the firing-time except to ensure it is early enough for complete replication.
 	However, eukaryotic DNA requires many origins of replication for a competent replicative program.
-	The number of origins in the genome varies by species, from fewer than 800 in budding yeast\cite{OriDB}, to about 100 000 in humans \cite{OriginsReview}.
+	The number of origins in the genome varies by species, from fewer than 800 in budding yeast \cite{OriDB}, to about 100 000 in humans \cite{OriginsReview}.
 	When multiple origins exist on the genome, there are more questions one can ask about their behaviour:
 	\begin{itemize}
 		\item \emph{What determines the locations of the origins?}
@@ -115,12 +115,13 @@ In other words, the program must be able to control the replication program such
 		
 		The question ``\emph{What determines the locations of the origins},'' can be difficult to answer.
 		Depending on what organism your discussing, the answer can change significantly.
-		In \emph{Saccharomyces civiseai} (budding yeast) origins are tightly bound in sequences between 11 and 17 bp in length and are effectively localized \cite{ScottsPaper}.
+		In \emph{Saccharomyces civiseai} (budding yeast) origins are tightly bound in sequences between 11 and 17 basepairs (bp) in length and are effectively localized \cite{ScottsPaper}.
 		In \emph{Schizosaccharomyces pombe} (fission yeast) the origins are loosely bounded in 100 to 200 bp sequences \cite{OriginsReview}.
-		[\textbf{FIND EXAMPLES}].
+		The region of potential licensing grows to about 200 kilobasepairs (kb) in the human genome \cite{HumanGenome}.
+		In \emph{Xenopus laevis} (African clawed frog) embryos, the origins are placed completely stochastically, with no sequence affinity at all \cite{FrogEmbryo}.
 		
 		For the research presented, \emph{S. cerevisiae} (budding yeast) was considered.
-		Budding yeast is an ideal model species because, unlike the other examples provided [\textbf{when I find some}], the origins of \emph{S. cerevisiae} are localized.
+		Budding yeast is an ideal model species because, unlike the other examples provided, the origins of \emph{S. cerevisiae} are localized.
 		In each cell cycle, origins of budding yeast may only be licensed in very narrow windows (aproximately 11 base pairs (bp)).
 		These windows are defined by specific sequences in the genome, called \emph{a}utonomously \emph{r}eplicatin \emph{s}equences (ARS) elements, have been identified and catalogued\footnote{an online database can be found at http://cerevisiae.oridb.org/} \cite{OriDB}.
 		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
