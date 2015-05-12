@@ -7,9 +7,9 @@ From the origins, replicates bidirectionally as the single-stranded segments gro
 The boundaries between replicated and non-replicated DNA, called ``forks,'' continue to propogate throught the genome until it has been entirely separated and replicated.
 Prokaryotic organisms have such small genomes that replication can be completed using a single origin.\cite{MolecularCellBiology}
 
-More complex organisms (called eukaryotes), have genomes which are aproximately 1000 times longer and have forks that propogate about 10 times slower than prokaryotes [FIND SOURCE].
+More complex organisms (called eukaryotes), have genomes which are aproximately 1000 times longer and have forks that propogate about 10 times slower than prokaryotes.
 Therefore, a single origin cannot fully replicate eukaryotic DNA quickly enough to sustain life.
-To overcome this limitation, eukaryotic DNA is replicated using a parallel process, with many origins firing throughout the genome [\textbf{FIND SOURCE}].
+To overcome this limitation, eukaryotic DNA is replicated using a parallel process, with many origins firing throughout the genome.
 
 Using many origins in the replication program creates several non-obvious issues that must be addressed for the program to work effectively.
 One such issue is the existance of separate replicated regions during the replication process.
@@ -78,7 +78,7 @@ In other words, the program must be able to control the replication program such
 		Finally, when two forks meet, coalescense occurs:
 		The helicases dissasemble, and the two regions of dsDNA are connected by DNA ligase. \cite{MolecularCellBiology}
 		
-		For full definitions of those protiens that take part in the replication process and how they interact, see \cite{PurifiedProteins}.
+		For more information on the intricacies of this process, see \cite{OriginsReview}, and for full definitions of those protiens that take part in the replication process and how they interact, see \cite{PurifiedProteins}.
 		
 	Figure \ref{EarlyReplicationConcept} shows a distilled version of these processes. It effectively communicates the important parts of the cell cycle and removes many of the fine details that can be ignored.
 	
@@ -103,7 +103,8 @@ In other words, the program must be able to control the replication program such
 	
 	When prokaryotic DNA is replicated, a single origin is sufficient for a competent replicative program.
 	In this case the origin is located at a sequence specific site, and there is no need to worry about the firing-time except to ensure it is early enough for complete replication.
-	However, eukaryotic DNA requires many origins of replication for a competent replicative program (the number varries by species) [\textbf{FIND EXAMPLES}].
+	However, eukaryotic DNA requires many origins of replication for a competent replicative program.
+	The number of origins in the genome varies by species, from fewer than 800 in budding yeast\cite{OriDB}, to about 100 000 in humans \cite{OriginsReview}.
 	When multiple origins exist on the genome, there are more questions one can ask about their behaviour:
 	\begin{itemize}
 		\item \emph{What determines the locations of the origins?}
@@ -114,12 +115,14 @@ In other words, the program must be able to control the replication program such
 		
 		The question ``\emph{What determines the locations of the origins},'' can be difficult to answer.
 		Depending on what organism your discussing, the answer can change significantly.
+		In \emph{Saccharomyces civiseai} (budding yeast) origins are tightly bound in sequences between 11 and 17 bp in length and are effectively localized \cite{ScottsPaper}.
+		In \emph{Schizosaccharomyces pombe} (fission yeast) the origins are loosely bounded in 100 to 200 bp sequences \cite{OriginsReview}.
 		[\textbf{FIND EXAMPLES}].
 		
 		For the research presented, \emph{S. cerevisiae} (budding yeast) was considered.
 		Budding yeast is an ideal model species because, unlike the other examples provided [\textbf{when I find some}], the origins of \emph{S. cerevisiae} are localized.
 		In each cell cycle, origins of budding yeast may only be licensed in very narrow windows (aproximately 11 base pairs (bp)).
-		These windows are defined by specific sequences in the genome, called \emph{a}utonomously \emph{r}eplicatin \emph{s}equences (ARS) elements, have been identified and catalogued [\textbf{FIND SOURCE}].
+		These windows are defined by specific sequences in the genome, called \emph{a}utonomously \emph{r}eplicatin \emph{s}equences (ARS) elements, have been identified and catalogued\footnote{an online database can be found at http://cerevisiae.oridb.org/} \cite{OriDB}.
 		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
 		
 		\subsection{Origin Firing-Times}
@@ -140,15 +143,25 @@ In other words, the program must be able to control the replication program such
 	Once an origin has fired, replication forks traverse the DNA bidirectionaly, enclosing a growing region of replicated DNA between them.
 	When two regions of replicated DNA meet, they coalesce into one larger region.
 	
-	This process can very easily be mapped to a crystalization process in 1 dimension:
+	This process can very easily be mapped to a crystalization process in 1 dimension (Figure \ref{CrystalVsReplication}):
 	Crystalization starts when the crystal nucleates at nucleation sites, which map to origins of replication.
 	From nucleation sites, the crystal grows bidirectionally and the crystal domain is surrounded by boundaries that can be mapped to the replicative forks.
 	Finally, when two crystal regions meet they coalesce into a larger region, which matches the coalescense of neighbouring regions of replicated DNA.
 	This mapping of DNA replication to crystal growth is quite convenient.
 	
+	\begin{figure}[tbh]
+		\begin{center}
+			\includegraphics[width=\textwidth]{Images/CrystalVsReplication.png}
+		\end{center}
+			\caption[Comparing Crystalization with Replication]{\label{CrystalVsReplication} A comparison between the 1 dimensional KJMA crystalization model and the described replication model.
+				On the left is the 1 dimentional crystalization process, with nucleations shown as single circles and the crystals propogating at circular boundaries.
+				On the right is the replication process as described, see Figure \ref{EarlyReplicationConcept} for a full description.
+				It is possible to take advantage of the striking similarity between the two processes.}
+	\end{figure}
+	
 	Early in the 20th century the KJMA model was developed as a stochastic model that describes crystalization growth in three dimensions.
-	Since its inception, the KJMA model has been used for many studies that range from phase transition kinetics to Renyi's car-parking problem in one dimension [\textbf{SOURCES IN P847 PAPER}].
-	With the wealth of work done in the KJMA, it shouldn't be surprising that in 2005 S.~Jun, H.~Zhang, and J.~Bechhoefer successfully synthesised a KJM-like model of DNA replication [\textbf{SOURCE THIS}].
+	Since its inception, the KJMA model has been used for many studies that range from phase transition kinetics \cite{AlloyPhaseTransitions} to Renyi's car-parking problem in one dimension \cite{CarParking}.
+	With the wealth of work done in the KJMA, it shouldn't be surprising that in 2005 S.~Jun, H.~Zhang, and J.~Bechhoefer successfully synthesised a KJM-like model of DNA replication \cite{KJMA1,KJMA2}.
 	In the work of 2005, a formalism was developed which can be used to infer the replication profile of a genome given a set of parameters that describe the speed of replication forks and the origins' locations in time and space.
 	
 	One of the quantities that can be infered using the KJMA formalism is the replicated fraction, $f(x,t)$.
