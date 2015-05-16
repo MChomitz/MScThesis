@@ -1,13 +1,15 @@
 \chapter{Introduction}
+\label{ch:Introduction'}
 
-Ubiquitous to all life is the timely and accurate replication of DNA.
+The timely and accurate replication of DNA is a crucial step in the continuation of all life.
 In simple cells (called prokaryotes), the process used to replicate the genome (called the ``replication program'') is well understood.
-Starting a sequence-defined location (the ``origin''), the double stranded DNA of the prokaryote genome separates into two single-stranded segments.
-From the origins, replicates bidirectionally as the single-stranded segments grow and are used as templates for the creation of two copies of the original genome.
-The boundaries between replicated and non-replicated DNA, called ``forks,'' continue to propagate through the genome until it has been entirely separated and replicated.
+Starting at a sequence-defined location (the ``origin''), the double-stranded DNA (dsDNA) of the prokaryote genome separates into two single-stranded DNA (ssDNA) segments.
+Complex biological machinery travel bidirectionally from the origin, separating the dsDNA into growing ssDNA segments which are used as templates for the creation of two copies of the original genome.
+The machinery between replicated and non-replicated DNA, called ``forks,'' continue to propagate through the genome until it has been entirely separated and replicated.
 Prokaryotic organisms have such small genomes that replication can be completed using a single origin. \cite{MolecularCellBiology}
 
-More complex organisms (called eukaryotes), have genomes which are approximately 1000 times longer and have forks that propagate about 10 times slower than prokaryotes.
+More complex organisms (called eukaryotes), have genomes that are approximately 1000 times longer and have forks that propagate about 10 times slower than prokaryotes.
+The replicationi forks from a single origin would take about $10^4$ time as long to fully separate the dsDNA for replication.
 Therefore, a single origin cannot fully replicate eukaryotic DNA quickly enough to sustain life.
 To overcome this limitation, eukaryotic DNA is replicated using a parallel process, with many origins firing throughout the genome.
 
@@ -19,10 +21,11 @@ In other words, the program must be able to control the replication program such
 
 
 	\section{The Cell Cycle}
+	\label{sec:CellCycle}
 	
 	The cell cycle defines the steps taken during cellular reproduction.
 	There are many ways to define the different steps, or phases, taken during the cell cycle, depending on the depth and resolution needed.
-	For the purpose of communicating this research, the cell cycle will be divided into four steps (see Figure \ref{CellCycle}):
+	For the purpose of communicating this research, the cell cycle will be divided into four steps (see Figure \ref{fig:CellCycle}):
 	The first gap (G1) phase, the synthesis (S) phase, the second gap (G2) phase, and the mitosis (M) phase.
 	The first two phases of the cell cycle (G1 and S) are described by key processes for DNA replication.
 	The third phase of the cell cycle (G2) primarily acts as a buffer to ensure complete DNA replication.
@@ -31,7 +34,7 @@ In other words, the program must be able to control the replication program such
 	
 	\begin{SCfigure}[1][thb]
 		\includegraphics[width=0.45\textwidth]{images/CellCycle.png}
-		\caption[Cell Cycle]{\label{CellCycle} The complete cell cycle is made up of four phases: 
+		\caption[Cell Cycle]{\label{fig:CellCycle} The complete cell cycle is made up of four phases: 
 			The Mitosis (M) phase, when a mother cell separates into two daughter cells. 
 			The first Gap (G1) phase, when the daughter cell undergoes growth and chemical preparation for DNA replication.
 			The Synthesis (S) phase, when the DNA is replicated.
@@ -39,6 +42,7 @@ In other words, the program must be able to control the replication program such
 	\end{SCfigure}
 	
 		\subsection{The G1 Phase}
+		\label{subsec:G1Phase}
 		
 		As with any cycle, the cell cycle begins at the end of the previous cell cycle.
 		The G1 phase begins early in the life of a daughter cell, after the mother cell has divided in the previous M phase.
@@ -52,6 +56,7 @@ In other words, the program must be able to control the replication program such
 		Licensing is suppressed during the S and G2 phases by cyclin-dependant kinases, this effectively limits the cell cycle to a single replication event. \cite{MolecularCellBiology}
 		
 		\subsection{The S Phase}
+		\label{subsec:SPhase}
 		
 		The second phase in the cell cycle is the S phase.
 		After licensing is completed in the G1 phase, the S phase encompasses the division of the genome into two identical copies.
@@ -80,13 +85,13 @@ In other words, the program must be able to control the replication program such
 		
 		For more information on the intricacies of this process, see \cite{OriginsReview}, and for full definitions of those proteins that take part in the replication process and how they interact, see \cite{PurifiedProteins}.
 		
-	Figure \ref{EarlyReplicationConcept} shows a distilled version of these processes. It effectively communicates the important parts of the cell cycle and removes many of the fine details that can be ignored.
+	Figure \ref{fig:EarlyReplicationConcept} shows a distilled version of these processes. It effectively communicates the important parts of the cell cycle and removes many of the fine details that can be ignored.
 	
 	\begin{figure}[tbh]
 		\begin{center}
 			\includegraphics[width=\textwidth]{images/EarlyReplicationConcept.png}
 		\end{center}
-			\caption[Events During Replication]{\label{EarlyReplicationConcept} During replication many processes encompassing many proteins and protein structures are carried out.
+			\caption[Events During Replication]{\label{fig:EarlyReplicationConcept} During replication many processes encompassing many proteins and protein structures are carried out.
 				This graphic illustrates a digested version of the G1 and S phases of the cell cycle, with only those parts that are necessary to understand the model present.
 				\textbf{A} In the G1 phase, origins are located and licensed when the ORC recruits pairs of MCM2-7 hexamers onto the dsDNA.
 					During S phase, pairs of MCM2-7 hexamers are activated by the addition of the cdc45 protien.
@@ -100,6 +105,7 @@ In other words, the program must be able to control the replication program such
 	
 	
 	\section{Origins of Replication}
+	\label{sec:Origins}
 	
 	When prokaryotic DNA is replicated, a single origin is sufficient for a competent replicative program.
 	In this case the origin is located at a sequence specific site, and there is no need to worry about the firing-time except to ensure it is early enough for complete replication.
@@ -112,6 +118,7 @@ In other words, the program must be able to control the replication program such
 	\end{itemize}
 	
 		\subsection{Origin Locations}
+		\label{subsec:OriginLocations}
 		
 		The question ``\emph{What determines the locations of the origins},'' can be difficult to answer.
 		Depending on what organism your discussing, the answer can change significantly.
@@ -127,10 +134,11 @@ In other words, the program must be able to control the replication program such
 		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
 		
 		\subsection{Origin Firing-Times}
+		\label{subsec:OriginTimes}
 		
 		Origin initiation is a chemical process, and therefore is governed in part by the diffusive flow of chemicals within the cell.
 		This means the initiation process must be stochastic at some level.
-		Previous studies of the firing-times of individual origins in budding yeast have found evidence that the process has some driving force\cite{ScottsPaper,StochasticTermination}.
+		Previous studies of the firing-times of individual origins in budding yeast have found evidence that the process has some driving force \cite{ScottsPaper,StochasticTermination}.
 		Both studies measured the average firing-time and the spread in firing-times for each origin in budding yeast and discovered a correlation between them.
 		Essentially, origins that tend to fire early have narrowly defined fire-times, while those that tend to fire late have loosely defined firing times.
 		This trend implies the existence of a mechanism that strongly controls the fire-time of origins at the start of S phase, but loses its potency as S phase progresses.
@@ -139,12 +147,13 @@ In other words, the program must be able to control the replication program such
 		
 		
 	\section{Modeling Replication}
+	\label{sec:Modeling}
 	
 	To recap, DNA replication begins at origins which, in budding yeast, are localized spatially but whose firing-times exhibit stochasticity.
 	Once an origin has fired, replication forks traverse the DNA bidirectionally, enclosing a growing region of replicated DNA between them.
 	When two regions of replicated DNA meet, they coalesce into one larger region.
 	
-	This process can very easily be mapped to a crystallization process in 1 dimension (Figure \ref{CrystalVsReplication}):
+	This process can very easily be mapped to a crystallization process in 1 dimension (Figure \ref{fig:CrystalVsReplication}):
 	Crystallization starts when the crystal nucleates at nucleation sites, which map to origins of replication.
 	From nucleation sites, the crystal grows bidirectionally and the crystal domain is surrounded by boundaries that can be mapped to the replicative forks.
 	Finally, when two crystal regions meet they coalesce into a larger region, which matches the coalescence of neighbouring regions of replicated DNA.
@@ -154,7 +163,7 @@ In other words, the program must be able to control the replication program such
 		\begin{center}
 			\includegraphics[width=\textwidth]{Images/CrystalVsReplication.png}
 		\end{center}
-			\caption[Comparing Crystallization with Replication]{\label{CrystalVsReplication} A comparison between the 1 dimensional KJMA crystallization model and the described replication model.
+			\caption[Comparing Crystallization with Replication]{\label{fig:CrystalVsReplication} A comparison between the 1 dimensional KJMA crystallization model and the described replication model.
 				On the left is the 1 dimensional crystallization process, with nucleations shown as single circles and the crystals propagating at circular boundaries.
 				On the right is the replication process as described, see Figure \ref{EarlyReplicationConcept} for a full description.
 				It is possible to take advantage of the striking similarity between the two processes.}
@@ -171,6 +180,7 @@ In other words, the program must be able to control the replication program such
 	
 	
 	\section{Experiments Measuring Replication}
+	\label{sec:Experiments}
 	
 	So far, the mechanisms of DNA replication and a quick introduction to modeling that process have been discussed.
 	The question still remains:
@@ -199,6 +209,7 @@ In other words, the program must be able to control the replication program such
 	Due to their impact on the research, microarray experiments and sequencing experiments will be discussed in more detail. Both experiments were designed to maximize spacial resolution, and both can use either temporal scope.
 	
 		\subsection{Microarray Experiments}
+		\label{subsec:Microarray}
 		
 		Microarray experiments are high-throughput experiments that measure entire populations of cells simultaneously.
 		They start with a microarray chip\footnote{actually, many chips} and a population of cells.
@@ -210,6 +221,7 @@ In other words, the program must be able to control the replication program such
 		For example, in \cite{McCuneMicroArray} the measured replicated fraction didn't traverse the full spectrum of possible values; instead of values between $0$ and $1$, a range from $0.1$ to $0.9$ was observed.
 		
 		\subsection{Sequencing Experiments}
+		\label{subsec:Sequencing}
 		
 		A sequencing experiment is any experiment that can identify the sequence of base pairs contained in the input segment of DNA.
 		To measure the replicated fraction using sequencing, one must start with with the fully maped genome of the organism in question.
@@ -224,6 +236,7 @@ In other words, the program must be able to control the replication program such
 		Recent advances lowering the cost of sequencing have seen a transition from microarray experiments to sequencing experiments for measuring DNA replication.
 		
 	\section{Thesis map \textbf{UPDATE}}
+	\label{sec:Map}
 
 	Here I will give a brief outline of the thesis and how to traverse it. For now this will serve as a plan for the outline, but after writing this will be more of a roadmap for readers than for me.
 	

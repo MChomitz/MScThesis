@@ -6,5 +6,7 @@ The mythesis.tex file contains only the commands needed to create the thesis. Al
 
 In the Chapters\ directory, all the chapters are stored:
     Introduction.tex file which is included for the introduction chapter.
+    Motivation.tex file which is included
+    Meathods.tex file, not yet included
 
 The .bib file is the current bibliography. This will need to grow substantially before the thesis is finished.
