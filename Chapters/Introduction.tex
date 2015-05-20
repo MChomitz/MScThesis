@@ -6,17 +6,20 @@ In simple cells (called prokaryotes), the process used to replicate the genome (
 Starting at a sequence-defined location (the ``origin''), the double-stranded DNA (dsDNA) of the prokaryote genome separates into two single-stranded DNA (ssDNA) segments.
 Complex biological machinery travel bidirectionally from the origin, separating the dsDNA into growing ssDNA segments which are used as templates for the creation of two copies of the original genome.
 The machinery between replicated and non-replicated DNA, called ``forks,'' continue to propagate through the genome until it has been entirely separated and replicated.
-Prokaryotic organisms have such small genomes that replication can be completed using a single origin. \cite{MolecularCellBiology}
+Prokaryotic organisms have such small genomes that replication can be completed using a single origin \cite{MolecularCellBiology}.
+With this replication program, an \emph{E.~coli} bacterium can replicate its entire genome in about 40 minutes\footnote{Appendix \ref{ap:EColi}}.
 
 More complex organisms (called eukaryotes), have genomes that are approximately 1000 times longer and have forks that propagate about 10 times slower than prokaryotes.
-The replicationi forks from a single origin would take about $10^4$ time as long to fully separate the dsDNA for replication.
-Therefore, a single origin cannot fully replicate eukaryotic DNA quickly enough to sustain life.
-To overcome this limitation, eukaryotic DNA is replicated using a parallel process, with many origins firing throughout the genome.
+The replication forks from a single origin would take about $10^4$ time as long to fully separate the dsDNA for replication.
+Many human cells replicate in about 24 hours, during 8 of those hours, the DNA is replicated \cite{CellMolApproach}.
+This is much less than $10^4$ times as long as the 40 minute replication time of \emph{E.~coli}.
+Therefore, a single origin cannot be soley responsible for the replication of eukaryotic DNA.
+Eukaryotic DNA is replicated using a parallel process, with many origins along the genome that fire stochastically.
 
 Using many origins in the replication program creates several non-obvious issues that must be addressed for the program to work effectively.
 One such issue is the existence of separate replicated regions during the replication process.
 When the forks of two neighbouring replicated regions meet, the two coalesce into a single, larger replicated region.
-Another hurdle the program must overcome is the need to coordinate multiple origin activations events that are driven by stochastic processes.
+Another hurdle the program must overcome is the need to coordinate multiple origin activation events that are driven by stochastic processes.
 In other words, the program must be able to control the replication program such that the stochastic events that drive replication do not cause errors that can potentially harm the organism. \cite{eukaryotereview}
 
 
@@ -24,13 +27,11 @@ In other words, the program must be able to control the replication program such
 	\label{sec:CellCycle}
 	
 	The cell cycle defines the steps taken during cellular reproduction.
-	There are many ways to define the different steps, or phases, taken during the cell cycle, depending on the depth and resolution needed.
-	For the purpose of communicating this research, the cell cycle will be divided into four steps (see Figure \ref{fig:CellCycle}):
+	The cell cycle can be divided into four phases (see Figure \ref{fig:CellCycle}) \cite{CellMolApproach,MolecularBiology}:
 	The first gap (G1) phase, the synthesis (S) phase, the second gap (G2) phase, and the mitosis (M) phase.
-	The first two phases of the cell cycle (G1 and S) are described by key processes for DNA replication.
+	The first two phases of the cell cycle (G1 and S) contain key processes for DNA replication.
 	The third phase of the cell cycle (G2) primarily acts as a buffer to ensure complete DNA replication.
-	The fourth phase of the cell cycle (M) encompasses the physical division of the cell into two daughter cells.
-	The G2 and M phases are very important for robust cellular reproduction, but do not play a large role in DNA replication, and will therefore remain undiscussed.
+	During the fourth phase of the cell cycle (M) the cell physical divides into two daughter cells.
 	
 	\begin{SCfigure}[1][thb]
 		\includegraphics[width=0.45\textwidth]{images/CellCycle.png}
@@ -53,7 +54,7 @@ In other words, the program must be able to control the replication program such
 		Two additional proteins (Cdc6 and Cdt1) assist the ORC in recruiting minichromosome maintenance (Mcm) 2-7 hexamer rings onto the DNA.
 		Loaded hexamers form pairs oriented away from each other, each such pair will later be referred to as potential initiators, or just initiators.
 		After licensing, the resulting set of proteins associated with the origin is call the pre-replication complex (pre-RC).
-		Licensing is suppressed during the S and G2 phases by cyclin-dependant kinases, this effectively limits the cell cycle to a single replication event. \cite{MolecularCellBiology}
+		Licensing is suppressed during the S and G2 phases by cyclin-dependent kinases, this effectively limits the cell cycle to a single replication event. \cite{MolecularCellBiology}
 		
 		\subsection{The S Phase}
 		\label{subsec:SPhase}
@@ -68,9 +69,9 @@ In other words, the program must be able to control the replication program such
 		The total system of proteins is called the CMG complex (\emph{c}dc45, \emph{M}cm2-7, \emph{G}INS complex) and composes a helicase which traverses the genome during the S phase.
 		As an origin fires, the pre-RC disassembles and the activated pair of helicases unwind and separate the double helix of the double-stranded DNA (dsDNA) into two complimentary single-stranded DNA (ssDNA) chains. \cite{GINSComplex}
 		
-		After an origin has been initiated, there is a small region of ssDNA bounded on either side by the CGM complex helicases.
+		After an origin has been initiated, there is a small region of ssDNA bounded on either side by the CMG complex helicases.
 		The points where the dsDNA is separated into two ssDNA chains are called replication forks (or just ``forks'').
-		Elongation is the process by which the replication forks, with the help of the biological machinery stored in the CGM complex, propagate bidirectionally from the origin, separating the dsDNA.
+		Elongation is the process by which the replication forks, with the help of the biological machinery stored in the CMG complex, propagate bidirectionally from the origin, separating the dsDNA.
 		As the forks propagate, DNA polymerases bind with the ssDNA between them.
 		DNA polymerases use the ssDNA as a template and backbone for synthesizing dsDNA; essentially it adds the missing half back onto the separated strand.
 		DNA polymerase can only propagate in the 3' direction.
@@ -94,7 +95,7 @@ In other words, the program must be able to control the replication program such
 			\caption[Events During Replication]{\label{fig:EarlyReplicationConcept} During replication many processes encompassing many proteins and protein structures are carried out.
 				This graphic illustrates a digested version of the G1 and S phases of the cell cycle, with only those parts that are necessary to understand the model present.
 				\textbf{A} In the G1 phase, origins are located and licensed when the ORC recruits pairs of MCM2-7 hexamers onto the dsDNA.
-					During S phase, pairs of MCM2-7 hexamers are activated by the addition of the cdc45 protien.
+					During S phase, pairs of MCM2-7 hexamers are activated by the addition of the Cdc45 protein.
 					After activation, the resulting structures become the replicative forks which traverse the DNA unwinding the dsDNA allowing the DNA to be replicated.
 				\textbf{B} Due to the existence of multiple origins in eukaryotes, there are several other events that happen during the S phase.
 					At the start of S phase, there are several origins licensed along the genome (top of image).
