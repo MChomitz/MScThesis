@@ -42,6 +42,7 @@ In other words, the program must be able to control the replication program such
 			And the second Gap (G2) phase which acts as a buffer to ensure complete replication before the M phase.}
 	\end{SCfigure}
 	
+	
 		\subsection{The G1 Phase}
 		\label{subsec:G1Phase}
 		
@@ -55,6 +56,7 @@ In other words, the program must be able to control the replication program such
 		Loaded hexamers form pairs oriented away from each other~\cite{MCMPairs}, each such pair will later be referred to as potential initiators, or just initiators.
 		After licensing, the resulting set of proteins associated with the origin is call the pre-replication complex (pre-RC).
 		Licensing is suppressed during the S and G2 phases by cyclin-dependent kinases, this effectively limits the cell cycle to a single replication event.~\cite{MolecularCellBiology}
+		
 		
 		\subsection{The S Phase}
 		\label{subsec:SPhase}
@@ -113,6 +115,7 @@ In other words, the program must be able to control the replication program such
 		\item \emph{What controls the timing of origin firing?}
 	\end{itemize}
 	
+	
 		\subsection{Origin Locations}
 		\label{subsec:OriginLocations}
 		
@@ -123,18 +126,20 @@ In other words, the program must be able to control the replication program such
 		The region of potential licensing grows to about 200 kilo base pairs (kb) in the human genome~\cite{HumanGenome}.
 		In \emph{Xenopus laevis} (African clawed frog) embryos, the origins are placed completely stochastically, with no sequence affinity at all~\cite{FrogEmbryo}.
 		
+		
 		\subsection{Origin Firing-Times}
 		\label{subsec:OriginTimes}
 		
 		Origin initiation is a chemical process, and therefore is governed in part by the diffusive flow of chemicals within the cell.
 		This means the initiation process must be stochastic at some level.
 		
+		
 		\subsection{Budding Yeast}
 		\label{subsec:BuddingYeast}
 		
 		For the research presented, \emph{S. cerevisiae} (budding yeast) was considered.
 		Budding yeast is an ideal model species because, unlike the other examples provided, the origins of \emph{S. cerevisiae} are localized.
-		In each cell cycle, origins of budding yeast may only be licensed in very narrow windows.
+		In each cell cycle, origins of budding yeast may be licensed only in very narrow windows.
 		These windows are defined by specific sequences in the genome, called autonomously replicating sequences (ARS) elements, have been identified and cataloged\footnote{an online database can be found at http://cerevisiae.oridb.org/} \cite{OriDB}.
 		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
 		
@@ -146,33 +151,32 @@ In other words, the program must be able to control the replication program such
 		A theory for what physical components of the replicative machinery create this timing mechanism will be discussed in detail later [\textbf{Section number or name?}].
 		
 		
-	\section{Modeling Replication}
-	\label{sec:Modeling}
+	\section{Modelling Replication}
+	\label{sec:Modelling}
 	
 	To recap, DNA replication begins at origins which, in budding yeast, are localized spatially but whose firing-times exhibit stochasticity.
 	Once an origin has fired, replication forks traverse the DNA bidirectionally, enclosing a growing region of replicated DNA between them.
 	When two regions of replicated DNA meet, they coalesce into one larger region.
 	
-	This process can very easily be mapped to a crystallization process in 1 dimension (Figure~\ref{fig:CrystalVsReplication}):
+	This process can very easily be mapped to a crystallization process in one-dimension (Fig.~\ref{fig:CrystalVsReplication}):
 	Crystallization starts when the crystal nucleates at nucleation sites, which map to origins of replication.
-	From nucleation sites, the crystal grows bidirectionally and the crystal domain is surrounded by boundaries that can be mapped to the replicative forks.
-	Finally, when two crystal regions meet they coalesce into a larger region, which matches the coalescence of neighbouring regions of replicated DNA.
-	This mapping of DNA replication to crystal growth is quite convenient.
+	From nucleation sites, the crystal grows bidirectionally, and the crystal domain is surrounded by boundaries that can be mapped to the replicative forks.
+	Finally, when two crystal regions meet, they coalesce into a larger region, which matches the coalescence of neighbouring regions of replicated DNA.
+	This mapping of DNA replication to crystal growth means that one can use mathematics already developed, instead of reinventing the wheel.
 	
 	\begin{figure}[tbh]
 		\begin{center}
 			\includegraphics[width=\textwidth]{Images/CrystalVsReplication.png}
 		\end{center}
-			\caption[Comparing Crystallization with Replication]{\label{fig:CrystalVsReplication} A comparison between the 1 dimensional KJMA crystallization model and the described replication model.
-				On the left is the 1 dimensional crystallization process, with nucleation events shown as single circles and the crystals propagating at circular boundaries.
-				On the right is the replication process as described, see Figure~\ref{EarlyReplicationConcept} for a full description.
-				It is possible to take advantage of the striking similarity between the two processes.}
+			\caption[Comparing Crystallization with Replication]{\label{fig:CrystalVsReplication} Comparison between the one-dimensional KJMA crystallization model and the described replication model.
+				At left is the one-dimensional crystallization process, with circles representing nucleation sites (no arrow), or the propagating crystal boundaries (arrows in direction of propagation).
+				Right is the replication process as described, see Fig.~\ref{fig:EarlyReplicationConcept} for a full description.}
 	\end{figure}
 	
-	Early in the 20th century the KJMA model was developed as a stochastic model that describes crystallization growth in three dimensions.
-	Since its inception, the KJMA model has been used for many studies that range from phase transition kinetics~\cite{AlloyPhaseTransitions} to Renyi's car-parking problem in one dimension~\cite{CarParking}.
-	With the wealth of work done in the KJMA, it shouldn't be surprising that in 2005 S.~Jun, H.~Zhang, and J.~Bechhoefer successfully synthesized a KJMA-like model of DNA replication~\cite{KJMA1,KJMA2}.
-	In the work of 2005, a formalism was developed which can be used to infer the replication profile of a genome given a set of parameters that describe the speed of replication forks and the origins' locations in time and space.
+	Early in the 20th century the KJMA model was developed as a stochastic model that describes crystallization growth in three dimensions\cite{Kolmogorov, JohnsonAndMehl, AvramiI, AvramiII, AvramiIII}.
+	Since its inception, the KJMA model has been used for many studies that range from phase transition kinetics~\cite{AlloyPhaseTransitions} to R{\'e}nyi's car-parking problem in one dimension~\cite{CarParking}.
+	With the wealth of work done in the KJMA, it shouldn't be surprising that in 2002 J.~Herrick \emph{et al.} successfully synthesized a KJMA-like model of DNA replication when analyzing experiments done on \emph{X.~laevis}~\cite{KJMA2002}.
+	In 2005, the KJMA-like model was expanded, and a formalism was developed which can be used to infer the replication profile of a genome given a set of parameters that describe the speed of replication forks and the origins' locations in time and space~\cite{KJMA1, KJMA2}.
 	
 	One of the quantities that can be inferred using the KJMA formalism is the replicated fraction, $f(x,t)$.
 	The replicated fraction can be interpreted as the probability that the genome at position $x$ has been replicated by the time $t$ after the start of S phase.
@@ -182,58 +186,62 @@ In other words, the program must be able to control the replication program such
 	\section{Experiments Measuring Replication}
 	\label{sec:Experiments}
 	
-	So far, the mechanisms of DNA replication and a quick introduction to modeling that process have been discussed.
-	The question still remains:
+	So far, the topics covered have been conceptual and theoretical.
+	However, the theory describing DNA replication has been driven by the results of experiment, so there is a question that should be addressed:
 	\emph{How can DNA replication be observed experimentally?}
-	As it turns out, there are several techniques available to scientists that answer this question, including flow cytometry~\cite{DeepSeq}, DNA combing~\cite{DNACombing}, microarray~\cite{McCuneMicroArray}, and sequencing experiments~\cite{DeepSeq}.
-	All of these techniques differ to some degree, but there are some ways to easily categorize them by way of their scope.
-	The scope of an experiment can be broken into two parameters: Time and space.
+	As it turns out, there are several techniques available to scientists that answer this question, including flow cytometry~\cite{DeepSeq}, DNA combing~\cite{DNACombing}, microarray~\cite{MicroarrayReview, McCuneMicroArray}, and sequencing experiments~\cite{DeepSeq}.
+	These experiments can be separated into categories based on probing replication primarily spatially or temporally.
 	
-	In terms of time, there are a two approaches that experiments use to look at time.
-	The first approach is to \emph{arrest} the cell cycle.
-	This usually entails using a chemical bath to stop the cells from moving from one phase to another (for experiments related to DNA replication, this is generally just prior to entering the S phase).
-	The main drawbacks to this approach is it is susceptible to systematic error and it is difficult to arrest many species of eukaryotic organisms.
+	There are two approaches that experiments use to look at time.
+	The first is to synchronize the cell cycle.
+	A common way to do this is by \emph{arresting} the cell cycle, though there are other techniques~\cite{CellCycleSynch}.
+	This usually entails using a chemical bath to stop the cells from progressing from one phase to another (for experiments related to DNA replication, this is generally just prior to entering the S phase).
+	The main drawbacks to this approach are that it is susceptible to systematic error and that it is difficult to arrest many species of eukaryotic organisms.
 	After arresting the cell cycle, another chemical bath can be used to force the entire population of cells to enter the S phase synchronously.
-	The second approach is to forgo arresting the cell cycle and pull samples from an asynchronous population.
+	The second approach is to forego arresting the cell cycle and pull samples from an asynchronous population.
 	The main drawback to this method is it either creates time-average data or it relies on multiple techniques to infer the timing information.
-	For this research, the first scope was investigated.
+	For this research, the first was investigated.
 	
-	Spatially, there exists a spectrum of approaches, spanning between two extremes: Perfect base pair resolution and no spacial information.
-	At one end of the spectrum, some experiments calculate one value over the entire genome. 
-	For example a common flow cytometry technique called florescence activated cell sorting (FACS), measures only the amount of DNA in the cell.
-	Techniques like FACS provide only limited information but are simple and fast.
-	At the other end of the spectrum, some techniques are able to spatially resolve to small windows (\cite{DeepSeq} uses sequencing experiments to a resolution of 1 kb).
+	Spatially, approaches range between two extremes: Perfect base pair resolution and no spacial information.
+	At one extreme, some experiments calculate one value over the entire genome. 
+	For example a common flow cytometry technique called fluorescence activated cell sorting (FACS)~\cite{SequencingReview, DeepSeq}, measures only the amount of DNA in the cell.
+	Techniques such as FACS provide only limited information but are simple and fast.
+	At the other extreme, other techniques such as DNA sequencing and DNA microarray are able to spatially resolve to small windows (as small as 1 kb~\cite{DeepSeq}).
 	Experiments with this level of resolution are quite complex but provide tremendous insight toward understanding DNA replication.
 	For this research, the second scope was investigated.
 	
-	Due to their impact on the research, microarray experiments and sequencing experiments will be discussed in more detail. Both experiments were designed to maximize spacial resolution, and both can use either temporal scope.
+	Due to their impact on the research presented in this thesis, microarray experiments and sequencing experiments will be discussed in more detail.
+	Both experiments were designed to maximize spacial resolution, and both can use either a synchronous or an asynchronous population.
+	
 	
 		\subsection{Microarray Experiments}
 		\label{subsec:Microarray}
 		
-		Microarray experiments are high-throughput experiments that measure entire populations of cells simultaneously.
+		Microarray experiments are high-throughput experiments that count the genome of entire populations of cells simultaneously~\cite{MicroarrayReview}.
 		They start with a microarray chip\footnote{actually, many chips} and a population of cells.
 		The DNA of the population is extracted and hybridized with the chip, which provides a measure of the replicated fraction, $f$.
-		Depending on the temporal scope of the experiment, the measured replicated fraction could be time-averaged, $f(x)$, or in the case of an arrested population, it could be the replicated fraction for a specific time, $t_i$ after the start of S phase, $f(x,t=t_i)$.
+		Depending on the temporal scope of the experiment, the measured replicated fraction can be time-averaged, $f(x)$, or in the case of an arrested population, it can be the replicated fraction for a specific time, $t_i$ after the start of S phase, $f(x,t=t_i)$.
 		
-		Because this technique measures entire populations, microarray experiments are unable to provide any information about the variability between individual cells.
-		More importantly, microarrays suffer from artifacts and limitations that researchers must account for.
-		For example, in \cite{McCuneMicroArray} the measured replicated fraction didn't traverse the full spectrum of possible values; instead of values between $0$ and $1$, a range from $0.1$ to $0.9$ was observed.
+		Because this technique measures entire populations, microarray experiments do not provide information about cell-to-cell variability.
+		More importantly, microarrays suffer from artifacts that can be challenging to overcome.
+		For example, in 2008, McCune \emph{et al.} measured replication fractions that spanned only 80\% of the possible values~\cite{McCuneMicroArray}.
+		
 		
 		\subsection{Sequencing Experiments}
 		\label{subsec:Sequencing}
 		
-		A sequencing experiment is any experiment that can identify the sequence of base pairs contained in the input segment of DNA.
+		A sequencing experiment determines the precise sequence of base pairs contained in the input segment of DNA~\cite{SequencingReview}.
 		To measure the replicated fraction using sequencing, one must start with with the fully mapped genome of the organism in question.
-		The DNA from a population of cells to be measured is harvested and broken into segments about 50 bp in length~\cite{StochasticTermination}.
-		Each segment can be sequenced and compared to the previously mapped genome.
+		The DNA from a population of cells to be measured is harvested and broken into segments about 50 bp long~\cite{StochasticTermination}.
+		Each segment can be sequenced and matched to the previously mapped genome.
 		The normalized histogram of reads over the genome then provides the replicated fraction:
-		Regions that have not replicated in any cell are measured once and regions that have replicated in every cell are measured twice.
+		Regions that have not replicated are measured once and regions that have replicated are measured twice.
 		
 		Except for the actual process of measuring how many of each segment of DNA is present in the sample, sequencing experiments and microarray experiments are very similar.
 		The process of arresting cells, or not, is the same for both, as is the broad strokes of analyzing the output.
 		However, sequencing experiments do not required any clever data-processing to remove artifacts like those discussed already~\cite{EndOfMicroarray}.
 		Recent advances lowering the cost of sequencing have seen a transition from microarray experiments to sequencing experiments for measuring DNA replication.
+		
 		
 	\section{Thesis map \textbf{UPDATE}}
 	\label{sec:Map}
