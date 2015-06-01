@@ -1,11 +1,11 @@
 \chapter{Motivation}
 \label{ch:Motivation}
 
-Previous research into DNA replication has investigated the timing of origin initiation in great detail \cite{ScottsPaper,StochasticTermination}.
-In \cite{ScottsPaper}, Yang \emph{et al.} fit the replication fraction of an origin, $f(x=x_o,t)$, to a Sigmoidal Model to better understand origin firing-time [\textbf{Section reference}].
-The results (discussed in detail below) were confirmed using a different model by Hawkins \emph{et al.} \cite{StochasticTermination} in 2013.
+Previous research into DNA replication has investigated the timing of origin initiation in great detail~\cite{ScottsPaper,StochasticTermination,Bechhoefer2012374,deMouraModel1,deMouraModel2}.
+In particular, Yang \emph{et al.} fit the replication fraction of an origin, $f(x=x_o,t)$, to a Sigmoidal Model to better understand origin firing-time~\cite{ScottsPaper} [\textbf{Section reference}].
+The results (discussed in detail below) were confirmed using a different model by Hawkins \emph{et al.} in 2013~\cite{StochasticTermination}.
 
-The work of Yang \emph{et al.} lead to the development of a second analytical model called the Multiple Initiator Model (MIM) [\textbf{Section reference}].
+The work of Yang \emph{et al.} lead to the development of a second analytical model called the Multiple Initiator Model (MIM)~\cite{ScottsPaper} [\textbf{Section reference}].
 The MIM made some reasonable assumptions to simplify the math involved.
 This simple model can then be used to analyze experimental data and draw conclusions about the physical mechanisms controlling DNA replication.
 
@@ -13,6 +13,57 @@ However, recent work performed in N. Rhind's lab [\textbf{Source this, somehow}]
 The purpose of this research is to discover the impact of this new information on the MIM.
 
 The following sections of this chapter will expand on this story, filling in the details of the math behind the models, and explicitly stating the assumptions and measurements made.
+
+
+	\section{Replicated Fraction}
+	\label{sec:ReplicatedFraction}
+	
+	It was mentioned briefly in Chapter~\ref{ch:Introduction} that the replicated fraction,$f$, can be calculated from both theoretical models and experiments.
+	This makes it a valuable quantity because it acts as a bridge between the two.
+	
+	There are two equivalent ways to describe the replicated fraction as a function of time and space, $f(x,t)$.
+	The first is to describe it as a quantity of a single cell.
+	In the single cell case, the replicated fraction at $x$ and $t$ is the probability that the genome at position, $x$, in the genome has replicated a time, $t$, after the start of S phase.
+	The second description uses a population of cells.
+	From a population of cells, the replicated fraction at $x$ and $t$ is the fraction of the cells in the population that have replicated at position, $x$, in the genome a time, $t$, after the start of S phase.
+	It is not difficult to see the equivalency between these two descriptions, but it is important to make it clear that both definitions are true.
+	
+	
+		\subsection{Qualities of the Replicated Fraction}
+		\label{subsec:QualitiesReplicatedFraction}
+		
+		Before diving into the mathematical formulae that describe the replicated fraction of the KJMA-like model of DNA replication, it is valuable to build some intuition.
+		Experimentally, the replicated fraction is measured spatially in windows about 1 kb wide, and temporally in steps of 5 minutes~\cite{StochasticTermination}.
+		Budding yeast's genome is over $12000$kb long so, visually, the data is well resolved spatially.
+		However, Budding yeast completely replicates it's DNA in less than 90 minutes~\cite{DeepSeq}, and in fact most experiments stop performing thorough measurements after about 50 minutes~\cite{DeepSeq,StochasticTermination,McCuneMicroArray}.
+		Therefore, the data is not visually well resolved temporally.
+		The good news is, this amount of temporal resolution is enough to build an intuitive understanding of the replicated fraction, and to analyze mathematically.
+		
+		Figure~\ref{fig:ReplicatedFractionExample} shows an example set of replicated fraction data.
+		The data comes from measurements done on chromosome IV of budding yeast by M{\"u}ller \emph{et al.}~\cite{DeepSeq}.
+		The perceptive reader may notice a few things:
+		There are gaps in the spatial data.
+		The replicated fraction ranges lower than zero and higher than 1.
+		Some regions of the genome replicate faster than others.
+		
+		The gaps exist because of a limitation of the sequencing experiment used to gather this data.
+		Sequencing experiments match small chunks of DNA to the fully mapped genome (Section~\ref{subsec:Sequencing})
+		There are segments of the budding yeast genome that contain identical sequences [\textbf{FIND SOURCE}].
+		When a chunk of DNA that contains only a sequence that is repeated and nothing that can uniquely identify it, that sequence is omitted from the results because there is no way to know where it came from.
+		
+		The replicated fraction has a larger range than is theoretically possible.
+		This is not because some regions are not replicated or replicated doubly, but because of inaccuracies in the experimental procedure.
+		
+		The most important observation is the fact that some regions of the genome start replicating much earlier than others.
+		This can be seen in the peaks in Figure~\ref{fig:ReplicatedFractionExample}, for example at $x \approx 900$.
+		
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=\textwidth]{Images/CHR4Exp.png}
+			\end{center}
+				\caption[Budding yeast chromosome IV replicated fraction]{\label{fig:ReplicatedFractionExample} Replicated fraction of chromosome IV of budding yeast measured by M{\"u}ller \emph{et al.}~\cite{DeepSeq}.
+				}
+		\end{figure}
 
 
 	\section{The Sigmoidal Model}

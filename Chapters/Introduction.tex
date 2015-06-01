@@ -5,7 +5,7 @@ The timely and accurate replication of DNA is a critical process in maintaining 
 In simple cells (called prokaryotes), the process used to replicate the genome (called the ``replication program'') is well understood.
 Starting at a sequence-defined location (the ``origin''), the double-stranded DNA (dsDNA) of the prokaryote genome separates into two single-stranded DNA (ssDNA) segments.
 Complex biological machinery travel bidirectionally from the origin, separating the dsDNA into growing ssDNA segments which are used as templates for the creation of two copies of the original genome.
-The machinery between replicated and non-replicated DNA, called ``forks,'' continue to propagate through the genome until it has been entirely separated and replicated.
+The machinery between separated and non-separated DNA, called ``forks,'' continue to propagate through the genome until it has been entirely separated and replicated.
 Prokaryotic organisms have such small genomes that replication can be completed using a single origin~\cite{MolecularCellBiology}.
 With this replication program, an \emph{E.~coli} bacterium can replicate its entire genome in about 40 minutes\footnote{Appendix~\ref{ap:EColi}}.
 
@@ -31,7 +31,7 @@ In other words, the program must be able to control the replication program such
 	The first gap (G1) phase, the synthesis (S) phase, the second gap (G2) phase, and the mitosis (M) phase.
 	The first two phases of the cell cycle (G1 and S) contain key processes for DNA replication.
 	The third phase of the cell cycle (G2) primarily acts as a buffer to ensure complete DNA replication.
-	During the fourth phase of the cell cycle (M) the cell physical divides into two daughter cells.
+	During the fourth phase of the cell cycle (M) the cell physically divides into two daughter cells.
 	
 	\begin{SCfigure}[1][thb]
 		\includegraphics[width=0.45\textwidth]{images/CellCycle.png}
@@ -48,7 +48,7 @@ In other words, the program must be able to control the replication program such
 		
 		As with any cycle, the cell cycle begins at the end of the previous cell cycle.
 		The G1 phase begins early in the life of a daughter cell, after the mother cell has divided in the preceding M phase.
-		During this time, the cell grows and, more importantly, an important chemical process called licensing is carried out to prepare for replication during S phase.
+		During this time, the cell grows and, more importantly, a chemical process called licensing is carried out to prepare for replication during S phase.
 		
 		Licensing occurs at the origin recognition complex (ORC)~\cite{DNAInitiation}, as seen in Figure~\ref{fig:EarlyReplicationConcept}:A.
 		The ORC is made up of a single group of six proteins that bind to the DNA at an origin~\cite{ORC}.
@@ -90,7 +90,7 @@ In other words, the program must be able to control the replication program such
 			\includegraphics[width=\textwidth]{images/EarlyReplicationConcept.png}
 		\end{center}
 			\caption[Events During Replication]{\label{fig:EarlyReplicationConcept} During replication, many processes encompassing many proteins and protein structures are carried out.
-				This graphic illustrates a version of the G1 and S phases of the cell cycle containing only those parts that are necessary to understand the model present.
+				This graphic illustrates a version of the G1 and S phases of the cell cycle containing only those parts that are necessary to understand the model presented in Chapter [\textbf{REFERENCE}].
 				\textbf{A} In the G1 phase, origins are located and licensed when the ORC recruits pairs of MCM2-7 hexamers onto the dsDNA.
 					During S phase, pairs of Mcm2-7 hexamers are activated by the addition of the Cdc45 protein.
 					After activation, the resulting structures become replicative forks that traverse the DNA unwinding the dsDNA allowing the DNA to be replicated.
@@ -144,8 +144,7 @@ In other words, the program must be able to control the replication program such
 		For the research presented, \emph{S. cerevisiae} (budding yeast) was considered.
 		Budding yeast is an ideal model species because, unlike the other examples provided, the origins of \emph{S. cerevisiae} are localized.
 		In each cell cycle, origins of budding yeast may be licensed only in very narrow windows.
-		These windows are defined by specific sequences in the genome, called autonomously replicating sequences (ARS elements), have been identified and cataloged\footnote{an online database can be found at http://cerevisiae.oridb.org/}
-~\cite{OriDB}.
+		These windows are defined by specific sequences in the genome, called autonomously replicating sequences (ARS elements), that have been identified and cataloged\footnote{an online database can be found at http://cerevisiae.oridb.org/}~\cite{OriDB}.
 		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
 		
 		Previous studies of the firing-times of individual origins in budding yeast have found evidence that the process has some driving force~\cite{ScottsPaper,StochasticTermination}.
@@ -181,7 +180,7 @@ In other words, the program must be able to control the replication program such
 	Early in the 20th century the KJMA model was developed as a stochastic model that describes crystallization growth in three dimensions\cite{Kolmogorov, JohnsonAndMehl, AvramiI, AvramiII, AvramiIII}.
 	Since its inception, the KJMA model has been used for many studies that range from phase transition kinetics~\cite{AlloyPhaseTransitions} to R{\'e}nyi's car-parking problem in one dimension~\cite{CarParking}.
 	With the wealth of work done in the KJMA, it shouldn't be surprising that in 2002 J.~Herrick \emph{et al.} successfully synthesized a KJMA-like model of DNA replication when analyzing experiments done on \emph{X.~laevis}~\cite{KJMA2002}.
-	In 2005, the KJMA-like model was expanded, and a formalism was developed which can be used to infer the replication profile of a genome given a set of parameters that describe the speed of replication forks and the origins' locations in time and space~\cite{KJMA1, KJMA2}.
+	In 2005, the KJMA-like model was expanded, and a formalism was developed which can be used to infer the replication program of a genome given a set of parameters that describe the speed of replication forks and the origins' locations in time and space~\cite{KJMA1, KJMA2}.
 	
 	One of the quantities that can be inferred using the KJMA formalism is the replicated fraction, $f(x,t)$.
 	The replicated fraction can be interpreted as the probability that the genome at position $x$ has been replicated by the time $t$ after the start of S phase.
@@ -194,13 +193,13 @@ In other words, the program must be able to control the replication program such
 	So far, the topics covered have been conceptual and theoretical.
 	However, the theory describing DNA replication has been driven by the results of experiment, so there is a question that should be addressed:
 	\emph{How can DNA replication be observed experimentally?}
-	As it turns out, there are several techniques available to scientists that answer this question, including flow cytometry~\cite{DeepSeq}, DNA combing~\cite{DNACombing}, microarray~\cite{MicroarrayReview, McCuneMicroArray}, and sequencing experiments~\cite{DeepSeq}.
+	As it turns out, there are several techniques available to scientists that answer this question, including flow cytometry~\cite{DeepSeq}, DNA combing~\cite{DNACombing}, microarray~\cite{MicroarrayReview, McCuneMicroArray}, and sequencing experiments~\cite{DeepSeq,StochasticTermination}.
 	These experiments can be separated into categories based on probing replication primarily spatially or temporally.
 	
 	There are two approaches that experiments use to look at time.
 	The first is to synchronize the cell cycle.
 	A common way to do this is by \emph{arresting} the cell cycle, though there are other techniques~\cite{CellCycleSynch}.
-	This usually entails using a chemical bath to stop the cells from progressing from one phase to another (for experiments related to DNA replication, this is generally just prior to entering the S phase).
+	Arresting usually entails using a chemical bath to stop the cells from progressing from one phase to another (for experiments related to DNA replication, this is generally just prior to entering the S phase).
 	The main drawbacks to this approach are that it is susceptible to systematic error and that it is difficult to arrest many species of eukaryotic organisms.
 	After arresting the cell cycle, another chemical bath can be used to force the entire population of cells to enter the S phase synchronously.
 	The second approach is to forego arresting the cell cycle and pull samples from an asynchronous population.
@@ -209,7 +208,7 @@ In other words, the program must be able to control the replication program such
 	
 	Spatially, approaches range between two extremes: Perfect base pair resolution and no spacial information.
 	At one extreme, some experiments calculate one value over the entire genome. 
-	For example a common flow cytometry technique called fluorescence activated cell sorting (FACS)~\cite{SequencingReview, DeepSeq}, measures only the amount of DNA in the cell.
+	For example a common flow cytometry technique called fluorescence activated cell sorting (FACS)~\cite{DeepSeq, SequencingReview}, measures only the amount of DNA in the cell.
 	Techniques such as FACS provide only limited information but are simple and fast.
 	At the other extreme, other techniques such as DNA sequencing and DNA microarray are able to spatially resolve to small windows (as small as 1 kb~\cite{DeepSeq}).
 	Experiments with this level of resolution are quite complex but provide tremendous insight toward understanding DNA replication.
