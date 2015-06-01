@@ -50,7 +50,7 @@ In other words, the program must be able to control the replication program such
 		The G1 phase begins early in the life of a daughter cell, after the mother cell has divided in the preceding M phase.
 		During this time, the cell grows and, more importantly, an important chemical process called licensing is carried out to prepare for replication during S phase.
 		
-		Licensing occurs at the origin recognition complex (ORC), as seen in Figure~\ref{fig:EarlyReplicationConcept}:A.
+		Licensing occurs at the origin recognition complex (ORC)~\cite{DNAInitiation}, as seen in Figure~\ref{fig:EarlyReplicationConcept}:A.
 		The ORC is made up of a single group of six proteins that bind to the DNA at an origin~\cite{ORC}.
 		Two additional proteins (Cdc6 and Cdt1; left out of Figure~\ref{fig:EarlyReplicationConcept}:A) assist the ORC in recruiting minichromosome maintenance (MCM) 2-7 hexamer rings onto the DNA~\cite{DNARepInitiation}.
 		Loaded hexamers form pairs oriented away from each other~\cite{MCMPairs}, each such pair will later be referred to as potential initiators, or just initiators.
@@ -133,9 +133,9 @@ In other words, the program must be able to control the replication program such
 		Origin initiation is a chemical process, and therefore is governed in part by the diffusive flow of chemicals within the cell.
 		In prokaryotes, with only a single origin, firing-time isn't very interesting:
 		As long as the origin fires early enough, the DNA will be reproduced successfully.
-		In eukaryotes, however, the cooperation of multiple origins can lead to interesting timing dynamics.
-		
-		
+		In eukaryotes, however, the cooperation of multiple origins leads to interesting timing dynamics.
+		The origins do not all initiate simultaneously, but origin initiation events occur throughout the S phase~\cite{DNAInitiation}.
+		The mechanism that controls the relative timing of the different origin initiation events is still a matter of some debate~\cite{ScottsPaper,Bechhoefer2012374,deMouraModel1,deMouraModel2} and is the topic of this research.
 		
 		
 		\subsection{Budding Yeast}
@@ -144,7 +144,8 @@ In other words, the program must be able to control the replication program such
 		For the research presented, \emph{S. cerevisiae} (budding yeast) was considered.
 		Budding yeast is an ideal model species because, unlike the other examples provided, the origins of \emph{S. cerevisiae} are localized.
 		In each cell cycle, origins of budding yeast may be licensed only in very narrow windows.
-		These windows are defined by specific sequences in the genome, called autonomously replicating sequences (ARS) elements, have been identified and cataloged\footnote{an online database can be found at http://cerevisiae.oridb.org/} \cite{OriDB}.
+		These windows are defined by specific sequences in the genome, called autonomously replicating sequences (ARS elements), have been identified and cataloged\footnote{an online database can be found at http://cerevisiae.oridb.org/}
+~\cite{OriDB}.
 		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
 		
 		Previous studies of the firing-times of individual origins in budding yeast have found evidence that the process has some driving force~\cite{ScottsPaper,StochasticTermination}.
