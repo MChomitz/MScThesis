@@ -18,7 +18,7 @@ The following sections of this chapter will expand on this story, filling in the
 	\section{Replicated Fraction}
 	\label{sec:ReplicatedFraction}
 	
-	It was mentioned briefly in Chapter~\ref{ch:Introduction} that the replicated fraction,$f$, can be calculated from both theoretical models and experiments.
+	It was mentioned briefly in Chapter~\ref{ch:Introduction} that the replicated fraction, $f$, can be calculated from both theoretical models and experiments.
 	This makes it a valuable quantity because it acts as a bridge between the two.
 	
 	There are two equivalent ways to describe the replicated fraction as a function of time and space, $f(x,t)$.
@@ -34,7 +34,7 @@ The following sections of this chapter will expand on this story, filling in the
 		
 		Before diving into the mathematical formulae that describe the replicated fraction of the KJMA-like model of DNA replication, it is valuable to build some intuition.
 		Experimentally, the replicated fraction is measured spatially in windows about 1 kb wide, and temporally in steps of 5 minutes~\cite{StochasticTermination}.
-		Budding yeast's genome is over $12000$kb long so, visually, the data is well resolved spatially.
+		Budding yeast's genome is over $12\times10^3$ kb long so, visually, the data is well resolved spatially.
 		However, Budding yeast completely replicates it's DNA in less than 90 minutes~\cite{DeepSeq}, and in fact most experiments stop performing thorough measurements after about 50 minutes~\cite{DeepSeq,StochasticTermination,McCuneMicroArray}.
 		Therefore, the data is not visually well resolved temporally.
 		The good news is, this amount of temporal resolution is enough to build an intuitive understanding of the replicated fraction, and to analyze mathematically.
@@ -55,13 +55,16 @@ The following sections of this chapter will expand on this story, filling in the
 		This is not because some regions are not replicated or replicated doubly, but because of inaccuracies in the experimental procedure.
 		
 		The most important observation is the fact that some regions of the genome start replicating much earlier than others.
-		This can be seen in the peaks in Figure~\ref{fig:ReplicatedFractionExample}, for example at $x \approx 900$.
+		This can be seen in the peaks in Figure~\ref{fig:ReplicatedFractionExample}, for example at $x \approx 910$.
+		Because replication starts at an origin and propagates outward, peaks in the replicated fraction should be centered on origins.
+		Additionally, early origins should create peaks earlier in the program, and late origins should create peaks later in the program.
 		
 		\begin{figure}[tbh]
 			\begin{center}
 				\includegraphics[width=\textwidth]{Images/CHR4Exp.png}
 			\end{center}
-				\caption[Budding yeast chromosome IV replicated fraction]{\label{fig:ReplicatedFractionExample} Replicated fraction of chromosome IV of budding yeast measured by M{\"u}ller \emph{et al.}~\cite{DeepSeq}.
+				\caption[Budding yeast chromosome IV replicated fraction]{\label{fig:ReplicatedFractionExample} Replicated fraction of chromosome IV of budding yeast measured by M{\"u}ller \emph{et al.}~\cite{DeepSeq} [\textbf{Do I need permission for this?}].
+						
 				}
 		\end{figure}
 
@@ -69,4 +72,62 @@ The following sections of this chapter will expand on this story, filling in the
 	\section{The Sigmoidal Model}
 	\label{sec:SigmoidalModel}
 	
+	The sigmoidal model is an approach to analyzing DNA replication by investigating the replicated fraction at each origin, $f(x=x_o,t)$.
+	Developed by S. Yang as part of his PhD thesis, this model assumes that the functional form of $f(x=x_0,t)$ is a sigmoidal function that goes from zero to one and is defined by three parameters at each origin, $o$, on the genome~\cite{ScottsThesis, ScottsPaper}.
 	
+	Figure [\textbf{make/take figure}] [\textbf{ask Scott - Fig. 3.1}] shows the approach and results of the sigmoidal model.
+	First, extract the replicated fraction at an origin, $f(x=x_0,t)$, from experimental data of the entire genome, $f(x,t)$.
+	For his thesis, Yang used microarray data~\cite{McCuneMicroArray}.
+	Second, fit a sigmoidal curve to $f(x=x_0,t)$.
+	This sigmoidal curve was parameterized to define the median replication time, $t_{1/2}$, and the spread of replication times, $t_w$:
+	\begin{equation}
+		f(t) = {\frac{1}{1+({\frac{t_{1/2}}{t}})^r}},
+	\end{equation}
+	where $t_w$ is defined by
+	\begin{equation}
+		t_w = (3^{1/r}-3^{-1/r})t_{1/2}.
+	\end{equation}
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
