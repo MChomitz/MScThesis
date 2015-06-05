@@ -1,8 +1,8 @@
 \chapter{Motivation}
 \label{ch:Motivation}
 
-Previous research into DNA replication has investigated the timing of origin initiation in great detail~\cite{ScottsPaper,StochasticTermination,Bechhoefer2012374,deMouraModel1,deMouraModel2}.
-In particular, Yang \emph{et al.} fit the replication fraction of an origin, $f(x=x_o,t)$, to a Sigmoidal Model to better understand origin firing-time~\cite{ScottsPaper} [\textbf{Section reference}].
+Previous research into DNA replication has investigated the timing of origin initiation in great detail~\cite{ScottsPaper,Bechhoefer2012374,deMouraModel1,deMouraModel2,StochasticTermination}.
+In particular, Yang \emph{et al.} fit the replication fraction of an origin, $f(x=x_o,t)$, to a Sigmoidal Model to better understand origin firing time~\cite{ScottsPaper} [\textbf{Section reference}].
 The results (discussed in detail below) were confirmed using a different model by Hawkins \emph{et al.} in 2013~\cite{StochasticTermination}.
 
 The work of Yang \emph{et al.} lead to the development of a second analytical model called the Multiple Initiator Model (MIM)~\cite{ScottsPaper} [\textbf{Section reference}].
@@ -35,7 +35,7 @@ The following sections of this chapter will expand on this story, filling in the
 		Before diving into the mathematical formulae that describe the replicated fraction of the KJMA-like model of DNA replication, it is valuable to build some intuition.
 		Experimentally, the replicated fraction is measured spatially in windows about 1 kb wide, and temporally in steps of 5 minutes~\cite{StochasticTermination}.
 		Budding yeast's genome is over $12\times10^3$ kb long so, visually, the data is well resolved spatially.
-		However, Budding yeast completely replicates it's DNA in less than 90 minutes~\cite{DeepSeq}, and in fact most experiments stop performing thorough measurements after about 50 minutes~\cite{DeepSeq,StochasticTermination,McCuneMicroArray}.
+		However, Budding yeast completely replicates it's DNA in less than 90 minutes~\cite{DeepSeq}, and in fact most experiments stop performing thorough measurements after about 50 minutes~\cite{StochasticTermination,DeepSeq,McCuneMicroArray}.
 		Therefore, the data is not visually well resolved temporally.
 		The good news is, this amount of temporal resolution is enough to build an intuitive understanding of the replicated fraction, and to analyze mathematically.
 		
@@ -73,14 +73,14 @@ The following sections of this chapter will expand on this story, filling in the
 	\label{sec:SigmoidalModel}
 	
 	The sigmoidal model is an approach to analyzing DNA replication by investigating the replicated fraction at each origin, $f(x=x_o,t)$.
-	Developed by S. Yang as part of his PhD thesis, this model assumes that the functional form of $f(x=x_0,t)$ is a sigmoidal function that goes from zero to one and is defined by three parameters at each origin, $o$, on the genome~\cite{ScottsThesis, ScottsPaper}.
+	Developed by S. Yang as part of his PhD thesis, this model assumes that the functional form of $f(x=x_0,t)$ is a sigmoidal function that goes from zero to one and is defined by three parameters at each origin, $o$, on the genome~\cite{ScottsPaper,ScottsThesis}.
 	
 	Figure [\textbf{make/take figure}] [\textbf{ask Scott - Fig. 3.1}] shows the approach and results of the sigmoidal model.
 	First, extract the replicated fraction at an origin, $f(x=x_0,t)$, from experimental data of the entire genome, $f(x,t)$.
 	For his thesis, Yang used microarray data~\cite{McCuneMicroArray}.
 	Second, fit a sigmoidal curve to $f(x=x_0,t)$.
 	This sigmoidal curve was parameterized to define the median replication time, $t_{1/2}$, and the spread of replication times, $t_w$:
-	\begin{equation}
+	\begin{equation} \label{eq:SigmoidalModel}
 		f(t) = {\frac{1}{1+({\frac{t_{1/2}}{t}})^r}},
 	\end{equation}
 	where $t_w$ is defined by
@@ -88,7 +88,23 @@ The following sections of this chapter will expand on this story, filling in the
 		t_w = (3^{1/r}-3^{-1/r})t_{1/2}.
 	\end{equation}
 	
+	When $t_{1/2}$ vs $t_w$ is graphed an interesting trend appears.
+	A strong correlation exists between $t_{1/2}$ and $t_w$.
+	The correlation [\textbf{seen in the figure}] means that origins that tend to fire early have very narrowly defined firing times, while origins that tend to fire late have more loosely defined firing times.
+	The conclusion that was drawn from this insight is this:
+	There must be a mechanism that has control over origin firing time the strength of which is high at the start of S phase but decreases as S phase progresses\cite{ScottsThesis}.
+	From this theory, a new model was developed called the Multiple Initiator Model (MIM).
 	
+	
+	\section{The Multiple Initiator Model}
+	\label{sec:MIM}
+	
+	The MIM, in its simplest terms, says that each origin has a specific affinity for MCM2-7 hexamers.
+	This affinity, which can vary between origins, means each origin has an average number of MCM pairs each cell cycle.
+	It is the relative number of MCM pairs (initiators) loaded on the origins that determines the relative firing times.~\cite{ScottsThesis}
+	
+	During licensing, the ORC can load MCM2-7 hexamers in excess~\cite{MultiMCM}.
+	If during S phase each initiator has an equal chance to fire
 
 
 
