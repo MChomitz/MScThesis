@@ -1,85 +1,94 @@
 \chapter{Motivation}
 \label{ch:Motivation}
 
-Previous research into DNA replication has investigated the timing of origin initiation in great detail~\cite{ScottsPaper,Bechhoefer2012374,deMouraModel1,deMouraModel2,StochasticTermination}.
-In particular, Yang \emph{et al.} fit the replication fraction of an origin, $f(x=x_o,t)$, to a Sigmoidal Model to better understand origin firing time~\cite{ScottsPaper} [\textbf{Section reference}].
-The results (discussed in detail below) were confirmed using a different model by Hawkins \emph{et al.} in 2013~\cite{StochasticTermination}.
+Previous research into DNA replication has investigated the timing of origin initiation~\cite{ScottsPaper,Bechhoefer2012374,deMouraModel1,deMouraModel2,StochasticTermination}.
+In particular, Yang~\emph{et~al.} fit the replication fraction of an origin, $f(x=x_o,t)$, to a Sigmoidal Model to better understand origin firing time~\cite{ScottsPaper} (Sec.~\ref{sec:SigmoidalModel}).
+The results (discussed in detail below) were confirmed using a different model by Hawkins~\emph{et~al.} in 2013~\cite{StochasticTermination}.
 
-The work of Yang \emph{et al.} lead to the development of a second analytical model called the Multiple Initiator Model (MIM)~\cite{ScottsPaper} [\textbf{Section reference}].
+The work of Yang~\emph{et~al.} lead to the development of a second analytical model called the Multiple Initiator Model (MIM)~\cite{ScottsPaper} (Sec.~\ref{sec:MIM}).
 The MIM made some reasonable assumptions to simplify the math involved.
-This simple model can then be used to analyze experimental data and draw conclusions about the physical mechanisms controlling DNA replication.
+This simple mode was used to analyze experimental data and draw conclusions about the physical mechanisms controlling DNA replication.
 
-However, recent work performed in N. Rhind's lab [\textbf{Source this, somehow}] have shown that one of the assumptions used in the MIM may not be representative of the truth. [\textbf{Section reference}]
+However, recent work performed in N. Rhind's lab [\textbf{Source this, somehow}] have shown that one of the assumptions used in the MIM may not be representative of the truth (Sec.~[\textbf{Section reference}]).
 The purpose of this research is to discover the impact of this new information on the MIM.
 
-The following sections of this chapter will expand on this story, filling in the details of the math behind the models, and explicitly stating the assumptions and measurements made.
+This chapter will expand on the above story, filling in the details of the math behind the models, and explicitly stating the assumptions and measurements made.
 
 
 	\section{Replicated Fraction}
 	\label{sec:ReplicatedFraction}
 	
-	It was mentioned briefly in Chapter~\ref{ch:Introduction} that the replicated fraction, $f$, can be calculated from both theoretical models and experiments.
-	This makes it a valuable quantity because it acts as a bridge between the two.
+	It was mentioned briefly in Ch.~\ref{ch:Introduction} that the replicated fraction, $f$, can be calculated from both theoretical models and experiments.
+	Thus, the replicated fraction is a quantity that can be used to test the validity of models through comparison with, and analysis to experimental data.
+	For this reason we will now provide some more details about what the replicated fraction is, how it is calculated, and how we used it in our research.
 	
-	There are two equivalent ways to describe the replicated fraction as a function of time and space, $f(x,t)$.
-	The first is to describe it as a quantity of a single cell.
-	In the single cell case, the replicated fraction at $x$ and $t$ is the probability that the genome at position, $x$, in the genome has replicated a time, $t$, after the start of S phase.
-	The second description uses a population of cells.
-	From a population of cells, the replicated fraction at $x$ and $t$ is the fraction of the cells in the population that have replicated at position, $x$, in the genome a time, $t$, after the start of S phase.
-	It is not difficult to see the equivalency between these two descriptions, but it is important to make it clear that both definitions are true.
+	There are two equivalent ways to describe the replicated fraction as a function of time and space, $f(x,t)$:
+	as a quantity of either a single cell, or a population of cells.
+	In the single cell case, $f(x,t)$ is the probability that the sequence at position, $x$, in the genome has replicated a time, $t$, after the start of S phase.
+	From a population of cells, $f(x,t)$ is the fraction of the cells in the population that have replicated at position, $x$, a time, $t$, after the start of S phase.
+	It is not difficult to see the equivalency between these two descriptions, but it can be helpful to have more than one way to conceptualize $f(x,t)$.
 	
 	
 		\subsection{Qualities of the Replicated Fraction}
 		\label{subsec:QualitiesReplicatedFraction}
 		
 		Before diving into the mathematical formulae that describe the replicated fraction of the KJMA-like model of DNA replication, it is valuable to build some intuition.
-		Experimentally, the replicated fraction is measured spatially in windows about 1 kb wide, and temporally in steps of 5 minutes~\cite{StochasticTermination}.
-		Budding yeast's genome is over $12\times10^3$ kb long so, visually, the data is well resolved spatially.
+		In DNA sequencing experiments, the replicated fraction is measured spatially in windows about 1 kb wide, and temporally in steps of 5 minutes~\cite{StochasticTermination}.
+		Budding yeast's genome is over $12\times10^3$ kb long so the there is tremendous spatial data.
 		However, Budding yeast completely replicates it's DNA in less than 90 minutes~\cite{DeepSeq}, and in fact most experiments stop performing thorough measurements after about 50 minutes~\cite{StochasticTermination,DeepSeq,McCuneMicroArray}.
-		Therefore, the data is not visually well resolved temporally.
-		The good news is, this amount of temporal resolution is enough to build an intuitive understanding of the replicated fraction, and to analyze mathematically.
+		There are generally no more than 10 values for $t$ measured experimentally (indeed, the data analyzed in Sec. [\textbf{Section Reference}] has only 6).
+		Fortunately, this amount of temporal data is enough to build an intuitive understanding of the replicated fraction and to analyze it mathematically.
 		
 		Figure~\ref{fig:ReplicatedFractionExample} shows an example set of replicated fraction data.
-		The data comes from measurements done on chromosome IV of budding yeast by M{\"u}ller \emph{et al.}~\cite{DeepSeq}.
+		The data comes from measurements done on chromosome IV of budding yeast by Hawkins~\emph{et~al.}~\cite{StochasticTermination}.
 		The perceptive reader may notice a few things:
-		There are gaps in the spatial data.
-		The replicated fraction ranges lower than zero and higher than 1.
-		Some regions of the genome replicate faster than others.
-		
-		The gaps exist because of a limitation of the sequencing experiment used to gather this data.
-		Sequencing experiments match small chunks of DNA to the fully mapped genome (Section~\ref{subsec:Sequencing})
-		There are segments of the budding yeast genome that contain identical sequences [\textbf{FIND SOURCE}].
-		When a chunk of DNA that contains only a sequence that is repeated and nothing that can uniquely identify it, that sequence is omitted from the results because there is no way to know where it came from.
-		
-		The replicated fraction has a larger range than is theoretically possible.
-		This is not because some regions are not replicated or replicated doubly, but because of inaccuracies in the experimental procedure.
-		
-		The most important observation is the fact that some regions of the genome start replicating much earlier than others.
-		This can be seen in the peaks in Figure~\ref{fig:ReplicatedFractionExample}, for example at $x \approx 910$.
-		Because replication starts at an origin and propagates outward, peaks in the replicated fraction should be centered on origins.
-		Additionally, early origins should create peaks earlier in the program, and late origins should create peaks later in the program.
+		there are gaps in the spatial data;
+		the replicated fraction ranges lower than zero and higher than 1;
+		and some regions of the genome replicate faster than others.
 		
 		\begin{figure}[tbh]
 			\begin{center}
 				\includegraphics[width=\textwidth]{Images/CHR4Exp.png}
 			\end{center}
-				\caption[Budding yeast chromosome IV replicated fraction]{\label{fig:ReplicatedFractionExample} Replicated fraction of chromosome IV of budding yeast measured by M{\"u}ller \emph{et al.}~\cite{DeepSeq} [\textbf{Do I need permission for this?}].
-						
+				\caption[Budding yeast chromosome IV replicated fraction]{\label{fig:ReplicatedFractionExample} Replicated fraction of chromosome IV of budding yeast measured by Hawkins~\emph{et~al.}~\cite{StochasticTermination} [\textbf{Do I need permission for this?}].	
+					Large gaps in the data are visible at $x \approx 750$ and $x \approx 990$ (note: There are other, smaller gaps present).
+					These data fall within a range of $-0.2 < f < 1.4$, which is larger than expected from theory.
+					The several peaks that can be identified are expected to be centered on origins of replication.
 				}
 		\end{figure}
-
+		
+		The gaps in Fig.~\ref{fig:ReplicatedFractionExample} exist because of a limitation of the sequencing experiment used to gather this data.
+		Sequencing experiments match small chunks of DNA to the fully mapped genome (Section~\ref{subsec:Sequencing})
+		The budding yeast genome contains repeated patterns: sequences longer than 50 bp that appear more than once~[\textbf{FIND SOURCE}].
+		When a chunk of DNA that in enclosed in one of these patterns is measured, it is not counted because it cannot be uniquely located.
+		
+		The replicated fraction in Fig.~\ref{fig:ReplicatedFractionExample} has a larger range than is theoretically possible.
+		This is not because some regions are not replicated or replicated doubly, but because of inaccuracies in the experimental procedure.
+		In the presented data, this comes from two assumptions made: first that the measured sequences were evenly distributed spatially, and second that all cells have the same average replicated fraction at the time measured, $f(t=t_i)$~\cite{StochasticTermination}.
+		In the experiment by Hawkins~\emph{et~al.}, they acquired 10-25 million 50 bp reads.
+		If all of those reads were spatially uniform, that's a read of 50-100 full genomes.
+		However, the only factor that pushes the reads toward spatial uniformity is probability, so there will be some regions that are read more and some that are read less.
+		Additionally, Hawkins~\emph{et~al.} normalized the measured replicated fraction by ensuring the average replicated fraction, $f(t=t_i)$, was equal to the replicated fraction measured using FACS on the bulk sample.
+		This normalization assumes (reasonably) that the ``100 full cells'' measured have the same average replicated fraction as the population measured with FACS.
+		These two processes combine to increase the measured range for $f$ outside of numbers that are theoretically possible.
+		
+		The most important observation is the fact that some regions of the genome start replicating much earlier than others.
+		This can be seen in the peaks in Figure~\ref{fig:ReplicatedFractionExample}, for example at $x \approx 910$.
+		Because replication starts at an origin and propagates outward, peaks in the replicated fraction should be centered on origins.
+		Additionally, early origins should create peaks earlier in the program, and late origins should create peaks later in the program.
+		This corresponds to taller and shorter peaks later in S phase
 
 	\section{The Sigmoidal Model}
 	\label{sec:SigmoidalModel}
 	
 	The sigmoidal model is an approach to analyzing DNA replication by investigating the replicated fraction at each origin, $f(x=x_o,t)$.
-	Developed by S. Yang as part of his PhD thesis, this model assumes that the functional form of $f(x=x_0,t)$ is a sigmoidal function that goes from zero to one and is defined by three parameters at each origin, $o$, on the genome~\cite{ScottsPaper,ScottsThesis}.
+	Developed by S. Yang as part of his PhD thesis, this model assumes that the functional form of $f(x=x_o,t)$ is a sigmoidal function that goes from zero to one and is defined by three parameters at each origin, $o$, on the genome~\cite{ScottsPaper,ScottsThesis}.
 	
 	Figure [\textbf{make/take figure}] [\textbf{ask Scott - Fig. 3.1}] shows the approach and results of the sigmoidal model.
-	First, extract the replicated fraction at an origin, $f(x=x_0,t)$, from experimental data of the entire genome, $f(x,t)$.
+	First, extract the replicated fraction at an origin, $f(x=x_o,t)$, from experimental data of the entire genome, $f(x,t)$ (Fig.~[\textbf{Scotts A}]).
 	For his thesis, Yang used microarray data~\cite{McCuneMicroArray}.
-	Second, fit a sigmoidal curve to $f(x=x_0,t)$.
-	This sigmoidal curve was parameterized to define the median replication time, $t_{1/2}$, and the spread of replication times, $t_w$:
+	Second, fit a sigmoidal curve to $f(x=x_0,t)$ (Fig.~[\textbf{Scotts B}]).
+	This sigmoidal curve is parameterized to define the median replication time, $t_{1/2}$, and the spread of replication times, $t_w$:
 	\begin{equation} \label{eq:SigmoidalModel}
 		f(t) = {\frac{1}{1+({\frac{t_{1/2}}{t}})^r}},
 	\end{equation}
@@ -88,11 +97,10 @@ The following sections of this chapter will expand on this story, filling in the
 		t_w = (3^{1/r}-3^{-1/r})t_{1/2}.
 	\end{equation}
 	
-	When $t_{1/2}$ vs $t_w$ is graphed an interesting trend appears.
+	When $t_{1/2}$ vs $t_w$ is graphed an interesting trend appears (Fig.~[\textbf{Scotts C}]).
 	A strong correlation exists between $t_{1/2}$ and $t_w$.
-	The correlation [\textbf{seen in the figure}] means that origins that tend to fire early have very narrowly defined firing times, while origins that tend to fire late have more loosely defined firing times.
-	The conclusion that was drawn from this insight is this:
-	There must be a mechanism that has control over origin firing time the strength of which is high at the start of S phase but decreases as S phase progresses\cite{ScottsThesis}.
+	The correlation means that origins that tend to fire early have very narrowly defined firing times, while origins that tend to fire late have more loosely defined firing times.
+	The conclusion one can draw from this insight is that there must be a mechanism that has control over origin firing time the strength of which is high at the start of S phase but decreases as S phase progresses\cite{ScottsThesis}.
 	From this theory, a new model was developed called the Multiple Initiator Model (MIM).
 	
 	
@@ -106,7 +114,7 @@ The following sections of this chapter will expand on this story, filling in the
 	However, it is important to note that factors besides the number of loaded MCM2-7 pairs can impact the relative firing times of origins, for example the three dimensional organization of the genome~\cite{}.~\cite{ScottsThesis}
 	
 	During licensing, the ORC can load MCM2-7 hexamers in excess~\cite{MultiMCM}.
-	If during S phase each initiator has an equal chance to fire
+	If during S phase each initiator\footnote{Each pair of MCM2-7 hexamers is a potential initiator} has an equal chance to fire, then origins with many initiators are more likely to fire early than origins with few.
 
 
 
