@@ -2,7 +2,7 @@
 \label{ch:Motivation}
 
 Previous research into DNA replication has investigated the timing of origin initiation~\cite{ScottsPaper,Bechhoefer2012374,deMouraModel1,deMouraModel2,StochasticTermination}.
-In particular, Yang~\emph{et~al.} fit the replication fraction of an origin, $f(x=x_o,t)$, to a Sigmoidal Model to better understand origin firing time~\cite{ScottsPaper} (Sec.~\ref{sec:SigmoidalModel}).
+In 2010, Yang~\emph{et~al.} fit the replication fraction of an origin, $f(x=x_o,t)$, to a Sigmoidal Model to better understand origin firing time~\cite{ScottsPaper} (Sec.~\ref{sec:SigmoidalModel}).
 The results (discussed in detail below) were confirmed using a different model by Hawkins~\emph{et~al.} in 2013~\cite{StochasticTermination}.
 
 The work of Yang~\emph{et~al.} lead to the development of a second analytical model called the Multiple Initiator Model (MIM)~\cite{ScottsPaper} (Sec.~\ref{sec:MIM}).
@@ -18,15 +18,15 @@ This chapter will expand on the above story, filling in the details of the math 
 	\section{Replicated Fraction}
 	\label{sec:ReplicatedFraction}
 	
-	It was mentioned briefly in Ch.~\ref{ch:Introduction} that the replicated fraction, $f$, can be calculated from both theoretical models and experiments.
-	Thus, the replicated fraction is a quantity that can be used to test the validity of models through comparison with, and analysis to experimental data.
-	For this reason we will now provide some more details about what the replicated fraction is, how it is calculated, and how we used it in our research.
+	It was mentioned briefly in Sec.~\ref{sec:modelling} and Sec.~\ref{sec:experiments} that the replicated fraction, $f$, can be calculated from both theoretical models and experiments.
+	Thus, the replicated fraction is a quantity that can be used to analyze experimental data and to test the validity of models.
+	For this reason we will now provide details about what the replicated fraction is, how it is calculated, and how we used it in our research.
 	
 	There are two equivalent ways to describe the replicated fraction as a function of time and space, $f(x,t)$:
 	as a quantity of either a single cell, or a population of cells.
 	In the single cell case, $f(x,t)$ is the probability that the sequence at position, $x$, in the genome has replicated a time, $t$, after the start of S phase.
 	From a population of cells, $f(x,t)$ is the fraction of the cells in the population that have replicated at position, $x$, a time, $t$, after the start of S phase.
-	It is not difficult to see the equivalency between these two descriptions, but it can be helpful to have more than one way to conceptualize $f(x,t)$.
+	It is not difficult to see the equivalency between these two descriptions, but there is a subtle difference that will become apparent soon (Sec.~\ref{sec:MIM}.
 	
 	
 		\subsection{Qualities of the Replicated Fraction}
@@ -53,17 +53,17 @@ This chapter will expand on the above story, filling in the details of the math 
 				\caption[Budding yeast chromosome IV replicated fraction]{\label{fig:ReplicatedFractionExample} Replicated fraction of chromosome IV of budding yeast measured by Hawkins~\emph{et~al.}~\cite{StochasticTermination} [\textbf{Do I need permission for this?}].	
 					Large gaps in the data are visible at $x \approx 750$ and $x \approx 990$ (note: There are other, smaller gaps present).
 					These data fall within a range of $-0.2 < f < 1.4$, which is larger than expected from theory.
-					The several peaks that can be identified are expected to be centered on origins of replication.
+					The several peaks that can be identified are centered on origins of replication.
 				}
 		\end{figure}
 		
 		The gaps in Fig.~\ref{fig:ReplicatedFractionExample} exist because of a limitation of the sequencing experiment used to gather this data.
-		Sequencing experiments match small chunks of DNA to the fully mapped genome (Section~\ref{subsec:Sequencing})
+		Sequencing experiments match small chunks of DNA to the fully mapped genome (Sec.~\ref{subsec:Sequencing})
 		The budding yeast genome contains repeated patterns: sequences longer than 50 bp that appear more than once~[\textbf{FIND SOURCE}].
-		When a chunk of DNA that in enclosed in one of these patterns is measured, it is not counted because it cannot be uniquely located.
+		When a chunk of DNA that is enclosed in one of these patterns is measured, it is not counted because it cannot be uniquely located.
 		
 		The replicated fraction in Fig.~\ref{fig:ReplicatedFractionExample} has a larger range than is theoretically possible.
-		This is not because some regions are not replicated or replicated doubly, but because of inaccuracies in the experimental procedure.
+		This is not because some regions are absent or replicated doubly, but because of inaccuracies in the experimental procedure.
 		In the presented data, this comes from two assumptions made: first that the measured sequences were evenly distributed spatially, and second that all cells have the same average replicated fraction at the time measured, $f(t=t_i)$~\cite{StochasticTermination}.
 		In the experiment by Hawkins~\emph{et~al.}, they acquired 10-25 million 50 bp reads.
 		If all of those reads were spatially uniform, that's a read of 50-100 full genomes.
@@ -77,6 +77,13 @@ This chapter will expand on the above story, filling in the details of the math 
 		Because replication starts at an origin and propagates outward, peaks in the replicated fraction should be centered on origins.
 		Additionally, early origins should create peaks earlier in the program, and late origins should create peaks later in the program.
 		This corresponds to taller and shorter peaks later in S phase
+		
+		
+		\subsection{Calculating Replicated Fraction from the KJMA Formalism}
+		\label{subsec:KJMA}
+		
+		Fill this in with the calculations that help us calculate $f(x,t)$ given $I(x,t)$ and then $\Phi(t)$.
+		
 
 	\section{The Sigmoidal Model}
 	\label{sec:SigmoidalModel}
@@ -90,11 +97,11 @@ This chapter will expand on the above story, filling in the details of the math 
 	Second, fit a sigmoidal curve to $f(x=x_0,t)$ (Fig.~[\textbf{Scotts B}]).
 	This sigmoidal curve is parameterized to define the median replication time, $t_{1/2}$, and the spread of replication times, $t_w$:
 	\begin{equation} \label{eq:SigmoidalModel}
-		f(t) = {\frac{1}{1+({\frac{t_{1/2}}{t}})^r}},
+		f(t) = {\frac{1}{1+\left({\frac{t_{1/2}}{t}}\right)^r}}\text{ ,}
 	\end{equation}
 	where $t_w$ is defined by
 	\begin{equation}
-		t_w = (3^{1/r}-3^{-1/r})t_{1/2}.
+		t_w = \left(3^{1/r}-3^{-1/r}\right)t_{1/2}\text{ .}
 	\end{equation}
 	
 	When $t_{1/2}$ vs $t_w$ is graphed an interesting trend appears (Fig.~[\textbf{Scotts C}]).
@@ -107,14 +114,70 @@ This chapter will expand on the above story, filling in the details of the math 
 	\section{The Multiple Initiator Model}
 	\label{sec:MIM}
 	
-	The MIM, in its simplest terms, says that each origin has some number of unique chances to be initiated each cell cycle.
-	One way to attain this is to say each origin has a specific affinity for MCM2-7 hexamers.
-	This affinity, which can vary between origins, means each origin has an average number of MCM pairs each cell cycle.
-	It is the relative number of MCM pairs (initiators) loaded on the origins that determines the relative firing times.
-	However, it is important to note that factors besides the number of loaded MCM2-7 pairs can impact the relative firing times of origins, for example the three dimensional organization of the genome~\cite{}.~\cite{ScottsThesis}
+	The MIM, in its simplest terms, says that each origin has some number of unique chances to be initiated at any given time~\cite{ScottsThesis}.
+	If each of these chances are equally weighted, then origins with larger numbers of chances should tend to fire earlier than origins with fewer chances.
+	One hypothesis for the physical mechanism that creates these unique chanced to initiate is the MCM2-7 pairs loaded at each origin.
+	Effectively, origins with more MCM2-7 pairs loaded will tend to fire earlier in S phase than origins with fewer pairs.
+	However, it is important to note that factors besides the number of loaded MCM2-7 pairs can impact the relative firing times of origins, for example the three dimensional organization of the genome~\cite{}.
 	
-	During licensing, the ORC can load MCM2-7 hexamers in excess~\cite{MultiMCM}.
-	If during S phase each initiator\footnote{Each pair of MCM2-7 hexamers is a potential initiator} has an equal chance to fire, then origins with many initiators are more likely to fire early than origins with few.
+		\subsection{MIM Basics}
+		\label{subsec:MIMBasics}
+		During licensing, the ORC can load MCM2-7 hexamers in excess~\cite{MultiMCM}.
+		We believe this the loading of initiators is a Poisson-process:
+		MCM2-7 hexamers are loaded at an origin individually with some probability determined by the affinity of that origin.
+		We assume that the average number of initiators loaded at the $i^{\text{th}}$ origin, $n_i$ is a fixed quantity over many cell cycles.
+		However, the actual number of initiators can change between cell cycles and is believed to be exponentially distributed as a result of the Poisson-process~[\textbf{FindSource}].
+		
+		During S phase, the initiators are activated by the addition of Cdc45 and the GINS complex.
+		The MIM assumes that each initiator has the same cumulative probability of firing as time progresses through S phase, given by
+		\begin{equation}\label{eq:CPDInitiator}
+			\Phi_0(t) = \frac{1}{1+\left(\frac{t^*_{1/2}}{t}\right)^{r^*}}\text{ .}
+		\end{equation}
+		Where $t^*_{1/2}$ is the median firing-time for a single initiator and $r^*$ is the rate of increase.
+		These variables are global, defining the behaviour of every initiator on the genome.
+		Using this assumption, then the cumulative probability that an origin with $N$\footnote{In this thesis, $N$ represents the absolute number of initiators at an origin in a single cell, and $n$ represents the average number of initiators at an origin in a large population of cells.} loaded initiators is given by
+		\begin{equation} \label{eq:CPDEffectiveN}
+			\Phi_{\text{eff}}(t,N) = 1 - \left[1 - \Phi_0(t)\right]^N\text{ .}
+		\end{equation}
+	
+		Equation~\ref{eq:CPDEffectiveN} calculates the effective cumulative probability distribution of an origin with $N$ loaded initiators.
+		This is a property of a single-cell, with a single value for $N$.
+		If the number of loaded initiators at an origin does not change between cell cycles (i.e. $N=n$), then Eq.~\ref{eq:CPDEffectiveN} applies to large cell populations as effectively as a single cell.
+		However, it does not take into account any variability in $N$ between cell cycles.
+		In other words, $\Phi_{\text{eff}}$ cannot be calculated from population data the same way:
+		\begin{equation} \label{eq:CPDEffectivenTemp}
+			\Phi_{\text{eff}}(t,n) \neq 1 - \left[1 - \Phi_0(t)\right]^n\text{ .}
+		\end{equation}
+		
+		
+		\subsection{Accounting for variability in $n$}
+		\label{subsec:VariableN}
+		
+		Given the many factors that effect the ORC's ability to load MCM2-7 initiators onto DNA~\cite{MultiMCM}, it is reasonable to assume that the number of initiators will not be the same between cell cycles.
+		Thus, the fact that Eq.~\ref{eq:CPDEffectivenTemp} will only be an equality when $N=n$ must be addressed.
+		
+		The assumption made by S.~Yang in his thesis is that initiators are loaded as a Poisson-process.
+		This means in a large population of cells, if a particular origin has a mean number of initiators, $n$, the standard deviation of $N$ will be $\sqrt{n}$~[\textbf{does this need a citation?}].
+		Therefore, as $n$ grows, the relative differences in $N$ within the population shrinks.
+		Thus, for large enough $n$, $N\approx n$, so Eq.~\ref{eq:CPDEffectivenTemp} becomes
+		\begin{equation} \label{eq:PhiEffective}
+			\Phi_{\text{eff}}(t,n) = \lim_{n\to\infty} 1 - \left[1 - \Phi_0(t)\right]^n\text{ .}
+		\end{equation}
+		
+		A new problem arises from Eq.~\ref{eq:PhiEffective}:
+		It is not the case that an infinite number of initiators are loaded at an origin \textsuperscript{[citation needed]}, so it is necessary to determine at what value $n$ is ``large enough.''
+		When the MIM was first developed, this threshold was set at $n=$ \textbf{FIND THIS}.
+		Consequently, assuming that for many origins $n>$ \textbf{FIND THIS}, the parameters of the MIM were fit to microarray data.
+		The results showed that for the majority of origins, the assumption was true~\cite{ScottsThesis}.
+		Note that those origins that did not have $n>$ \textbf{FIND THIS} are late-firing origins because of their low $n$, and they have negligible impact on the replication process.
+		
+	\section{Experimental measure of the Number of Initiators}
+	
+	The MIM presents a strong theory about the physical mechanism controlling origin fire-times during S phase.
+	A part of the strength of this theory is it can be checked experimentally by counting the number of initiators loaded at an origin, and in 2013 N.~Rhind~\emph{et~al.} did just that~[\textbf{Figure out how to cite this}].
+	
+	Rhind~\emph{et~al.} ran several tests measuring the relative occupancy of MCM2-7 along the genome.
+	After removing origins known to be 
 
 
 
