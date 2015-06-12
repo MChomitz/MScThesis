@@ -9,7 +9,7 @@ The work of Yang~\emph{et~al.} lead to the development of a second analytical mo
 The MIM made some reasonable assumptions to simplify the math involved.
 This simple mode was used to analyze experimental data and draw conclusions about the physical mechanisms controlling DNA replication.
 
-However, recent work performed in N. Rhind's lab [\textbf{Source this, somehow}] have shown that one of the assumptions used in the MIM may not be representative of the truth (Sec.~[\textbf{Section reference}]).
+However, recent work performed in N. Rhind's lab [\textbf{Source this, somehow}] have shown that one of the assumptions used in the MIM may not be representative of the truth (Sec.~\ref{sec:ExperimentsMIM}).
 The purpose of this research is to discover the impact of this new information on the MIM.
 
 This chapter will expand on the above story, filling in the details of the math behind the models, and explicitly stating the assumptions and measurements made.
@@ -18,7 +18,7 @@ This chapter will expand on the above story, filling in the details of the math 
 	\section{Replicated Fraction}
 	\label{sec:ReplicatedFraction}
 	
-	It was mentioned briefly in Sec.~\ref{sec:modelling} and Sec.~\ref{sec:experiments} that the replicated fraction, $f$, can be calculated from both theoretical models and experiments.
+	It was mentioned briefly in Sec.~\ref{sec:Modelling} and Sec.~\ref{sec:ExperimentsBasics} that the replicated fraction, $f$, can be calculated from both theoretical models and experiments.
 	Thus, the replicated fraction is a quantity that can be used to analyze experimental data and to test the validity of models.
 	For this reason we will now provide details about what the replicated fraction is, how it is calculated, and how we used it in our research.
 	
@@ -26,7 +26,7 @@ This chapter will expand on the above story, filling in the details of the math 
 	as a quantity of either a single cell, or a population of cells.
 	In the single cell case, $f(x,t)$ is the probability that the sequence at position, $x$, in the genome has replicated a time, $t$, after the start of S phase.
 	From a population of cells, $f(x,t)$ is the fraction of the cells in the population that have replicated at position, $x$, a time, $t$, after the start of S phase.
-	It is not difficult to see the equivalency between these two descriptions, but there is a subtle difference that will become apparent soon (Sec.~\ref{sec:MIM}.
+	It is not difficult to see the equivalency between these two descriptions, but there is a subtle difference that will become apparent soon (Sec.~\ref{sec:MIM}).
 	
 	
 		\subsection{Qualities of the Replicated Fraction}
@@ -82,8 +82,45 @@ This chapter will expand on the above story, filling in the details of the math 
 		\subsection{Calculating Replicated Fraction from the KJMA Formalism}
 		\label{subsec:KJMA}
 		
-		Fill this in with the calculations that help us calculate $f(x,t)$ given $I(x,t)$ and then $\Phi(t)$.
+		The replication program is defined by the origins.
+		Specifically, the spatial and temporal organization of the origins has a large impact on replication.
+		The speed at which the replicative forks propagate also play a roll in determining the replicative program.
+		Based on the work of Jun~\emph{et~al.}~\cite{KJMA1}, here we outline the mathematical process of calculating the replicated fraction from a set of parameters describing the origins of replication and the replicative forks.
 		
+		We define the rate of initiation, $I(x,t)$ at an unreplicated position, $x$, and time, $t$, after the start of S phase.
+		Of course, initiation can only happen at origins of replication, and in budding yeast origins are localized at known locations~\cite{OriDB}, labeled $x_i$.
+		Therefore we define the rate of initiation at origin $i$ as $I_i(x,t)=\delta(x-x_i)I_0(x,t)$, where $\delta(x)$ is the Dirac $\delta$ function.
+		Finally, we define the rate of initiation as $I(x,t) = \sum\limits_i I_i(x,t)$.
+		
+		Given the function $I(x,t)$, we can infer the replicated fraction, $f(x,t)$, at a position $x$ a time, $t$, after the start of S phase:
+		\begin{equation} \label{eq:RepFromI}
+			f\left( x,t\right) = 1 - \prod_\Delta\left[1-I\left( x^\prime,t^\prime\right)\Delta x^\prime\Delta t^\prime\right] \text{ ,}
+		\end{equation}
+		where the product is over the past triangle shown in Fig.~[\textbf{Make/TakeFigure}].
+		In words, Eq.~\ref{eq:RepFromI} says that the probability that the genome at position $x$ has been replicated is one minus the probability that no origin has fired long enough in the past to have a replicative fork pass over position $x$.
+		In the limit $\Delta x\rightarrow0$ and $\Delta t\rightarrow0$, Eq.~\ref{eq:RepFromI} becomes
+		\begin{equation} \label{eq:RepFromIexp}
+			f\left( x,t\right) = 1 - \exp\left[-\iint\limits_\Delta dx^\prime dt^\prime I\left( x^\prime,t^\prime\right)\right] \text{ .}
+		\end{equation}
+		
+		Now, it is possible to define a new quantity, $g(\Delta x_p,t)$, that is a local measure of origin firing:
+		\begin{equation} \label{eq:LocalOriginFiring}
+			g\left(\Delta x_p,t\right) = \int\limits_{x_p}^{x_{p+1}}\delta\left( x-x_i\right) dx \int\limits_o^t I_0\left( x,t^\prime\right) dt^\prime
+		\end{equation}
+		over the region $[x_p, x_{p+1})$ of a genome of length, $L$, discretized into $M$ segments;
+		\begin{align}
+			\Delta x = \frac{L}{M} \qquad\qquad x_p = p\left(\Delta x\right) \qquad\qquad p = 0, 1, 2, \ldots , M-1 \text{ .}
+		\end{align}
+		$g(\Delta x_p,t)=0$ if there are no origins enclosed in $\Delta x_p$ because initiation will only occur at an origin.
+		Thus, we can replace the double integral in Eq.~\ref{eq:RepFromIexp} with the function $g(\Delta x_p,t$ and arrive at
+		\begin{equation} \label{eq:RepFromG}
+			f\left( x,t\right) = 1 - \exp\left[ - \sum\limits_{p=0}^{M-1}g\left(\Delta x_p,t-\frac{\left| x-x_p \right|}{v}\right)\right] \text{ ,}
+		\end{equation}
+		where $v$ is the speed of replicative forks, $\Delta x_p$ is the $p^\text{th}$ interval, $x_p$ is the $p^\text{th}$ position, and $\left| x-x_p \right|/v$ is the time at the edge of the triangle in Fig.~[\textbf{Make/Take}].
+		
+		Recognizing that $g(\Delta x_p,t)$ represents the initiation rate of budding yeast, we can constrain it to represent the biological system better:
+		First, we constrain $g$ such that replication can not happen before the start of S phase -- $g(\Delta x_p,t<0)=0$. 
+
 
 	\section{The Sigmoidal Model}
 	\label{sec:SigmoidalModel}
@@ -91,24 +128,38 @@ This chapter will expand on the above story, filling in the details of the math 
 	The sigmoidal model is an approach to analyzing DNA replication by investigating the replicated fraction at each origin, $f(x=x_o,t)$.
 	Developed by S. Yang as part of his PhD thesis, this model assumes that the functional form of $f(x=x_o,t)$ is a sigmoidal function that goes from zero to one and is defined by three parameters at each origin, $o$, on the genome~\cite{ScottsPaper,ScottsThesis}.
 	
-	Figure [\textbf{make/take figure}] [\textbf{ask Scott - Fig. 3.1}] shows the approach and results of the sigmoidal model.
-	First, extract the replicated fraction at an origin, $f(x=x_o,t)$, from experimental data of the entire genome, $f(x,t)$ (Fig.~[\textbf{Scotts A}]).
+	Figure~\ref{fig:SigmoidalModel} shows the approach and results of the sigmoidal model.
+	First, extract the replicated fraction at an origin, $f(x=x_o,t)$, from experimental data of the entire genome, $f(x,t)$ (Fig.~\ref{fig:SigmoidalModel}A).
 	For his thesis, Yang used microarray data~\cite{McCuneMicroArray}.
-	Second, fit a sigmoidal curve to $f(x=x_0,t)$ (Fig.~[\textbf{Scotts B}]).
-	This sigmoidal curve is parameterized to define the median replication time, $t_{1/2}$, and the spread of replication times, $t_w$:
+	Second, fit a sigmoidal curve to $f(x=x_0,t)$ (Fig.~\ref{fig:SigmoidalModel}B).
+	This sigmoidal curve is parameterized to define the median replication time, $t_{\text{rep}}$, and the spread of replication times, $t_{\text{width}}$:
 	\begin{equation} \label{eq:SigmoidalModel}
-		f(t) = {\frac{1}{1+\left({\frac{t_{1/2}}{t}}\right)^r}}\text{ ,}
+		f(t) = {\frac{1}{1+\left({\frac{t_{\text{rep}}}{t}}\right)^r}}\text{ ,}
 	\end{equation}
-	where $t_w$ is defined by
+	where $t_{\text{width}}$ is defined by
 	\begin{equation}
-		t_w = \left(3^{1/r}-3^{-1/r}\right)t_{1/2}\text{ .}
+		t_{\text{width}} = \left(3^{1/r}-3^{-1/r}\right)t_{\text{rep}}\text{ .}
 	\end{equation}
 	
-	When $t_{1/2}$ vs $t_w$ is graphed an interesting trend appears (Fig.~[\textbf{Scotts C}]).
-	A strong correlation exists between $t_{1/2}$ and $t_w$.
+	When $t_{\text{rep}}$ vs $t_{\text{width}}$ is graphed an interesting trend appears (Fig.~\ref{fig:SigmoidalModel}C).
+	A strong correlation exists between $t_{\text{rep}}$ and $t_{\text{width}}$.
 	The correlation means that origins that tend to fire early have very narrowly defined firing times, while origins that tend to fire late have more loosely defined firing times.
-	The conclusion one can draw from this insight is that there must be a mechanism that has control over origin firing time the strength of which is high at the start of S phase but decreases as S phase progresses\cite{ScottsThesis}.
+	The conclusion one can draw from this insight is that there must be a mechanism that has control over origin firing time the strength of which is high at the start of S phase but decreases as S phase progresses~\cite{ScottsThesis}.
 	From this theory, a new model was developed called the Multiple Initiator Model (MIM).
+	
+	\begin{figure}[tbh]
+		\begin{center}
+			\includegraphics[width=.82\textwidth]{Images/ScottFig3-1.pdf}
+		\end{center}
+			\caption[Sigmoidal model]{\label{fig:SigmoidalModel} Schematic of the Sigmoidal Model process and results from analysis of budding yeast data.
+				\textbf{A} Sample replicated fraction: smoothed data from microarray measurements of Chromosome I (solid lines)~\cite{McCuneMicroArray}.
+				The black triangles indicate the locations of previously identified origins~\cite{OriginLocations}.
+				To fit the sigmoidal model, take only the replicated fraction at an origin (grey region).
+				\textbf{B} Fit Eq.~\ref{eq:SigmoidalModel} to the extracted replicated fraction at an origin.
+				The fitted function has parameters, $t_{\text{rep}}$ and $t_{\text{width}}$, which are shown.
+				\textbf{C} After performing this process on every identified origin, a correlation is identified between these two parameters.
+				Figure reproduced with permission from S.~Yang [PhD Thesis]~\cite{ScottsThesis} (Copyright~\textcopyright~2012)}
+	\end{figure}
 	
 	
 	\section{The Multiple Initiator Model}
@@ -118,7 +169,8 @@ This chapter will expand on the above story, filling in the details of the math 
 	If each of these chances are equally weighted, then origins with larger numbers of chances should tend to fire earlier than origins with fewer chances.
 	One hypothesis for the physical mechanism that creates these unique chanced to initiate is the MCM2-7 pairs loaded at each origin.
 	Effectively, origins with more MCM2-7 pairs loaded will tend to fire earlier in S phase than origins with fewer pairs.
-	However, it is important to note that factors besides the number of loaded MCM2-7 pairs can impact the relative firing times of origins, for example the three dimensional organization of the genome~\cite{}.
+	However, it is important to note that factors besides the number of loaded MCM2-7 pairs can impact the relative firing times of origins.
+	For example, the chromatin structure (the three dimensional organization of the genome) is believed to play a roll in controlling origin firing times~\cite{Chromatin}.
 	
 		\subsection{MIM Basics}
 		\label{subsec:MIMBasics}
@@ -135,7 +187,7 @@ This chapter will expand on the above story, filling in the details of the math 
 		\end{equation}
 		Where $t^*_{1/2}$ is the median firing-time for a single initiator and $r^*$ is the rate of increase.
 		These variables are global, defining the behaviour of every initiator on the genome.
-		Using this assumption, then the cumulative probability that an origin with $N$\footnote{In this thesis, $N$ represents the absolute number of initiators at an origin in a single cell, and $n$ represents the average number of initiators at an origin in a large population of cells.} loaded initiators is given by
+		Using this assumption, then the cumulative probability that an origin with $N$\footnote{In this thesis, $N$ represents the number of initiators at an origin in a single cell, and $n$ represents the average number of initiators at an origin in a large population of cells.} loaded initiators is given by
 		\begin{equation} \label{eq:CPDEffectiveN}
 			\Phi_{\text{eff}}(t,N) = 1 - \left[1 - \Phi_0(t)\right]^N\text{ .}
 		\end{equation}
@@ -150,7 +202,7 @@ This chapter will expand on the above story, filling in the details of the math 
 		\end{equation}
 		
 		
-		\subsection{Accounting for variability in $n$}
+		\subsection{Accounting for variability in $N$}
 		\label{subsec:VariableN}
 		
 		Given the many factors that effect the ORC's ability to load MCM2-7 initiators onto DNA~\cite{MultiMCM}, it is reasonable to assume that the number of initiators will not be the same between cell cycles.
@@ -171,13 +223,55 @@ This chapter will expand on the above story, filling in the details of the math 
 		The results showed that for the majority of origins, the assumption was true~\cite{ScottsThesis}.
 		Note that those origins that did not have $n>$ \textbf{FIND THIS} are late-firing origins because of their low $n$, and they have negligible impact on the replication process.
 		
-	\section{Experimental measure of the Number of Initiators}
+	\section{Experimental Measure of the Number of Initiators}
+	\label{sec:ExperimentsMIM}
 	
 	The MIM presents a strong theory about the physical mechanism controlling origin fire-times during S phase.
-	A part of the strength of this theory is it can be checked experimentally by counting the number of initiators loaded at an origin, and in 2013 N.~Rhind~\emph{et~al.} did just that~[\textbf{Figure out how to cite this}].
+	A part of the strength of this theory is it can be checked experimentally by counting the number of initiators loaded at an origin, and in 2013 S.~P.~Das~\emph{et~al.} did just that~[\textbf{Figure out how to cite this}].
 	
-	Rhind~\emph{et~al.} ran several tests measuring the relative occupancy of MCM2-7 along the genome.
-	After removing origins known to be 
+	Das~\emph{et~al.} made several measurements to test the strength of the MIM.
+	First, they measured the relative number of initiators loaded at every origin; according to the MIM, origins that fire earlier should have more initiators than those that fire later.
+	Second, they measured the effect of reducing the number of initiators at an origins; according to the MIM, reducing the number of loaded initiators should delay the mean firing time of that origin.
+	Third, they measured the average number of initiators loaded on a particular early origin; according to the MIM, an early-firing origin should have many initiators loaded on average.
+	
+		\subsection{Relative Number of Initiators}
+		\label{subsec:RelativeNo}
+		
+		To measure the relative number of initiators, Das~\emph{et~al.} used ChIP-seq in a population of G1-arrested cells.
+		ChIP-seq experiments measure the interaction between proteins and DNA~[\textbf{Find Source}].
+		In this case, Das~\emph{et~al.} prepared the experiment so that the output provided a measure of the relative number of MCM proteins loaded throughout the genome.
+		Figure~[\textbf{Das Figure 1A}] shows the measure through Chromosome X, and peaks align nicely with origins identified in OriDB~\cite{OriDB}.
+		Figure~[\textbf{Das Figure 1B}] shows the relative number of MCM2-7 hexamers loaded at an origin vs the $n$ value predicted from the MIM in 2010~\cite{ScottsPaper}.
+		After ignoring those origins that are believed to fire late due to their location in chromatin structure (Blue origins in Fig.~[\textbf{Das Figure 1B}])~\cite{Chromatin}, a correlation between the number of initiators and the theoretical parameter $n$ is observed.
+		This measurement nicely confirms the prediction made by the MIM.
+		
+		
+		\subsection{Suppressing the Loading of Initiators}
+		\label{subsec:SuppressingInitiators}
+		
+		To measure the effect of suppressing the loading of MCM2-7 hexamers on the replication program, Das~\emph{et~al.} measured the replication profile of ARS1 and the ARS1-$\Delta$B2 mutant.
+		The ARS1 origin is known to be fairly early firing~\cite{OriDB}, and should therefore have a relatively high number of initiators, and the ARS1-$\Delta$B2 mutant reduces MCM2-7 loading~\cite{ARS1Mutant}.
+		The expectation, based on the MIM, is that the mutant ARS1-$\Delta$B2 will have a later mean firing time due to the reduced number of initiators loaded.
+		By measuring the replicated fraction of cells with both wild-type and mutant ARS1 origins independently, Das~\emph{et~al.} saw a marked (13 minute) delay in the average replication timing of ARS1 caused by the $\Delta$B2 mutation (Fig.~[\textbf{Das Figure 3C}].
+		
+		
+		\subsection{Number of Initiators Loaded}
+		\label{subsec:NoInitiatorsLoaded}
+		
+		Das~\emph{et~al.} engineered several special plasmids to measure the average number of initiators loaded at an early firing origin,.
+		A plasmid is a small loop of dsDNA that is separate from the genome and is able to replicate independently~[\textbf{Find Source}].
+		On each plasmid was engineered one of a selection of origins (each origin was contained in its own population).
+		One of the six proteins in the ORC and one of the six proteins in the MCM2-7 hexamer were tagged so their relative average numbers could be measured with western blotting.
+		In order to calculate the absolute average numbers of MCM2-7 hexamers and ORCs, the measured values were normalized using a zinc-finger -- Zif268 will bind to a specific 10 bp sequence of DNA (which was included in the plasmid) with sub-nanomolar affinity~\cite{ZincFingers}.
+		From a population of G1 phase arrested cells, the engineered plasmids were extracted and the relative number of ORCs, MCM2-7s and zinc-fingers were measured and normalized such that the average number of zinc-fingers was one.
+		
+		Of the origins investigated by Das~\emph{et~al.}, ARS1 is illustrative, and their measurements for ARS1 are shown in Fig.~[\textbf{Das Figure 2B}].
+		The figure shows the average number of loaded MCM2-7 hexamers (one initiator is a pair of these), and the average number of loaded ORCs during G1 arrest and G2 arrest.
+		Notably, Das~\emph{et~al.} measured an average of about 3 initiators loaded on the ARS1 origin, compared to $n=24$ predicted by the MIM~\cite{ScottsPaper}.
+		It is important to restate that $n$ does not necessarily equal the number of initiators, but is proportional to the number of unique chances an origin has to fire.
+		So, the fact that the number measured by Das~\emph{et~al.} does not match that predicted by the MIM isn't troublesome.
+		However, the fact that the number of initiators is so slow, means that the number (which must be an integer value on the single-cell scale), may vary greatly between cells in a population.
+		The question we set out to answer with this research is \emph{how does variability in the initiation factor affect the replication program?}
 
 
 

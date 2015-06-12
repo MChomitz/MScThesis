@@ -12,6 +12,6 @@ In the Chapters\ directory, all the chapters are stored:
     Meathods.tex file, not yet included
 
 In the Appendicies\ directory, all the appendices are stored:
-    EColiRep.tex outlines the back-of-the-envelope calculations done to find the replication time of E. coli
+    EColiRep.tex (REMOVED) outlines the back-of-the-envelope calculations done to find the replication time of E. coli
 
 The .bib file is the current bibliography. This will need to grow substantially before the thesis is finished.

@@ -151,11 +151,11 @@ In other words, the program must be able to control the replication program such
 		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
 		
 		Previous studies of the firing times of individual origins in budding yeast have found evidence that the process has some driving force~\cite{ScottsPaper,StochasticTermination}.
-		Both studies measured the average firing time and the spread in firing times for each origin in budding yeast and discovered a correlation between them (See Fig. [\textbf{make/take figure}][\textbf{ask Scott - Fig 3.1C}].
+		Both studies measured the average firing time and the spread in firing times for each origin in budding yeast and discovered a correlation between them (See Fig.~\ref{fig:SigmoidalModel}B).
 		Essentially, origins that tend to fire early have narrowly defined firing times, while those that tend to fire late have loosely defined firing times.
 		This trend implies the existence of a mechanism that strongly controls the fire-time of origins at the start of S phase, but loses its potency as S phase progresses.
 		
-		A theory for what physical components of the replicative machinery create this timing mechanism will be discussed in detail below in  [\textbf{Sec. \#}].
+		A theory for what physical components of the replicative machinery create this timing mechanism will be discussed in detail below in Sec.~\ref{sec:MIM}.
 		
 		
 	\section{Modelling Replication}
@@ -188,11 +188,11 @@ In other words, the program must be able to control the replication program such
 	
 	One of the quantities that can be inferred using the KJMA formalism is the replicated fraction, $f(x,t)$.
 	The replicated fraction can be interpreted as the probability that the genome at position $x$ has been replicated by a time $t$ after the start of S phase.
-	The replicated fraction is an important quantity that will be discussed more in [\textbf{Sec. \#}].
+	The replicated fraction is an important quantity that will be discussed more in Sec.~\ref{sec:ReplicatedFraction}.
 	
 	
 	\section{Experiments Measuring Replication}
-	\label{sec:Experiments}
+	\label{sec:ExperimentsBasics}
 	
 	The theory describing DNA replication has been driven by experimental results.
 	In this section, we answer the question, \emph{How can DNA replication be observed experimentally?}
@@ -256,11 +256,10 @@ In other words, the program must be able to control the replication program such
 	Here, I give a brief outline of the thesis. For now, this will serve as a plan for the outline. After the writing is complete this will be more of a road-map for readers than for me.
 	
 	\textbf{Chapter 2 - Motivation}
-	should introduce the mathematics of the model more clearly.
-	A discussion of the replicated fraction and how to calculate it.
-	It should outline Scott's Sigmoidal Model and the observed correlation between $t_{1/2}$ and $t_{\text{width}}$.
-	It will then introduce the Multiple Initiator Model, its assumptions, and its results.
-	Finally, it will discuss Nick's 2014 experiment measuring loaded MCM and the potential problem it points to.
+	Starts by summarizing the mathematical details of the KJMA-like model that describes DNA replication, and how to use it to calculate the replicated fraction from a theoretical model.
+	We then discuss the Sigmoidal Model and how it measured the correlation between $t_{\text{rep}}$ and $t_{\text{width}}$.
+	The chapter moves on to describe the Multiple Initiator model, which was developed to explain said correlation in budding yeast.
+	Finally, we introduce an experiment run by a collaborator that measured loaded MCM and the potential problem it points to.
 	
 	\textbf{Chapter 3 - Method}
 	should talk about the different tools I used to try to understand the problem and its solution.
