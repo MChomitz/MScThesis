@@ -1,4 +1,35 @@
 \chapter{Methods}
+\label{ch:Methods}
 
-To address the question of how variability in initiation factor impacts the MIM, we developed a program that simulates DNA replication and produces data similar to those from experiment.
-Some consideration was taken in the design of this program 
+In this chapter we outline our approach to investigating the question of how variability in initiation factor impacts the MIM.
+The backbone of our investigation was the development and implementation of a Monte Carlo program that simulates DNA replication.
+A great deal of consideration went into the details of the simulation program to ensure it was efficiently producing meaningful results:
+We ensured the randomly generated numbers were distributed properly.
+We utilized optimized algorithms to track the replicated fraction and used multiple programming languages to increase performance.
+We calculated how to adequately produce measurements commensurate with current experimental standards.
+We ran simple tests that show that the program produces expected results in well understood regimes.
+After verifying the efficacy of the simulator, we set out to investigate the effect of small $n$ on the MIM.
+
+
+	\section{MIM simulator}
+	
+	The MIM simulator takes, as inputs, an identical set of parameters to those defined by the MIM.
+	Namely, there are four global inputs (The elapsed time since the start of S phase $t_\text{sim}$, the length of the genome $L$, the median firing time $t_{1/2}$, and the rate of increase of the cumulative probability distribution of firing times $r$) and two local parameters per origin (the position $x_i$ and the average number of unique chances to fire\footnote{For the remainder of this chapter, ``unique chances to fire'' will be referred to as ``initiators.''} $n_i$).
+	The simulator uses these parameters to generate the replicated fraction, $f(x,t=t_\text{sim})$, over the entire genome at time $t_\text{sim}$.
+	To increase efficiency, the simulation is able to do this over several sets of parameters that are nearly identical (with $t_\text{sim}$ changing by steps of 5 minutes), thereby creating sets of data comparable to those measured with sequencing experiments.
+	
+	The MIM simulator can be broken into three modules: the preparation module, that sets the randomly distributed parameters; the phantom nuclei module, that uses those parameters to calculate $f(x,t=t_\text{sim})$; and, the housing module, that tracks progress and executes the commands.
+	The housing module was made for convenience only, and does not add any scientifically meaningful features to the program.
+	However, both the preparation module and the phantom nuclei module will be discussed in more detail below.
+	
+	
+		\subsection{The preparation module}
+		
+		The preparation module is, fundamentally, a Monte Carlo program.
+		A Monte Carlo program can be identified by its use of pseudo-random numbers~[\textbf{find source}] (pseudo-random because computers are unable to generate purely-random numbers~[\textbf{find source}].
+		In the case of the preparation module of the MIM simulator, there is are two sets of random numbers needed:
+		First, the program requires a set of absolute numbers initiators, ${N_i}$, for all origins $i$.
+		Second, the program requires a set of firing times, $t_i,j$, for each initiator $j$ at origin $i$.
+		For both sets, care was taken to ensure that the generated values were properly distributed to match MIM theory (Sec.~\ref{sec:MIM}).
+		
+		In Sec.~\
