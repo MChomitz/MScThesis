@@ -1,35 +1,175 @@
 \chapter{Methods}
 \label{ch:Methods}
 
-In this chapter we outline our approach to investigating the question of how variability in initiation factor impacts the MIM.
+In this chapter we outline our investigation of the impact of variability in initiation factor on the MIM.
 The backbone of our investigation was the development and implementation of a Monte Carlo program that simulates DNA replication.
 A great deal of consideration went into the details of the simulation program to ensure it was efficiently producing meaningful results:
 We ensured the randomly generated numbers were distributed properly.
 We utilized optimized algorithms to track the replicated fraction and used multiple programming languages to increase performance.
 We calculated how to adequately produce measurements commensurate with current experimental standards.
 We ran simple tests that show that the program produces expected results in well understood regimes.
-After verifying the efficacy of the simulator, we set out to investigate the effect of small $n$ on the MIM.
+After verifying the efficacy of the simulator, we investigated the effect of small $n$ on the MIM.
+Finally, we concluded that variability in $N$ does not greatly impact the predictive power of the MIM.
+
+Except where special note is made, all computations were performed in IGOR Pro Version 6.3.6.4
 
 
-	\section{MIM simulator}
+	\section{The MIM simulator}
+	\label{sec:MIMSimulator}
 	
-	The MIM simulator takes, as inputs, an identical set of parameters to those defined by the MIM.
-	Namely, there are four global inputs (The elapsed time since the start of S phase $t_\text{sim}$, the length of the genome $L$, the median firing time $t_{1/2}$, and the rate of increase of the cumulative probability distribution of firing times $r$) and two local parameters per origin (the position $x_i$ and the average number of unique chances to fire\footnote{For the remainder of this chapter, ``unique chances to fire'' will be referred to as ``initiators.''} $n_i$).
-	The simulator uses these parameters to generate the replicated fraction, $f(x,t=t_\text{sim})$, over the entire genome at time $t_\text{sim}$.
-	To increase efficiency, the simulation is able to do this over several sets of parameters that are nearly identical (with $t_\text{sim}$ changing by steps of 5 minutes), thereby creating sets of data comparable to those measured with sequencing experiments.
+	The MIM simulator takes as inputs an identical set of parameters to those defined by the MIM.
+	Namely, there are four global inputs (The elapsed time since the start of S phase $t_\text{sim}$, the speed of replicative forks $v$, the median firing time $t_{1/2}$, and $r$, which defines the width of the cumulative firing time distribution) and two local parameters per origin (the position $x_i$ and the average number of initiators $n_i$).
+	The reader may notice that this set of parameters is not identical to those outlined in Sec.~\ref{sec:MIM}, that is because the experimental error was handle slightly differently, as will be described in Sec.~\ref{}.
+	The simulator uses these parameters to generate the replicated fraction, $f(x,t=t_\text{sim})$, over the entire genome.
+	To increase efficiency, the simulation is able to do this over several sets of parameters that are nearly identical (with $t_\text{sim}$ changing by steps of 5 minutes), thereby creating data comparable to those measured with sequencing experiments.
 	
 	The MIM simulator can be broken into three modules: the preparation module, that sets the randomly distributed parameters; the phantom nuclei module, that uses those parameters to calculate $f(x,t=t_\text{sim})$; and, the housing module, that tracks progress and executes the commands.
-	The housing module was made for convenience only, and does not add any scientifically meaningful features to the program.
-	However, both the preparation module and the phantom nuclei module will be discussed in more detail below.
+	These three modules will be discussed in more detail below.
 	
 	
 		\subsection{The preparation module}
+		\label{subsec:PrepModule}
 		
 		The preparation module is, fundamentally, a Monte Carlo program.
-		A Monte Carlo program can be identified by its use of pseudo-random numbers~[\textbf{find source}] (pseudo-random because computers are unable to generate purely-random numbers~[\textbf{find source}].
+		A Monte Carlo program can be identified by its use of pseudo-random numbers~[\textbf{find source}] (pseudo-random because computers are unable to generate purely random numbers~[\textbf{find source}].
 		In the case of the preparation module of the MIM simulator, there is are two sets of random numbers needed:
-		First, the program requires a set of absolute numbers initiators, ${N_i}$, for all origins $i$.
-		Second, the program requires a set of firing times, $t_i,j$, for each initiator $j$ at origin $i$.
+		First, the program requires a set of absolute numbers of initiators, ${N_i}$, for all origins $i$.
+		Second, the program requires a set of firing times, $t_i,j$, for all initiators $j$ at each origin $i$.
 		For both sets, care was taken to ensure that the generated values were properly distributed to match MIM theory (Sec.~\ref{sec:MIM}).
+		To connect this with the DNA replication program, the preparation module is analogous to the initiation process undertaken in the G1 phase of the cell cycle (Sec.~\ref{subsec:G1Phase}.
 		
-		In Sec.~\
+		
+			\subsubsection{Randomly Generated $N_i$}
+			
+			The first task the preparation module undertakes is randomly generating $N_i$, the absolute number of initiators at origin $i$ for the cell being simulated.
+			Thus, the first choice we made in creating the simulator was how the values for $N_i$ should be distributed, given their average $n_i$.
+			In Sec.~\ref{subsec:MIMBasics}, we mentioned that a simple hypothesis is that initiators are loaded onto an origin as a Poisson-process; if this is the case, the number of initiators should be Poisson distributed.
+			This hypothesis is nearly as simple as possible (setting $N$ the same for every cell cycle is simpler, but that is the assumption we are testing from previous work), but is not based on observations.
+			We are unaware of any experiments that have measured the distribution in the number of initiators between cell cycles.	
+			In discussion with collaborators, another hypothetical distributions were considered:
+			It seems reasonable that it is very easy to load the first initiator at an origin, so perhaps all origins are guaranteed to have one initiator with additional initiators are loaded as a Poisson-process.
+			However, without any experimental evidence to motivate the selection of a complex model, the simple Poison model was used.
+			Therefore, the preparation module selects the number of initiators at origin $i$ from a Poisson distribution defined by the average $n_i$.
+			The preparation module makes this selection using a built-in IGOR function that will create Poisson-distributed random numbers given the desired average.
+			
+			
+			\subsubsection{Randomly Generated Firing Times}
+			
+			The second task the preparation module undertakes is assigning a firing time to each initiator on the genome.
+			This is different from assigning a firing time to each origin: If there are $k$ origins, then the number of initiators is given by $\sum\nolimits_{i=0}^k N_i = K$.
+			Therefore, $K$ randomly generated firing times are required.
+			In this case, the MIM dictates the desired firing time distribution of an initiator, which we derive from the cumulative firing time probability shown in Eq.~\ref{CPDInitiator} (Shown again below).
+			\begin{equation} \label{CPDInitiator2}
+				\Phi_0(t) = \frac{1}{1+\left(\frac{t^*_{1/2}}{t}\right)^{r^*}}\text{ .}
+			\end{equation}
+			By recognizing that $\Phi_0$ goes from zero (when $t$ is zero), to one (when $t$ is infinite), we can use inverse transform sampling~\textbf{cite} to randomly generate firing times that reproduce the desired cumulative firing time probability.
+			Essentially, if we generate $u$, a uniformly distributed number between zero and one, for which IGOR has a built-in function, we can transform that to be distributed as given by Eq.~\ref{CPDInitiator2} with
+			\begin{equation}
+				F(u) = \frac{t^*_{1/2}}{\left(\frac{1}{u}-1\right)^\frac{1}{r^*}} \text{ ,}
+			\end{equation}
+			where $F(u)$ is the firing time.
+			To test the inverse transformation, a histogram of $10^5$ samples was satisfactorily fit to the cumulative fire-time distribution.
+			After all $K$ firing times are generated, the time of the first-to-fire initiator at each origin is kept because each origin can only fire once, thus the firing time of the origin $i$ is given by the firing time of the earliest initiator $t_i$.
+			
+			
+		\subsection{The phantom nuclei module}
+		\label{subsec:PhanNuc}
+		
+		Based on work done by S.~Jun~\emph{et~al.}, the phantom nuclei algorithm we used in the simulation is a powerful tool for calculating replicative data from a set of data describing origins of replication in the KJMA-like formalism~\cite{KJMA1}.
+		There are three major components to the phantom nuclei module: the pre-processor, the coalescer, and the compiler.
+		With these three components, the phantom nuclei quickly calculates the regions on the genome which have been replicated given the input parameters (the four global parameters, and the positions and firing-times of each initiator).
+		These components have been separated for the sake of clearly describing the basic process, however there is some overlap between them in our code to increase performance.
+		Figure \textbf{Make/Take this} illustrates the key features of the phantom nuclei method
+		
+		
+			\subsubsection{Pre-processor}
+			
+			The strength of the phantom nuclei algorithm is in that it pre-processes the origin data it receives in order to remove redundant information and reduce the amount of computations needed to fully simulate the replication process.
+			As we mentioned above, we designed the simulator to loop through many values of $t_\text{sim}$.
+			The pre-processor calculates the state of replication at the highest value for $t_\text{sim}$ given.
+			We start at the last time step because that is when every meaningful event will have occurred: origins have fired, or not, and any coalescence events have taken place.
+			
+			For each origin, $i$, the pre-processor calculates the position $x_i^\text{(L)}$ of the left fork and and $x_i^\text{(R)}$ of the right fork that propagate from the position $x_i$ at a speed $v$ starting at the time $t_i$.
+			Calculating these positions is done with simple kinematics:
+			\begin{equation} \label{eq:findforks}
+				x_i^{\binom{\text{R}}{\text{L}}} = x_i \pm v \times \left( t_\text{sim} - t_i\right) \text{ ,}
+			\end{equation}
+			where the right fork is given by the sum, and the left fork by the difference, and where the bracketed term calculates the time since the origin fired.
+			As a part of this step, any origins for which $t_i > t_\text{sim}$ are immediately removed from the simulation, as they will not contribute any fork data.
+			Once the fork locations for each origin have been calculated, the pre-processor analyzes each pair of neighbouring origins to determine if any origin was passively replicated.
+			Any passively replicated origins, or ``phantom nuclei'' are removed from the simulation (black dots in Fig. \textbf{make/take this}).
+			The pre-processor is finished after it removes all but the necessary origins from the simulation (empty circles in Fig. \textbf{make/take this}), thereby speeding up the calculation of the replicated fraction.
+			
+			
+			\subsubsection{Coalescer}
+			
+			The coalescer is the largest part of the phantom nuclei algorithm, and is used at every time-step in the simulation.
+			The coalescer makes three major calculations:
+			First, it selects which origins will fire by comparing them to the current value of $t_\text{sim}$; only origins with $t_i < t_\text{sim}$ will fire.
+			Second, using Eq.~\ref{eq:findforks}, the coalescer creates two sets of fork positions (forks traveling left and forks traveling right) from the origins selected in the first step.
+			Third, it analyzes the two sets of forks, and identifies where forks have collided and coalescence has occurred.
+			Any forks that have collided are removed from the sets of forks, and the resulting set of forks make up the boundaries between replicated an unreplicated regions
+			
+			
+			\subsubsection{Compiler}
+			
+			The compiler is used immediately after the coalescer, and is therefore used at every time-step in the simulation.
+			The compiler simply loops through the two sets of forks, and sets the replicated fraction for the cell to one between forks, and zero otherwise.
+			Although this process may sound straightforward, we were unable to do it without nests loops that significantly slowed the simulation process.
+			For this reason, this part was written both in IGOR and in C++, and when we wanted to simulate large data sets early in our work, we called the C++ function as an external program.
+			
+		
+		\subsection{The housing module}
+		
+		When the compiler finished, so too did the simulator.
+		However, in Sec.~\ref{sec:ReplicatedFraction} we showed that the replicated fraction spans all values between zero and one, and in the description above, the simulator only creates replicated a replicated fraction with values of either zero or one.
+		The simulation is of a single cell, and knows the replication profile for the single cell exactly, so the replicated fraction can only be zero (not replicated) or one (replicated).
+		To see an example of $f(x,t)$ that can be compared to experimental data, we must loop over many cells and calculate the average replicated fraction.
+		This is, essentially, exactly what sequencing experiments do: taking large amounts of data from a population and averaging them to find the average behaviour of the population.
+		The housing module is designed to call the other two modules a prescribed number of times with the same set of parameters and thereby calculate an average.
+		
+		In addition to this, the housing module can analyze and alter the simulated replicated fraction $f_\text{sim}$.
+		In our research we fit the MIM parameters to $f_\text{sim}$, we added Gaussian noise to reflect current experimental limitations, and we calculated the difference between $f_\text{sim}$ and experimentally measured $f$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

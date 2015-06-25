@@ -54,7 +54,7 @@ In other words, the program must be able to control the replication program such
 		The ORC is made up of a single group of six proteins that bind to the DNA at an origin~\cite{ORC}.
 		Two additional proteins (Cdc6 and Cdt1; left out of Fig.~\ref{fig:EarlyReplicationConcept}A) assist the ORC in recruiting minichromosome maintenance (MCM) 2-7 hexamer rings onto the DNA~\cite{DNARepInitiation}.
 		Loaded hexamers form pairs oriented away from each other~\cite{MCMPairs}.
-		Each such pair will later be referred to as potential initiators, or just initiators.
+		Each such pair will later be referred to as ``potential initiators'', or just ``initiators''.
 		After licensing, the resulting set of proteins associated with the origin is called the pre-replication complex (pre-RC).
 		Licensing is suppressed during the S and G2 phases by cyclin-dependent kinases.
 		This effectively limits the cell cycle to a single replication event~\cite{MolecularCellBiology}.
@@ -67,9 +67,9 @@ In other words, the program must be able to control the replication program such
 		After licensing is completed in the G1 phase, the division of the genome into two identical copies occurs during S phase.
 		There are three main processes that happen during S phase: initiation, elongation, and coalescence, shown in Fig.~\ref{fig:EarlyReplicationConcept}B.
 		
-		An origin initiates (or activates, or fires) during S phase when five other proteins bind to each in a pair of MCM2-7 rings:
+		An origin initiates (or ``activates'', or ``fires') during S phase when five other proteins bind to each in a pair of MCM2-7 rings:
 		Cdc45 and the tetrameric GINS complex (only Cdc45 is shown in Fig.~\ref{fig:EarlyReplicationConcept}A).
-		The total system of proteins is called the CMG complex (Cdc45, MCM2-7, GINS complex) and comprises a helicase that traverses the genome during the S phase.
+		The total system of proteins is called the CMG complex (Cdc45, MCM2-7, GINS complex) and comprises a helicase that traverses the genome during S phase.
 		As an origin fires, the pre-RC disassembles and the activated pair of helicases unwind and separate the double helix of the dsDNA into two complementary ssDNA chains~\cite{GINSComplex}.
 		
 		After an origin has been initiated, there is a small region of ssDNA bounded on either side by the CMG complex helicases.
@@ -93,7 +93,7 @@ In other words, the program must be able to control the replication program such
 		\begin{center}
 			\includegraphics[width=\textwidth]{images/EarlyReplicationConcept.png}
 		\end{center}
-			\caption[Events During Replication]{\label{fig:EarlyReplicationConcept} Simplified schematic of the G1 and S phases of the cell cycle, containing only those parts that are necessary to understand the model presented in Ch.~[\textbf{REFERENCE}].
+			\caption[Events During Replication]{\label{fig:EarlyReplicationConcept} Simplified schematic of the G1 and S phases of the cell cycle, containing only those parts that are necessary to understand the model presented in Ch.~[\textbf{CH 3}].
 				\textbf{A} In the G1 phase, origins are located and licensed when the ORC recruits pairs of MCM2-7 hexamers onto the dsDNA.
 					During S phase, pairs of Mcm2-7 hexamers are activated by the Cdc45 protein.
 					After activation, the resulting structures become replicative forks that traverse the DNA unwinding the dsDNA allowing the DNA to be replicated.
@@ -110,7 +110,7 @@ In other words, the program must be able to control the replication program such
 	
 	When prokaryotic DNA is replicated, a single origin suffices for a competent (i.e. timely and accurate) replication program.
 	In this case, the origin is located at a sequence-specific site, and there is no need to worry about the firing time except to ensure that it is early enough for complete replication.
-	However, eukaryotic DNA requires many origins of replication for a competent replicative program.
+	However, eukaryotic DNA requires many origins of replication for a competent replication program.
 	The number of origins in the genome varies by species, from fewer than 800 in budding yeast~\cite{OriDB} to about 100 000 in humans~\cite{OriginsReview}.
 	When multiple origins exist on the genome, we can ask the following questions:
 	\begin{itemize}
@@ -138,7 +138,7 @@ In other words, the program must be able to control the replication program such
 		
 		In eukaryotes the  need to initiate multiple origins leads to interesting timing dynamics.
 		The origins do not all initiate simultaneously, but origin-initiation events occur throughout S phase~\cite{DNAInitiation}.
-		The mechanism that controls the relative timing of different origin initiation events is still a matter of some debate~\cite{ScottsPaper,Bechhoefer2012374,deMouraModel1,deMouraModel2} and is the topic of this research.
+		The mechanism that controls the relative timing of different origin initiation events is still a matter of some debate~\cite{ScottsPaper,Bechhoefer2012374,deMouraModel2,deMouraModel1} and is the topic of this thesis.
 		
 		
 		\subsection{Budding Yeast}
@@ -151,11 +151,12 @@ In other words, the program must be able to control the replication program such
 		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
 		
 		Previous studies of the firing times of individual origins in budding yeast have found evidence that the process has some driving force~\cite{ScottsPaper,StochasticTermination}.
-		Both studies measured the average firing time and the spread in firing times for each origin in budding yeast and discovered a correlation between them (see Fig.~[\textbf{Figure Reference}]).
+		Both studies measured the average firing time and the spread in firing times for each origin in budding yeast and discovered a correlation between them (see Fig.~\ref{fig:SigmoidalModel2}).
 		Essentially, origins that tend to fire early have narrowly defined firing times, while those that tend to fire late have loosely defined firing times.
 		This trend implies the existence of a mechanism that strongly controls the fire-time of origins at the start of S phase, but loses its potency as S phase progresses.
 		
-		A theory for what physical components of the replicative machinery create this timing mechanism will be discussed in detail below in Sec.~\ref{sec:MIM}.
+		One theory that explains this observation is the Multiple Initiator Model, which supposes that the number of MCM2-7 hexamers loaded on an origin will impact the timing width and median for that origin.
+		The MIM will be discussed in detail below in Sec.~\ref{sec:MIM}.
 		
 		
 	\section{Modelling Replication}
@@ -197,11 +198,11 @@ In other words, the program must be able to control the replication program such
 	The theory describing DNA replication has been driven by experimental results.
 	In this section, we answer the question, \emph{How can DNA replication be observed experimentally?}
 	There are several techniques available to scientists that answer this question, including flow cytometry~\cite{DeepSeq}, DNA combing~\cite{DNACombing}, microarray~\cite{MicroarrayReview, McCuneMicroArray}, and sequencing experiments~\cite{StochasticTermination,DeepSeq}.
-	These experiments can be separated into categories based on whether they probe replication primarily spatially or temporally.
+	When designing an experimental procedure to measure DNA replication, there are two main considerations to take into account: the temporal scope and the scope of the desired measurement.
 	
 	There are two approaches that experiments use to study the time course of replication.
 	The first is to synchronize the cell cycle.
-	A common way to do this is by \emph{arresting} the cell cycle, although there are other techniques~\cite{CellCycleSynch}.
+	A common way to do this is by arresting the cell cycle, although there are other techniques~\cite{CellCycleSynch}.
 	Arresting usually entails using a chemical bath to stop the cells from progressing from one phase to another (for experiments related to DNA replication, this is generally just prior to entering the S phase).
 	After arresting the cell cycle, another chemical bath can be used to force the entire population of cells to enter the S phase synchronously.
 	The main drawbacks to this approach are that  it is difficult to arrest many species of eukaryotic organisms and that, although arresting will stop a cell from moving through the cell cycle, it will not stop a cell from growing, so cells that have been arrested may have altered replication profiles as a result~\cite{CellCycleSynch}.
@@ -253,13 +254,15 @@ In other words, the program must be able to control the replication program such
 	\section{Thesis map \textbf{UPDATE}}
 	\label{sec:Map}
 
-	Here, I give a brief outline of the thesis. For now, this will serve as a plan for the outline. After the writing is complete this will be more of a road-map for readers than for me.
+	Here, we give a brief outline of the thesis. For now, this will serve as a plan for the outline. After the writing is complete this will be more of a road-map for readers than for me.
 	
 	\textbf{Chapter 2 - Motivation}
-	Starts by summarizing the mathematical details of the KJMA-like model that describes DNA replication, and how to use it to calculate the replicated fraction from a theoretical model.
-	We then discuss the Sigmoidal Model and how it measured the correlation between $t_{\text{rep}}$ and $t_{\text{width}}$.
-	The chapter moves on to describe the Multiple Initiator model, which was developed to explain said correlation in budding yeast.
-	Finally, we introduce an experiment run by a collaborator that measured loaded MCM and the potential problem it points to.
+	Here we summarize the mathematical details of the KJMA-like model that describes DNA replication, and how to use it to calculate the replicated fraction from a theoretical model.
+	We then discuss the development of the Sigmoidal Model the correlation between origin firing time width and median that it measured.
+	This correlation motivated the creation of the Multiple Initiator Model, which we outline.
+	Finally, we introduce the recently experimental work done in N.~Rhind's lab that measured loaded MCM.
+	These measurements provided some surprising results that call into question part of the scenario assumed in the MIM.
+	With this chapter we hope to motivate our work in measuring the effect of the experimental results from the Rhind Lab on the MIM.
 	
 	\textbf{Chapter 3 - Method}
 	should talk about the different tools I used to try to understand the problem and its solution.
