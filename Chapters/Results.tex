@@ -1,0 +1,81 @@
+\chapter{Results}
+\label{Ch:Results}
+
+\textbf{Make an introductory paragraph(s) to outline the procedures and the results shown here.}
+
+	\section{Single-Origin Investigations}
+	\label{sec:SingleOrigin}
+	
+	Our early work consisted of single-origin simulations to motivate further study.
+	Early in 2014, the results discussed in Sec.~\ref{sec:Experiments} from N.~Rhind's lab were sent to us~\cite{Rhind}.
+	As mentioned, these results called into question the assumption that $n$ is large enough to ignore variations in $N$.
+	Our first goal, therefore, was to show that simulations with small $n$ did not agree with the MIM predictions for small $n$.
+	In this investigation, discussed further below, we developed ``the difference parameter,'' a metric to measure the difference between the simulated and predicted $f(n)$ of a single origin with average $n$ initiators.
+	The investigation showed the difference parameter decreased as $n^{-1}$ and motivated the deeper research presented in this thesis.
+	
+	Two single-origin investigations that followed our preliminary work consisted of simulating $f(n)$ and fitting the MIM parameters to the result.
+	With these investigations we refined the simulation program to run more efficiently, and to create data similar to that measured in sequencing experiments.
+		
+	\begin{figure}[tbh!]
+		\begin{center}
+			\includegraphics[width=\textwidth]{Images/DifferenceParameterGraph.pdf}
+		\end{center}
+			\caption[Difference Parameter]{\label{fig:DifferenceParameter} Schematic of the difference parameter calculations.
+				Colours represent differen values of $n$. Triangles correspond to the parameter values in the corresponding inset graphs.
+				\textbf{A} Replication fraction simulation and theory curves for $n=10$; $DP=0.037$.
+				\textbf{B} Replication fraction simulation and theory curves for $n=5$; $DP = 0.062$.
+				\textbf{C} Replication fraction simulation and theory curves for $n=1$; $DP = 0.264$.
+				Also illustrated is the value $\Delta P(x)$ at the peak.
+				Note that $\Delta P(x)$ is defined over the entire domain.
+				}
+	\end{figure}
+	
+	
+		\subsection{The Difference Parameter}
+		\label{subsec:earlywork}
+		
+		When this project started, we performed a quick investigation into the difference between $f_\text{sim}(n)$ and $f_\text{MIM}(n)$ for a single origin.
+		To generate $f_\text{sim}(n)$, the MIM simulator calculated the average replicated fraction for about $10^6$ cells, producing data with very little statistical error.
+		The global parameters used for the simulation were set equal to those measured previously by fitting the MIM to microarray measurements of budding yeast~\cite{Scottspaper}.
+		To generate $f_\text{MIM}(n)$, the fitting function built into IGOR was used, where the parameters were fixed and set equal to those used in the simulation.
+		The difference parameter was then defined as
+		\begin{equation} \label{DifferenceParameter}
+			DP = \max_{x} {\frac {\Delta P(x)} {P}} \text{ ,}
+		\end{equation}
+		where $\Delta P(x)$ is the difference between $f_\text{sim}(n)$ and $f_\text{MIM}(n)$ (see Fig.~\ref{fig:DifferenceParameter}), and $P$ is the peak value of $f_\text{MIM}(n)$.
+		
+		Figure~\ref{fig:DifferenceParameter} shows the analysis process of the difference parameter for a single origin.
+		First, $f_\text{sim}(n)$ an $f_\text{MIM}(n)$ were calculated over several time steps and $n$ ranging from one to 128, examples are shown in the insets of Fig.~\ref{fig:DifferenceParameter}.
+		From these data, we calculated $DP(n,t)$, the main image in Fig.~\ref{fig:DifferenceParameter}.
+		Note the value for $DP$ ``saturates'' as $t$ increases, we call this value the ``saturated difference parameter.''
+		Figure~\ref{fig:SaturatedDifferenceParameter} shows the saturated difference parameter\footnote{
+		The reader may notice a change in the $n$ values displayed in the graphics. Figure~\ref{fig:DifferenceParameter} is illustrative and contains old data; accurate, but not useful.
+		After producing that graph we used a slightly different set of parameters in the simulation and changed the range of $n$ simulated when producing Fig.~\ref{fig:SaturatedDifferenceParameter}}.
+		This initial investigation showed the saturated difference parameter decreases as $n^{-1}$.
+		
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=0.8\textwidth]{Images/SaturatedDifferenceParameterGraph.pdf}
+			\end{center}
+				\caption[Saturated Difference Parameter]{\label{fig:SaturatedDifferenceParameter} Saturated difference parameter vs. $n$.
+				The large uncertainty in low $n$ comes the time-steps not going far enough to accurately measure the saturated difference parameter.
+				The line is proportional to $n^{-1}$ ($\text{[Saturated Difference Parameter]} \approx \frac{0.3}{n}$).
+				}
+		\end{figure}
+		
+		From our initial investigation, we concluded that the difference parameter grows quickly with decreasing $n$.
+		Therefore, we suspect that the MIM will not produce accurate results in the case that $n$ is small.
+		These results motivated further research into the effect of small $n$ on the MIM.
+		
+		
+		\subsection{Biased Fits}
+		\label{subsec:BiasedFits}
+		
+		The results from investigating the difference parameter suggested that the question of how variability in initiation factor affects the replication profile was worthy of more research.
+		However, the definition of the difference parameter does not scale to more than one origin for two reasons:
+		First, the saturated difference parameter is measurable once the theory curve has reached a peak value near one, therefore near-neighbour origins will interfere with each other.
+		Second the difference parameter is defined as a single value for the whole simulated genome, therefore we cannot infer anything about more than one origin.
+		Therefore, we investigated how the parameters from fitting the MIM to a simulation of small $n$ may be biased.
+		
+		The process of this investigation was to calculate $f_\text{sim}(n)$ and to follow that by fitting the parameters of the MIM to the result.
+		Thus, we have two parameters, $n_\text{sim}$ and $n_\text{fit}$.
