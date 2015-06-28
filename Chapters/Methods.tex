@@ -3,102 +3,134 @@
 
 In this chapter we outline our investigation of the impact of variability in the initiation factor on the MIM.
 The backbone of our investigation was the development and implementation of a Monte Carlo program that simulates DNA replication.
-A great deal of consideration went into the details of the simulation program to ensure it was efficiently producing meaningful results:
+A great deal of effort went into the details of the simulation program to ensure it was efficiently producing meaningful results:
 We ensured the randomly generated numbers were distributed properly.
-We adopted the phantom nuclei algorithm, an optimized algorithm that tracks the replicated fraction.
+We adopted the phantom-nuclei algorithm, an efficient way to simulate the replicated fraction~\cite{KJMA1}.
 We used multiple programming languages to increase performance.
-We produced measurements commensurate with current experimental results.
-We ran simple tests that show that the program produces expected results in well understood regimes.
-After verifying the efficacy of the simulator, we investigated the effect of small $n$ on the MIM.
-Finally, we concluded that variability in $N$ does not greatly impact the predictive power of the MIM.
+We produced measurements commensurate with current experimental results~\cite{StochasticTermination}.
 
-Except where special note is made, all computations were performed in IGOR Pro Version 6.3.6.4
+Except where special note is made, all computations were performed in IGOR Pro Version 6.3.6.4.
 
 
 	\section{The MIM simulator}
 	\label{sec:MIMSimulator}
 	
 	The MIM simulator takes as inputs a set of parameters nearly identical to those defined by the MIM.
-	Namely, there are four global inputs (The elapsed time since the start of S phase $t_\text{sim}$, the speed of replicative forks $v$, the median firing time $t_{1/2}$, and $r$, which defines the width of the cumulative firing time distribution) and two local parameters per origin (the position $x_i$ and the average number of initiators $n_i$).
-	This set of parameters is not identical to those outlined in Sec.~\ref{sec:MIM} because, as we describe in Sec.~\ref{}, noise was not treated the same way.
+	Namely, there are four global inputs: the elapsed time since the start of S phase $t_\text{sim}$, the speed of replicative forks $v$, the median firing time $t_{1/2}$, and $r$, which defines the width of the cumulative firing time distribution.
+	There are also two local parameters per origin: the position $x_i$ and the average number of initiators $n_i$).
+	This set of parameters is not identical to those outlined in Sec.~\ref{sec:MIM} because, as we describe in Sec.~\ref{sec:Noise}, noise was not treated the same way.
 	The simulator uses these parameters to generate the replicated fraction, $f(x,t=t_\text{sim})$, over the entire genome.
-	To increase efficiency, the simulation is able to do this over several sets of parameters for which only $t_\text{sim}$ changes by steps of 5 minutes, thereby creating data comparable to those from sequencing experiments.
+	The simulation does this over several sets of parameters for which only $t_\text{sim}$ changes by steps of 5 minutes, thereby efficiently creating data comparable to those from sequencing experiments.
 	
-	The MIM simulator is comprised of three modules:
+	The MIM simulator is comprised of three modules (see Fig.~\ref{fig:ProgramStructure}):
 	The preparation module sets the randomly distributed parameters.
 	The phantom nuclei module uses those parameters to calculate $f(x,t=t_\text{sim})$.
-	The housing module tracks progress and executes the commands.
-	Note that the preparation and the phantom nuclei modules both simulate only a single cell at a time, the housing module loops over many cells to find the average behaviour of a population.
+	The house-keeping module tracks progress, calls the preparation and phantom-nuclei modules, and analyzes the results.
+	Note that while the preparation and the phantom-nuclei modules both simulate only a single cell at a time, the house-keeping module loops over many cells to find the average behaviour of a population.
 	These three modules will be discussed in more detail below.
+		
+	\begin{SCfigure}[1][tbh]
+		\includegraphics[width=.47\textwidth]{Images/ProgramStructure.pdf}
+		\caption[MIM Simulator Program Structure]{\label{fig:ProgramStructure} 
+			Flow chart illustrating the MIM Simulator Structure.
+			The user inputs the parameters to be simulated.
+			The housekeeping module loops over the population of cells to be simulated.
+			The preparation module randomly generates numbers of initiators and firing times.
+			The phantom-nuclei module pre-processes the origin data.
+			Looping over every time-step, the phantom-nuclei module calculates the replicated fraction in a 3 step process.
+			Finally, the housekeeping module adds artificial noise to the replicated fraction, performs any additional required analysis, and outputs the results.
+		}
+	\end{SCfigure}
 	
 	
 		\subsection{The preparation module}
 		\label{subsec:PrepModule}
 		
 		The preparation module is a Monte Carlo program.
-		A Monte Carlo program can be identified by its use of random numbers~[\textbf{find source}].
-		In the case of the preparation module of the MIM simulator, there is are two sets of random numbers needed:
+		A Monte Carlo program is one whose output depends on random numbers~\cite{CompPhys}.
+		For the preparation module of the MIM simulator,  we need are two sets of random numbers:
 		First, the program requires a set of absolute numbers of initiators, $\{N_i\}$, for all origins $i$.
 		Second, the program requires a set of firing times, $\{t_{i,j}\}$, for each initiator $j$ loaded at each origin $i$.
-		For both sets, care was taken to ensure that the generated values were properly distributed to match MIM theory (Sec.~\ref{sec:MIM}).
+		For both sets, we took care to ensure that the generated values were properly distributed to match MIM theory (Sec.~\ref{sec:MIM}).
 		The preparation module is analogous to the initiation process undertaken in the G1 phase of the cell cycle (Sec.~\ref{subsec:G1Phase}).
 			
-		The first task the preparation module undertakes is randomly generating $\{N_i\}$, the set of absolute numbers of initiators at all origins $i$ for the cell being simulated.
+		The first task of the preparation module is to randomly generate $\{N_i\}$, the set of absolute numbers of initiators at all origins $i$ for the cell being simulated.
 		Thus, the first choice we made in creating the simulator was how the values for $N_i$ should be distributed, given their average $n_i$.
 		In Sec.~\ref{subsec:MIMBasics}, we mentioned that a simple hypothesis is that initiators are loaded onto an origin as a Poisson-process; if this is the case, the number of initiators should be Poisson distributed.
-		This hypothesis is nearly as simple as possible (setting $N$ the same for every cell cycle is simpler, but that is the assumption made previously that we are testing here), but is not based on observations.
-		We are unaware of any experiments that have measured the distribution in the number of initiators between cell cycles.	
-		In discussion with collaborators, another hypothetical distributions were considered:
-		It seems reasonable that it is very easy for the ORC to recruit the first initiator at an origin, so perhaps all origins are guaranteed to have one initiator with additional initiators are loaded as a Poisson-process.
+		This hypothesis is quite simple; setting $N$ constant over every cell cycle is simpler, but that is the assumption made previously that we are testing here).
+		However, the hypothesis that $N_i$ is Poisson-distributed is not based on observations.
+		We are unaware of any experiments that have measured the distribution in the number of initiators between cell cycles.
+		
+		In discussion with collaborators, another hypothetical distribution was considered.
+		Vogelauer~\emph{et~al.} showed in 2002 that an origin's firing time can be determined by the histone acetylation status in its vicinity~\cite{Histones}
+		In other words, early firing origins tend to be placed near acetylated histones.
+		Histones, large, octameric proteins that make up part of the system that organizes DNA into its three-dimensional shape can exist in two states: acetylated and deacetylated \textbf{cite - maybe molecular cell biology}.
+		When deacetylated, the histones are positively charged and attract the negatively charged DNA into a crowded configuration.
+		In contrast, When acetylated, the histones are not charged and do not exert a strong force on the DNA.
+		\textbf{Find publication showing all/many origins correspond to regions with high concentration of acetylated histones.}
+		Therefore we believe that in the presence of acetylated histones the ORC can quickly recruit the first initiator at an origin.
+		Before additional initiators can be recruited though, the previously loaded initiators must move along the DNA to make room.
+		Thus, the rate at which additional initiators is loaded may depend on the concentration of acetylated histones in the region of the origin.
 		However, without any experimental evidence to motivate the selection of a complex model, the simple Poison model was used.
 		Therefore, the preparation module selects the number of initiators at origin $i$ from a Poisson distribution defined by the average $n_i$.
 		The preparation module makes this selection using a built-in IGOR function that will create Poisson-distributed random numbers given the desired average.
 		
-		The second task the preparation module undertakes is assigning a firing time to each initiator on the genome.
+		The second task of the preparation module is to assign a firing time to each initiator on the genome.
 		This is different from assigning a firing time to each origin: If there are $k$ origins, then the number of initiators is given by $\sum\nolimits_{i=0}^k N_i = K$.
 		Therefore, $K$ randomly generated firing times are required.
 		The MIM dictates the desired firing time distribution of an initiator, which we derive from the cumulative firing time probability shown in Eq.~\ref{CPDInitiator} (and again below).
-		\begin{equation} \label{CPDInitiator2}
+		\begin{equation} \label{eq:CPDInitiator2}
 			\Phi_0(t) = \frac{1}{1+\left(\frac{t^*_{1/2}}{t}\right)^{r^*}}\text{ ,}
 		\end{equation}
-		where $t^*_{1/2}$ and $r^*$ are global parameters defining median firing time the spread in firing times for a single initiator respectively. 
+		where $t^*_{1/2}$ and $r^*$ are global parameters defining, for a single initiator, the median firing time the spread in firing times respectively. 
 		Recognizing that $\Phi_0$ goes from zero (when $t=0$), to one (when $t \rightarrow \infty$), we can use inverse transform sampling~\textbf{cite} to randomly generate firing times that reproduce the desired cumulative firing time probability.
-		Essentially, if we generate $u$, a uniformly distributed number between zero and one, for which IGOR has a built-in function, we can transform that to the desired distribution with
+		If we generate $u$, a uniformly distributed number between zero and one (for which IGOR has a built-in function) we can transform that to be distributed as desired with
 		\begin{equation}
 			F(u) = \frac{t^*_{1/2}}{\left(\frac{1}{u}-1\right)^\frac{1}{r^*}} \text{ ,}
 		\end{equation}
 		where $F(u)$ is the firing time.
-		This should produce random numbers that exhibit a cumulative probability distribution given by Eq.~\ref{eq:CPDInitiator2}.
+		This will produce random numbers that exhibit a cumulative probability distribution given by Eq.~\ref{eq:CPDInitiator2}.
 		To test the inverse transformation, a histogram of $10^5$ samples was satisfactorily fit to the cumulative fire-time distribution.
 		After all $K$ firing times are generated, the time of the first-to-fire initiator at each origin is kept because each origin can only fire once, thus the firing time of the origin $i$ is given by the firing time of the earliest initiator $\text{min}\{t_j\}_i$.
 		
 		
-		\subsection{The phantom nuclei module}
+		\subsection{The phantom-nuclei module}
 		\label{subsec:PhanNuc}
 		
-		Based on work done by S.~Jun~\emph{et~al.}, the phantom nuclei algorithm we used in the simulation is a powerful tool for calculating replicative data from a set of data describing origins of replication in the KJMA-like formalism~\cite{KJMA1}.
-		Figure \textbf{Make/Take this} illustrates the key features of the phantom nuclei method
-		There are three major steps int the phantom nuclei module: pre-processing, simulating, and compiling the replicated fraction.
-		In taking these three steps, the phantom nuclei quickly calculates the regions on the genome of a single cell which have been replicated.
-		These steps have been separated for the sake of clearly describing the basic process, however there is some overlap between them in our code to increase performance.
+		Based on work done by S.~Jun~\emph{et~al.}, the phantom nuclei algorithm we used in the simulation is a powerful tool for calculating replicative data from a set of parameters describing the origins of replication in the KJMA-like formalism~\cite{KJMA1}.
+		Figure~\ref{fig:phantom} illustrates the key features of the phantom-nuclei method.
+		There are three major steps in our phantom nuclei module: pre-processing the parameters, simulating replication, and compiling the replicated fraction.
+		In taking these three steps, the phantom nuclei module quickly calculates the regions on the genome of a single cell which have been replicated.
+		These steps have been separated for the sake of clarity, however, there is some overlap between them in our implementation to increase performance.
+		
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=\textwidth]{Images/PhantomNuclei.png}
+			\end{center}
+				\caption[Phantom Nuclei Illustration]{\label{fig:phantom} Schematic of the Phantom Nuclei algorithm.
+				Only the active origins (open circles) are considered during simulations.
+				Black dots correspond to passively replicated origins (``phantom'' nuclei).
+				The algorithm outputs the replicated fraction, which is one in replicated regions (ellipses at top) or zero in unreplicated regions (black line at top).
+				}
+		\end{figure}
 			
 		The strength of the phantom nuclei algorithm is in that it pre-processes the origin data it receives.
-		In order to reduce the amount of computations needed to fully simulate the replication process, ``phantom nuclei,'' origins that are passively replicated, are removed from the simulation.
+		To reduce the amount of work needed to fully simulate the replication process, the program removes origins that are passively replicated (``phantom nuclei'') from the simulation.
 		As we mentioned above, we designed the simulator to loop through many values of $t_\text{sim}$.
-		The algorithm starts by calculating the state of replication at the highest value for $t_\text{sim}$ given, $t_\text{sim max}$.
-		We start at $t_\text{sim max}$ because that is when every meaningful event will have occurred: origins have fired, or not, and every passively replicated origin can be identified.
+		The algorithm starts by calculating the state of replication at the highest value for $t_\text{sim}$, $t_\text{sim}^\text{(max)}$.
+		We start at $t_\text{sim}^\text{(max)}$ because that is when every meaningful event will have occurred: origins have fired, or not, and every passively replicated origin can be identified.
 		
-		When pre-processing, the positions $\{x_i^\text{(L)}\}$ of the left forks and $\{x_i^\text{(R)}\}$ of the right forks originating from all origins $i$ are calculated.
+		When pre-processing, the program calculates the positions $\{x_i^\text{(L)}\}$ of the left forks and $\{x_i^\text{(R)}\}$ of the right forks originating from all origins $i$.
 		Calculating these positions is done with simple kinematics:
 		\begin{equation} \label{eq:findforks}
 			x_i^{\binom{\text{R}}{\text{L}}} = x_i \pm v \times \left( t_\text{sim} - t_i\right) \text{ ,}
 		\end{equation}
-		where the right fork is given by the sum, and the left fork by the difference, and where the bracketed term calculates the time since the origin fired.
-		As a part of pre-processing, any origins for which $t_i > t_\text{sim max}$ are immediately removed from the simulation, as they will not contribute to the replicated fraction.
+		where the right fork is given by the sum, and the left fork is given by the difference, and where the bracketed term calculates the time since the origin fired.
+		As a part of pre-processing, any origins for which $t_i > t_\text{sim}^\text{(max)}$ are immediately removed from the simulation, as they will not contribute to the replicated fraction.
 		Once the algorithm calculates the set of fork locations, the forks from each pair of neighbouring origins are analyzed to determine which origins are passively replicated.
-		Any passively replicated origins (phantom nuclei) are removed from the simulation (black dots in Fig. \textbf{make/take this}).
-		Pre-processing is finished when only active origins (empty circles in Fig. \textbf{make/take this}) are left in the simulation.
-		This, pre-processing step is heavy in calculations, but (depending on the complexity of the input genome) can dramatically decrease the calculations needed for the second step, simulation.
+		Any phantom nuclei are removed from the simulation (black dots in Fig.~\ref{fig:phantom}).
+		Pre-processing is finished when only active origins (empty circles in Fig.~\ref{fig:phantom}) are left in the simulation.
+		Pre-processing is computationally expensive, but for complex genomes will dramatically decrease the calculations needed for the second step, and the calculations needed for simple genomes is small for this process.
 		
 		The second step of the phantom nuclei algorithm is the largest, and is used at every time-step.
 		During the simulation step, the algorithm performs three major calculations:
@@ -107,28 +139,42 @@ Except where special note is made, all computations were performed in IGOR Pro V
 		These two sets of fork data are used to define replicated regions on the genome.
 		Third, it analyzes the replicated regions defined by the two sets of fork data, and identifies where replicated regions overlap (i.e.\ coalescence has occurred).
 		Any overlapping regions are combined.
+		This step is analogous to the S phase of the cell cycle, including initiation (selecting cells that fire before $t_\text{sim}$), elongation (calculating fork positions), and coalescence (combining overlapping regions), as described in Sec.~\ref{subsec:SPhase}.
 		
-		Immediately after any overlapping replicated regions have been coalesced, the algorithm compiles replicated fraction.
+		Immediately after any overlapping replicated regions are coalesced, the algorithm compiles the replicated fraction.
 		Therefore, the replicated fraction is compiled at every time-step in the simulation.
-		To compile the replicated fraction, the algorithm simply loops through the replicated regions defined by $\{x_i^\text{(L)}\}$ and $\{x_i^\text{(R)}\}$, and sets the replicated fraction for the cell to one inside those regions, and zero outside.
+		To compile the replicated fraction, the algorithm simply loops through the replicated regions defined by $\{x_i^\text{(L)}\}$ and $\{x_i^\text{(R)}\}$ and sets the replicated fraction for the cell to one inside those regions and zero outside.
 		Although this process may sound straightforward, we were unable to do it without nested loops that significantly slowed the simulation process.
 		For this reason, this step was written both in IGOR and in C++.
 		When we wanted to simulate large data sets early in our work, we called the C++ function as an external program.
+		In using this external function we saw an 8-fold increase in performance.
 		
 		
-		\subsection{The housing module}
+		\subsection{The house-keeping module}
 		\label{subsec:Housing}
 		
-		When the compiler finished, so too did the simulator.
-		However, in Sec.~\ref{sec:ReplicatedFraction} we showed that the replicated fraction spans all values between zero and one, and in the description above, the simulator only creates a replicated fraction with values of either zero or one.
-		The simulation is of a single cell, and the replication profile for the single cell is known exactly.
-		Therefore, the replicated fraction can be only zero (not replicated) or one (replicated).
-		To calculate $f(x,t)$ such that it can be compared to experimental data, we must loop over many cells and calculate the average replicated fraction.
-		This is, qualitatively, exactly what sequencing experiments do: taking large amounts of data from a population and averaging them to find the average behaviour.
-		The housing module is designed to call the other two modules a prescribed number of times with the same set of parameters and thereby calculate an average $f(x,t)$ for a population.
+		The simulation described above calculates the replicated fraction on the entire genome of a single cell.
+		However, we are investigating sequencing data that are acquired by averaging over a large population.
+		Therefore, the house-keeping module is designed to loop over a population and call the preparation and phantom nuclei modules for each cell.
+		The resulting data are then averaged.
 		
-		In addition to this, the housing module can analyze and alter the simulated replicated fraction $f_\text{sim}$.
+		In addition, the house-keeping module can analyze and alter the simulated replicated fraction $f_\text{sim}$.
 		In our research we fit the MIM parameters to $f_\text{sim}$, we added Gaussian noise to reflect current experimental measurements, and we calculated the difference between $f_\text{sim}$ and experimentally measured $f$.
+		We discuss these procedures and their results in Ch.~\ref{ch:Results}.
+		
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=\textwidth]{Images/SimulatedDataExamples.pdf}
+			\end{center}
+				\caption[Simulated Replicated Fraction Example]{label{fig:SimulatedExample}
+					Example output of Chromosome IV from the MIM Simulator.
+					x-axis is the position in the genome.
+					y-axis is the replicated fraction.
+					\textbf{A} Data averaged over 100 cells, no artificial noise.
+					\textbf{B} Data averaged over 100 cells, Gaussian noise added according to the procedure outlined in Sec.~\ref{subsec:IncludingNoise}.
+					Parameters for the simulation were taken from~\cite{ScottsPaper} supplementary data.
+				}
+		\end{figure}	
 		
 		
 		\subsection{Qualities of the MIM Simulator}
@@ -138,12 +184,19 @@ Except where special note is made, all computations were performed in IGOR Pro V
 		The Monte Carlo process used in the MIM Simulator calculates the replicated fraction as the average of a population of cells.
 		Therefore, the larger the population, the closer to the ``true average'' the results will be.
 		It may seem simple to use the MIM Simulator instead of the analytical MIM shown in Sec.~\ref{sec:MIM}.
-		However, in order to simulate the replicated fraction to the accuracy needed for a fit takes many thousands of single-cell measurements to average over, and this is computationally expensive.
-		Whereas, a single calculation with the analytical MIM will produce the desired fit function.
-		Thus, the MIM Simulator is not a good replacement for the analytical MIM, rather it is a way to test the efficacy on the analytical MIM in the small $n$ regime.
+		However, simulating the replicated fraction to the accuracy needed for a fit takes many thousands of single-cell measurements to average over, and this is computationally expensive.
+		By contrast, a single calculation with the analytical MIM will produce the desired fit function.
+		Thus, the MIM Simulator is not a good replacement for the analytical MIM; rather, it is a way to test the efficacy of the analytical MIM in the small-$n$ regime.
 		
-		One of the great strengths of this program is in it's modular build: It would be quite simple to change the probability distribution of $\{N_i\}$ (the set of absolute numbers of initiators at each origin) or $\{t_j\}_i$ (the distribution of firing times).
-		Additionally, doing different analysis is simply a matter of creating a new housing module.
+		One of the great strengths of our program is its modular structure: It is quite simple to change the probability distribution of $\{N_i\}$ (currently Poisson-distributed) or $\{t_j\}_i$ (currently distributed as described above).
+		Additionally, doing new analysis is simply a matter of creating a new function that the house-keeping module can call.
+		
+		Figure~\ref{fig:SimulatedExample} shows two examples of the replicated fraction of Chromosome IV\footnote{
+		Figure~\ref{fig:ReplicatedFractionExample} shows the replicated fraction of the same chromosome measured with DNA sequencing~\cite{StochasticTermination}.}
+		generated by the MIM Simulator.
+		Both simulations were over a population of 100 cells.
+		In Fig.~\ref{fig:SimulatedExample}A, one can see that the simulated data without any added noise has a long correlation length relative to the experimental data.
+		This observation, in part, motivated the addition of Gaussian noise to the simulated data before analysis.
 		
 		
 	\section{Adding Gaussian Noise}
@@ -152,28 +205,26 @@ Except where special note is made, all computations were performed in IGOR Pro V
 	We initially chose to do simulations of populations of about $10^6$ cells.
 	This way, the randomly generated numbers were sampled from the full random distributions, and the averaging was very close to the ``true average''.
 	However, we found that this produced results that were too accurate; we could not make good comparison between the simulated replicated fraction and the replicated fraction predicted by the MIM (discussed in Ch.~\ref{ch:Results}).
-	Because of this problem, we created simulations that were limited in accuracy by current experimental standards.
+	Because of this problem, we created simulations that were limited in accuracy to reflect current experimental standards.
 	
 	
 		\subsection{Analyzing Sequencing Data}
 		\label{subsec:SequencingNoise}
 		
-		\textbf{Should this be an appendix?}
-		
 		Here we analyze data from a sequencing experiment investigating the replicated fraction of budding yeast performed by Hawkins~\emph{et~al.} in 2013~\cite{StochasticTermination}.
 		In their experiment, Hawkins~\emph{et~al.} used DNA sequencing to calculate the replicated fraction of two strains of budding yeast: wild-type budding yeast and a mutant with three origins of replication removed.
 		Figure~\ref{fig:ReplicatedFractionExample} shows their results for Chromosome IV of the wild-type genome.
 		Clearly, there is some amount of noise in this data; it is not a smooth function ranging from zero to one.
-		Indeed, as we discussed in Ch.~\ref{Motivation}, there are two assumptions made in the experiment that add to the noise inherent in the experimental process.
+		Indeed, as we discussed in Ch.~\ref{ch:Motivation}, there are some assumptions made in the data analysis that add to the noise inherent in the experimental process.
 		Our goal was to create simulated replicated fraction data that closely resembled data from experiment.
-		To do this, we need to include noise in our data similar to that seen experimentally.
+		To do this, we need to include noise in our data commensurate with that seen experimentally.
 		
-		\begin{figure}[tbh!]
+		\begin{figure}[tbh]
 			\begin{center}
 				\includegraphics[width=\textwidth]{Images/WTvsMutDifference.pdf}
 			\end{center}
 				\caption[Estimating Experimental Noise A]{\label{fig:MeanDifference} Mean point-by-point difference between wild-type and mutant replicated fractions for each chromosome at each time-step.
-					Each set of axis is for a different time after the start of S phase.
+					Each set of axis is for a different time after the start of S phase (labeled).
 					y-axis shows the mean difference.
 					x-axis is the chromosome label.
 					Note that no data are shown for Chromosomes VI, VII, and X, as they were not analyzed due to their mutations.
@@ -181,27 +232,27 @@ Except where special note is made, all computations were performed in IGOR Pro V
 				}
 		\end{figure}
 		
-		Following the process used by Yang~\emph{et al.}~(\cite{ScottsPaper} supplementary material), we analyzed the experimental data to estimate the uncertainty in the measured replicated fraction.
-		Ideally, we would estimate the noise distribution for each data point by analyzing data from an experiment that had been repeated many times.
-		Unfortunately, Hawkins~\emph{et~al.} did not repeat their measurement.
-		Therefore, we worked with two measurements we assume to be in close agreement, namely the wild-type and the mutant budding yeast measurements.
-		With only three origins removed, we assumed that the replication profiles between the wild-type and mutant measurements would be the same except on the chromosomes with missing origins (Chromosomes VI, VII, and X).
-		Thus, we compared 13 of the 16 chromosomes.
+		Following the process used by Yang~\emph{et al.}~\cite{ScottsPaper} (supplementary material), we analyzed the experimental data to estimate the uncertainty in the measured replicated fraction.
+		Ideally, we would estimate the noise distribution for each data point by analyzing data from an experiment that has been repeated many times.
+		Unfortunately, Hawkins~\emph{et~al.} did not publish any repetitions of their data set.
+		Therefore, we worked with two measurements we assume to be in close agreement: the wild-type budding yeast and the mutant budding yeast measurements.
+		With the mutation only removing three origins, we assumed that the replication profiles between the wild-type and mutant measurements would be the same except on the chromosomes with missing origins (Chromosomes VI, VII, and X).
+		Thus, we compared the remaining 13 of the total 16 budding yeast chromosomes.
 		To estimate the distribution of fluctuations, we considered how the differences between the experiments, calculated point-by-point, were distributed.
-		Figure~\ref{fig:MeanDifference} shows the mean difference for each chromosome (x-axis) at each time-step (separate axis).
+		Figure~\ref{fig:MeanDifference} shows the mean difference for each chromosome (x-axis) at each time-step (separate axis, labeled).
 		We can see that the differences vary in time, so the differences are analyzed at each time-step separately.
 		Within each time-point, the fluctuations are much more stable, except for a downward trend in Chromosome III.
 		Thus, in addition to the three chromosomes that were mutated, Chromosome III was removed from our analysis.
 		
-		\begin{figure}[tbh!]
+		\begin{figure}[tbh]
 			\begin{center}
 				\includegraphics[width=\textwidth]{Images/WTvsMutHistograms.pdf}
 			\end{center}
 				\caption[Estimating Experimental Noise B]{\label{fig:HistDifference} Histograms of the point-by-point difference between wild-type and mutant data and Gaussian fits.
-					Each set of axis is for a different time after the start of S phase (same orientation as Fig.~\ref{fig:MeanDifference}).
+					Each set of axis is for a different time after the start of S phase (labeled).
 					y-axis shows the normalized distribution.
 					x-axis shows difference.
-					Red circles are calculated from experiment.
+					Grey circles are calculated from experiment.
 					Black lines show the best Gaussian fit
 					Note that no data are shown for Chromosomes III, VI, VII, and X.
 					Data derived from~\cite{StochasticTermination} supplementary data.
@@ -209,48 +260,81 @@ Except where special note is made, all computations were performed in IGOR Pro V
 		\end{figure}
 		
 		After removing the data from the four chromosomes mentioned, we compiled histograms for the six time-steps measured in Fig.~\ref{fig:HistDifference}.
-		These histograms estimate the probability distribution between the two noisy measurements.
+		These histograms (shown in Fig.~\ref{fig:HistDifference}) estimate the probability distribution between the two noisy measurements.
 		To properly duplicate the noise of a single experiment, we need the distribution of a single noisy measurement.
-		We know from elementary properties of variance that, for two independent random variables $A$ and $B$, $\text{VAR}[A-B] = \text{VAR}[A] + \text{VAR}[B]$.
-		We assume that the two measurements are equally noisy, thus the standard deviations of the differences are $\sqrt{2}$ times larger than the standard deviation of a single measurement.
-		We estimated the noise to be $\sigma_{15}=0.06$, $\sigma_{20}=0.07$, $\sigma_{25}=0.09$, $\sigma_{30}=0.11$, $\sigma_{35}=0.11$, and $\sigma_{40}=0.12$, where the $t$ in $\sigma_t$ is the time since the start of S phase.
+		We know from elementary properties of the variance that, for two independent random variables $A$ and $B$, $\text{VAR}[A-B] = \text{VAR}[A] + \text{VAR}[B]$.
+		We assume that the two measurements are equally noisy, which implies that the standard deviations of the differences are $\sqrt{2}$ times larger than the standard deviation of a single measurement.
+		Our estimation of the noise is shown in Fig.~\ref{fig:Noise}.
+		
+		\begin{SCfigure}[1][tbh]
+			\includegraphics[width=.47\textwidth]{Images/SigmaEstimate.pdf}
+			\caption[Estimated Simulation and Experimental Noise]{\label{fig:Noise} 
+				Scatter plot of estimated $\sigma$ vs time since the start of S phase for experimental data and simulation data.
+				Black circles are experimental estimates and open circles are experimental estimates.
+			}
+		\end{SCfigure}
 		
 		There are two features of the histograms in Fig.~\ref{fig:HistDifference} that should be discussed.
-		First, unlike the microarray data Yang~\emph{et al.} analyzed, the histograms extracted from sequencing data is normally distributed.
+		First, unlike the microarray data that Yang~\emph{et al.} analyzed, the histograms extracted from sequencing data are Gaussian distributed.
 		This implies that it is better suited to analysis by MIM, since the MIM approach assumes Gaussian-distributed noise~\cite{ScottsPaper}.
-		Second, both the mean and variance defining the Gaussian fits show dramatic changes as time progressing.
-		We believe this is due to some global systematic error in the data, potentially the reported time since S phase, or a possible global effect of the mutation removing origins from Chromosomes VI, VII, and X.
+		Second, the mean of the Gaussian fits evolve dramatically as time progresses.
+		We believe this is due to a global systematic error in the data, potentially the reported time since S phase, or a possible global effect of the mutation removing origins from Chromosomes VI, VII, and X.
 		
 		
 		\subsection{Including Noise in the Simulated Replicated Fraction}
 		\label{subsec:IncludingNoise}
 		
-		Now that we have a measure of the level of noise in current sequencing experiments, we would like to use that information to simulate data with noise commensurate with experimental data.
-		Two steps were taken to make this happen, one based on experimental procedures, the other as a simple initial estimation.
+		Now that we have a measure of the level of noise in current sequencing experiments, we would like to use those data to ensure our simulated replicated fraction has noise commensurate with experimental data.
+		Two steps were taken to make this happen: the first based on experimental procedures, the second by artificially adding Gaussian noise.
 		
 		The first step to make our simulated data similar to experimental data was to limit the size of the population of simulated cells.
 		As we mentioned above, the Monte Carlo program operates by taking the average of many cells, which is very similar to sequencing experimental techniques.
 		However, where we can average over $10^6$ cells, Hawkins~\emph{et al.}, analyzed considerably fewer:
-		In their experiment, Hawkins~\emph{et al.} extracted 10--25 million 50 bp sequences.
-		If all of those sequences were evenly distributed, then that is 50--100 fully sequenced genomes.
-		To attain the same level of accuracy, we limited the MIM Simulator to average over 100 cells.
+		In their experiment, Hawkins~\emph{et al.} extracted 10--25 million 50 bp sequences~\cite{StochasticTermination}.
+		Over the genome of 12 Mb, that is equivalent to 50- to100-fold coverage per base.
+		Therefore, we limited our simulations to a population of 100 cells to get equivalent coverage.
 		
-		However, this is not enough to create the level of noise we desire.
-		There are two factors that contribute to the need to add more noise.
-		First, because the simulator analyzes 100 full cells and not random sequences from a larger population, the function remains smooth, with non of the high-frequency artifacts that can be seen in Fig.~\ref{fig:ReplicatedFractionExample}.
-		Second, the statistical noise that arises from the random sampling of the Monte Carlo process is not large enough to match the noise measured in experiment.
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=\textwidth]{Images/SimNoise.pdf}
+			\end{center}
+				\caption[Estimating Simulation Noise]{\label{fig:SimNoise} Histograms of the point-by-point difference between two sets of simulated data.
+					Each set of axis is for a different time after the start of S phase (labeled).
+					y-axis shows the normalized distribution.
+					x-axis shows difference.
+					Grey circles are calculated from experiment.
+					Black line at $t=15$ shows the best Laplace distribution fit.
+					Black line at $t=30$ shows the best Gaussian fit.
+				}
+		\end{figure}
+		
+		We generated two simulated replicated fraction functions over the entire genome from 100-cell populations (parameters were set using results from the MIM~\cite{ScottsPaper}.
+		These two functions were used to estimate the noise in the simulation, $\sigma_\text{sim}$, using the same process as outlined in Sec.~\ref{subsec:SequencingNoise}.
+		Figure~\ref{fig:SimNoise} shows the distributions of the difference at each time-step.
+		Interestingly, there is an evolution in the noise from near-Laplace distributed at early time, to near-Gaussian, and back to near-Laplace distributed.
+		\textbf{Continuing to investigate this - June 27}
+		Figure~\ref{fig:Noise} shows our estimations of the noise in experiment and the noise in simulation.
+		We suspect the simulation has smaller estimated standard deviations due to other sources of noise in the experiment that were not reported \textbf{Check this}.
+		
+		There are two features of the noise in simulation that we would like to change in order to better produce noise commensurate with experiments.
+		First, as shown in Fig.~\ref{fig:Noise}, the statistical noise that arises from the random sampling of the Monte Carlo process is not large enough to match the noise we estimated for the experiment.
+		Second, as shown in Figs.~\ref{fig:SimulatedExample} and~\ref{fig:ReplicatedFractionExample}, the experimental data has a relatively short correlation length when compared to the simulation over 100 cells.
 		Therefore, we chose to artificially add noise to the simulated data such that it was commensurate with our findings in Sec.~\ref{subsec:SequencingNoise}.
-		To add the noise, we first estimated the uncertainty from the simulation, $\sigma_\text{sim}$, then calculated the amount of Gaussian noise we had to add, $\sigma_\text{add}$, such that the resulting uncertainty matched the desired values:
+		To add the noise, we used our estimate the uncertainty from the simulation, $\sigma_\text{sim}$, then calculated the amount of Gaussian noise we had to add, $\sigma_\text{add}$, such that the resulting uncertainty matched the desired values:
 		\begin{equation}
 			\sigma_\text{add} = \sqrt{{\sigma_t}^2 - {\sigma_\text{sim}}^2} \text{ ,}
 		\end{equation}
 		where $\sigma_t$ is the experimental noise calculated for the simulated time $t$ from experimental data (Sec.~\ref{subsec:SequencingNoise}).
 		
-		One may question the physicality of artificially adding Gaussian noise to the simulated data:
-		Does it capture the true experimental process?
-		We do not believe this process accurately captures the experimental process.
-		However, we do think that this is an effective and simple way of producing the desired noise, without needing to simulate all the different facets of the experiment.
-		Future researchers may want to improve upon this method of creating noisy data.
+		We believe this is an effective first-approach to incorporating noise in the MIM Simulator.
+		Adding artificial noise has three main benefits:
+		First, it effectively increases the uncertainty in the simulated data to match that seen experimentally.
+		Second, the artificial noise pushes the differences between simulations closer to the Gaussian distribution we see in experimental data.
+		Third, it decreases the correlation length of the simulated data to closer to what is seen experimentally.
+		To better address the noise, the two features discussed above need to be addressed.
+		To address the first feature, one would need to fully understand the experimental procedures and equipment and the uncertainty inherent in both.
+		To address the second feature, the MIM Simulator would have to more accurately duplicate the experimental sampling process:
+		Simulating a large population of cells, measuring the replication of small segments of many cell, and combining the results.
 
 
 

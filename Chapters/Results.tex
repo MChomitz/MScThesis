@@ -1,5 +1,5 @@
 \chapter{Results}
-\label{Ch:Results}
+\label{ch:Results}
 
 \textbf{Make an introductory paragraph(s) to outline the procedures and the results shown here.}
 
@@ -7,13 +7,13 @@
 	\label{sec:SingleOrigin}
 	
 	Our early work consisted of single-origin simulations to motivate further study.
-	Early in 2014, the results discussed in Sec.~\ref{sec:Experiments} from N.~Rhind's lab were sent to us~\cite{Rhind}.
+	Early in 2014, the results discussed in Sec.~\ref{sec:ExperimentsMIM} from N.~Rhind's lab were sent to us~\cite{Rhind}.
 	As mentioned, these results called into question the assumption that $n$ is large enough to ignore variations in $N$.
-	Our first goal, therefore, was to show that simulations with small $n$ did not agree with the MIM predictions for small $n$.
+	Our first goal, therefore, was to discover whether simulations of small $n$ agreed with the MIM predictions for small $n$ or not.
 	In this investigation, discussed further below, we developed ``the difference parameter,'' a metric to measure the difference between the simulated and predicted $f(n)$ of a single origin with average $n$ initiators.
 	The investigation showed the difference parameter decreased as $n^{-1}$ and motivated the deeper research presented in this thesis.
 	
-	Two single-origin investigations that followed our preliminary work consisted of simulating $f(n)$ and fitting the MIM parameters to the result.
+	The single-origin investigations that followed our preliminary work consisted of simulating $f(n)$ and fitting the MIM parameters to the result.
 	With these investigations we refined the simulation program to run more efficiently, and to create data similar to that measured in sequencing experiments.
 		
 	\begin{figure}[tbh!]
@@ -21,11 +21,12 @@
 			\includegraphics[width=\textwidth]{Images/DifferenceParameterGraph.pdf}
 		\end{center}
 			\caption[Difference Parameter]{\label{fig:DifferenceParameter} Schematic of the difference parameter calculations.
-				Colours represent differen values of $n$. Triangles correspond to the parameter values in the corresponding inset graphs.
+				Coloured lines represent the difference parameter for different values of $n$.
+				Triangles show the parameter values in the corresponding inset graphs.
 				\textbf{A} Replication fraction simulation and theory curves for $n=10$; $DP=0.037$.
 				\textbf{B} Replication fraction simulation and theory curves for $n=5$; $DP = 0.062$.
 				\textbf{C} Replication fraction simulation and theory curves for $n=1$; $DP = 0.264$.
-				Also illustrated is the value $\Delta P(x)$ at the peak.
+				Also illustrated in \textbf{C} is the value $\Delta P(x)$ at the peak.
 				Note that $\Delta P(x)$ is defined over the entire domain.
 				}
 	\end{figure}
@@ -36,7 +37,7 @@
 		
 		When this project started, we performed a quick investigation into the difference between $f_\text{sim}(n)$ and $f_\text{MIM}(n)$ for a single origin.
 		To generate $f_\text{sim}(n)$, the MIM simulator calculated the average replicated fraction for about $10^6$ cells, producing data with very little statistical error.
-		The global parameters used for the simulation were set equal to those measured previously by fitting the MIM to microarray measurements of budding yeast~\cite{Scottspaper}.
+		The global parameters used for the simulation were set equal to those measured previously by fitting the MIM to microarray measurements of budding yeast~\cite{ScottsPaper}.
 		To generate $f_\text{MIM}(n)$, the fitting function built into IGOR was used, where the parameters were fixed and set equal to those used in the simulation.
 		The difference parameter was then defined as
 		\begin{equation} \label{DifferenceParameter}
@@ -45,12 +46,13 @@
 		where $\Delta P(x)$ is the difference between $f_\text{sim}(n)$ and $f_\text{MIM}(n)$ (see Fig.~\ref{fig:DifferenceParameter}), and $P$ is the peak value of $f_\text{MIM}(n)$.
 		
 		Figure~\ref{fig:DifferenceParameter} shows the analysis process of the difference parameter for a single origin.
-		First, $f_\text{sim}(n)$ an $f_\text{MIM}(n)$ were calculated over several time steps and $n$ ranging from one to 128, examples are shown in the insets of Fig.~\ref{fig:DifferenceParameter}.
+		First, $f_\text{sim}(n)$ an $f_\text{MIM}(n)$ were calculated over several time steps and $n$ ranging from one to 128, example replicated fractions are shown in the insets of Fig.~\ref{fig:DifferenceParameter}.
 		From these data, we calculated $DP(n,t)$, the main image in Fig.~\ref{fig:DifferenceParameter}.
 		Note the value for $DP$ ``saturates'' as $t$ increases, we call this value the ``saturated difference parameter.''
-		Figure~\ref{fig:SaturatedDifferenceParameter} shows the saturated difference parameter\footnote{
+		Figure~\ref{fig:SaturatedDifferenceParameter}\footnote{
 		The reader may notice a change in the $n$ values displayed in the graphics. Figure~\ref{fig:DifferenceParameter} is illustrative and contains old data; accurate, but not useful.
-		After producing that graph we used a slightly different set of parameters in the simulation and changed the range of $n$ simulated when producing Fig.~\ref{fig:SaturatedDifferenceParameter}}.
+		After producing that graph we used a slightly different set of parameters in the simulation and changed the range of $n$ simulated when producing Fig.~\ref{fig:SaturatedDifferenceParameter}}
+		shows the saturated difference parameter as a function of $n$.
 		This initial investigation showed the saturated difference parameter decreases as $n^{-1}$.
 		
 		\begin{figure}[tbh]
@@ -58,7 +60,7 @@
 				\includegraphics[width=0.8\textwidth]{Images/SaturatedDifferenceParameterGraph.pdf}
 			\end{center}
 				\caption[Saturated Difference Parameter]{\label{fig:SaturatedDifferenceParameter} Saturated difference parameter vs. $n$.
-				The large uncertainty in low $n$ comes the time-steps not going far enough to accurately measure the saturated difference parameter.
+				The large uncertainty in low $n$ arises because the time-steps not going far enough to accurately measure the saturated difference parameter.
 				The line is proportional to $n^{-1}$ ($\text{[Saturated Difference Parameter]} \approx \frac{0.3}{n}$).
 				}
 		\end{figure}
@@ -71,11 +73,112 @@
 		\subsection{Biased Fits}
 		\label{subsec:BiasedFits}
 		
-		The results from investigating the difference parameter suggested that the question of how variability in initiation factor affects the replication profile was worthy of more research.
-		However, the definition of the difference parameter does not scale to more than one origin for two reasons:
-		First, the saturated difference parameter is measurable once the theory curve has reached a peak value near one, therefore near-neighbour origins will interfere with each other.
-		Second the difference parameter is defined as a single value for the whole simulated genome, therefore we cannot infer anything about more than one origin.
-		Therefore, we investigated how the parameters from fitting the MIM to a simulation of small $n$ may be biased.
+		The definition of the difference parameter does not scale to more than one origin.
+		The saturated difference parameter is only measurable when the theory curve has a peak value near one, therefore near-neighbour origins will interfere with each other.
+		Additionally, the difference parameter is defined as a single value for the whole simulated genome, therefore we cannot infer anything about more than one origin.
+		Thus, we developed a second investigation that measures how the parameters fitted with the MIM to a simulation of small $n$ may be biased.
 		
 		The process of this investigation was to calculate $f_\text{sim}(n)$ and to follow that by fitting the parameters of the MIM to the result.
-		Thus, we have two parameters, $n_\text{sim}$ and $n_\text{fit}$.
+		Thus, we have two parameters, $n_\text{sim}$ and $n_\text{fit}$, where $n_\text{sim}$ is the value for $n$ input to the simulation, and $n_\text{MIM}$ is the value for $n$ that results from the MIM fit.
+		Initially, we performed these measurements using simulations of large populations of cells (populations of $10^6$ cells and larger).
+		However, we discovered that when we performed high-accuracy simulations the fits are not strong.
+		Therefore, we changed the simulation as described in Sec.~\ref{sec:Noise} to produce noisy data to represent the current capabilities of sequencing experiments.
+		
+		\begin{SCfigure}[1][tbh]
+			\includegraphics[width=0.47\textwidth]{Images/LargePopBias.pdf}
+			\caption[Bias in MIM fit on Large-Population Simulations]{\label{fig:LargePopulation} Scatter plot of $n_\text{sim}$ vs. $n_\text{fit}$ for simulations of a large population.
+			Red circles show the data, dashed line shows unity.
+			There is a large bias for low $n_\text{sim}$ which decreases as $n_\text{sim}$ grows.
+			}
+		\end{SCfigure}
+		
+		Figure~\ref{fig:LargePopulation} shows the preliminary results from our biased fit investigation on large-population simulations.
+		The graph is a scatter plot of $n_\text{sim}$ vs. $n_\text{MIM}$, the dashed line shows unity.
+		As we expected, the biased is relatively large for low $n_\text{sim}$, but decreases as $n_\text{sim}$ grows.
+		Before this line of analysis went any deeper, however, we found that, at this population size, the simulated replicated fraction and the analytical MIM were not compatible.
+		When performing the fits, the $\chi^2$ metric indicated that the fits generated were not acceptable.
+		Therefore, although the results match our expectation, we had to reconsider our approach to make a strong statement about the MIM.
+		
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=0.8\textwidth]{Images/NoisyBias.pdf}
+			\end{center}
+				\caption[Bias in MIM fit on Noisy Data]{\label{fig:NoisyBias} Scatter plot of $n_\text{sim}$ vs. $n_\text{fit}$ for simulations of noisy data.
+				Red dots show data from 50 simulations at each value $n_\text{sim}$.
+				Blue circles with error bars show the mean and standard deviation of the mean.
+				Dashed line shows unity.
+				The bias for low $n_\text{sim}$ decreases with increasing $n_\text{sim}$.
+				\textbf{Inset} Scatter plot of the normalized difference ($[n_\text{sim} - n_\text{fit}]/n_\text{sim}$) vs. $n_\text{sim}$.
+				$\text{[Dashed line]} = 0.55/n_\text{sim}$.
+				$\text{[Dottend line]} = 0.32/\sqrt{n_\text{sim}}$.
+				}
+		\end{figure}
+		
+		After discovering that simulating over a large population to produce highly accurate replicated fraction data was not working, we decided to limit our simulations to the accuracy of current experiments.
+		In Sec.~\ref{Sec:Noise} we outlined the process used to generate noisy data.
+		Figure~\ref{fig:NoisyBias} shows the result of our analysis of noisy simulated data.
+		Again, we used the MIM Simulator to generate $f_\text{sim}(n_\text{sim})$ and using a built-in IGOR Pro function, we fit the parameters of the MIM to that data.
+		Figure~\ref{fig:NoisyBias} is a scatter plot of $n_{sim}$ vs. the resulting $n_\text{fit}$.
+		In this case, because of the increased noise in the simulated data, we performed this procedure fifty times per $n_\text{sim}$ value (red dots).
+		The blue data show the mean and standard deviation of the mean for each value of $n_\text{sim}$.
+		Here, again, we see that the bias is largest for small $n_\text{sim}$, and decreases $n_\text{sim}$ grows.
+		In the inset to Fig.~\ref{fig:NoisyBias} we show the relative difference normalized by $n_\text{sim}$ (i.e. $[n_\text{sim} - n_\text{fit}]/n_\text{sim}$).
+		The dashed line shows $0.55/n_\text{sim}$, while the dotted line shows $0.32/\sqrt{n_\text{sim}}$.
+		The uncertainty in the data is too great to claim any particular trend, except to say that it is behaving qualitatively as expected.
+		
+		The data shown in Fig.~\ref{fig:NoisyBias}, which comes from fitting the MIM to artificially noisy simulated data, shows the behaviour we expect.
+		Additionally, the fits being produced have normalized $\chi^2$ values of $1\pm 0.1$.
+		Therefore, we conclude that the MIM Simulator is producing good data, that is comparable to both experimental data and the analytical MIM.
+		
+		
+	\section{Simulations of Chromosome I}
+	\label{sec:ChromosomeI}
+	
+	Our results from single-origin simulations seem to indicate that the MIM does not perform well in the small-$n$ regime, but multiple origins may work together to reduce that effect.
+	Following our single-origin investigation, we simulated the replicated fraction of Chromosome I of budding yeast.
+	For this investigation, we used the same simulation method as described for the noisy single-origin analysis, except that the genome size and origin parameters were chosen to represent Chromosome I.
+	The origin parameters were set by fitting the MIM to the replicated fraction for wild-type budding yeast reported by Hawkins~\emph{et al.}~\cite{StochasticTermination}.
+	To test the effect of small $n$, the fitted parameter $t_{1/2}$ was fixed at a high value (90 minutes) to produce high values for $n$, and it was fixed at a low value (40 minutes) to produce low values for $n$.
+	The resulting values for $n$ at each origin can be seen in table \textbf{make table}.
+	
+	We simulated
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
