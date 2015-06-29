@@ -62,7 +62,7 @@ Except where special note is made, all computations were performed in IGOR Pro V
 		We are unaware of any experiments that have measured the distribution in the number of initiators between cell cycles.
 		
 		In discussion with collaborators, another hypothetical distribution was considered.
-		Vogelauer~\emph{et~al.} showed in 2002 that an origin's firing time can be determined by the histone acetylation status in its vicinity~\cite{Histones}
+		Vogelauer~\emph{et~al.} showed in 2002 that an origin's firing time can be determined by the histone acetylation status in its vicinity~\cite{Histone}
 		In other words, early firing origins tend to be placed near acetylated histones.
 		Histones, large, octameric proteins that make up part of the system that organizes DNA into its three-dimensional shape can exist in two states: acetylated and deacetylated \textbf{cite - maybe molecular cell biology}.
 		When deacetylated, the histones are positively charged and attract the negatively charged DNA into a crowded configuration.
@@ -78,7 +78,7 @@ Except where special note is made, all computations were performed in IGOR Pro V
 		The second task of the preparation module is to assign a firing time to each initiator on the genome.
 		This is different from assigning a firing time to each origin: If there are $k$ origins, then the number of initiators is given by $\sum\nolimits_{i=0}^k N_i = K$.
 		Therefore, $K$ randomly generated firing times are required.
-		The MIM dictates the desired firing time distribution of an initiator, which we derive from the cumulative firing time probability shown in Eq.~\ref{CPDInitiator} (and again below).
+		The MIM dictates the desired firing time distribution of an initiator, which we derive from the cumulative firing time probability shown in Eq.~\ref{eq:CPDInitiator} (and again below).
 		\begin{equation} \label{eq:CPDInitiator2}
 			\Phi_0(t) = \frac{1}{1+\left(\frac{t^*_{1/2}}{t}\right)^{r^*}}\text{ ,}
 		\end{equation}
@@ -166,12 +166,12 @@ Except where special note is made, all computations were performed in IGOR Pro V
 			\begin{center}
 				\includegraphics[width=\textwidth]{Images/SimulatedDataExamples.pdf}
 			\end{center}
-				\caption[Simulated Replicated Fraction Example]{label{fig:SimulatedExample}
+				\caption[Simulated Replicated Fraction Example]{\label{fig:SimulatedExample}
 					Example output of Chromosome IV from the MIM Simulator.
 					x-axis is the position in the genome.
 					y-axis is the replicated fraction.
 					\textbf{A} Data averaged over 100 cells, no artificial noise.
-					\textbf{B} Data averaged over 100 cells, Gaussian noise added according to the procedure outlined in Sec.~\ref{subsec:IncludingNoise}.
+					\textbf{B} Data averaged over 100 cells, Gaussian noise added according to the procedure outlined in Sec.~\ref{subsec:AddingNoise}.
 					Parameters for the simulation were taken from~\cite{ScottsPaper} supplementary data.
 				}
 		\end{figure}	
@@ -199,16 +199,17 @@ Except where special note is made, all computations were performed in IGOR Pro V
 		This observation, in part, motivated the addition of Gaussian noise to the simulated data before analysis.
 		
 		
-	\section{Adding Gaussian Noise}
+	\section{Analyzing Noise in the Data}
 	\label{sec:Noise}
 	
 	We initially chose to do simulations of populations of about $10^6$ cells.
 	This way, the randomly generated numbers were sampled from the full random distributions, and the averaging was very close to the ``true average''.
 	However, we found that this produced results that were too accurate; we could not make good comparison between the simulated replicated fraction and the replicated fraction predicted by the MIM (discussed in Ch.~\ref{ch:Results}).
 	Because of this problem, we created simulations that were limited in accuracy to reflect current experimental standards.
+	However, as we show below, generating noisy data was not as simple as limiting our population size.
 	
 	
-		\subsection{Analyzing Sequencing Data}
+		\subsection{Estimating Experimental Noise}
 		\label{subsec:SequencingNoise}
 		
 		Here we analyze data from a sequencing experiment investigating the replicated fraction of budding yeast performed by Hawkins~\emph{et~al.} in 2013~\cite{StochasticTermination}.
@@ -217,7 +218,7 @@ Except where special note is made, all computations were performed in IGOR Pro V
 		Clearly, there is some amount of noise in this data; it is not a smooth function ranging from zero to one.
 		Indeed, as we discussed in Ch.~\ref{ch:Motivation}, there are some assumptions made in the data analysis that add to the noise inherent in the experimental process.
 		Our goal was to create simulated replicated fraction data that closely resembled data from experiment.
-		To do this, we need to include noise in our data commensurate with that seen experimentally.
+		To do this, we need to include noise in our data commensurate with that seen experimentally and must therefore estimate experimental noise.
 		
 		\begin{figure}[tbh]
 			\begin{center}
@@ -234,7 +235,8 @@ Except where special note is made, all computations were performed in IGOR Pro V
 		
 		Following the process used by Yang~\emph{et al.}~\cite{ScottsPaper} (supplementary material), we analyzed the experimental data to estimate the uncertainty in the measured replicated fraction.
 		Ideally, we would estimate the noise distribution for each data point by analyzing data from an experiment that has been repeated many times.
-		Unfortunately, Hawkins~\emph{et~al.} did not publish any repetitions of their data set.
+		Unfortunately, Hawkins~\emph{et~al.} did not publish any repetitions of their data set.\\
+		\textbf{Ask them!}\\
 		Therefore, we worked with two measurements we assume to be in close agreement: the wild-type budding yeast and the mutant budding yeast measurements.
 		With the mutation only removing three origins, we assumed that the replication profiles between the wild-type and mutant measurements would be the same except on the chromosomes with missing origins (Chromosomes VI, VII, and X).
 		Thus, we compared the remaining 13 of the total 16 budding yeast chromosomes.
@@ -270,19 +272,25 @@ Except where special note is made, all computations were performed in IGOR Pro V
 			\includegraphics[width=.47\textwidth]{Images/SigmaEstimate.pdf}
 			\caption[Estimated Simulation and Experimental Noise]{\label{fig:Noise} 
 				Scatter plot of estimated $\sigma$ vs time since the start of S phase for experimental data and simulation data.
-				Black circles are experimental estimates and open circles are experimental estimates.
+				Black circles show experimental estimates.
+				Open circles show simulation estimates.
+				Crosses show calculated values for $\sigma_\text{add}$ (Eq.~\ref{eq:AddingNoise})
+				dots show estimates from simulations with added Gaussian noise.
 			}
 		\end{SCfigure}
 		
-		There are two features of the histograms in Fig.~\ref{fig:HistDifference} that should be discussed.
+		There are three features of the histograms in Fig.~\ref{fig:HistDifference} that should be discussed.
 		First, unlike the microarray data that Yang~\emph{et al.} analyzed, the histograms extracted from sequencing data are Gaussian distributed.
 		This implies that it is better suited to analysis by MIM, since the MIM approach assumes Gaussian-distributed noise~\cite{ScottsPaper}.
-		Second, the mean of the Gaussian fits evolve dramatically as time progresses.
+		Second, the standard deviation evolves as time progresses.
+		This is not unexpected: Early in the replication program and late in the replication program, many of the cells will be mostly unreplicated and mostly replicated  respectively.
+		Therefore, we expect that the noise will be diminished at early time and late time.
+		Third, the mean of the Gaussian fits evolve dramatically as time progresses.
 		We believe this is due to a global systematic error in the data, potentially the reported time since S phase, or a possible global effect of the mutation removing origins from Chromosomes VI, VII, and X.
 		
 		
-		\subsection{Including Noise in the Simulated Replicated Fraction}
-		\label{subsec:IncludingNoise}
+		\subsection{Estimating Simulation Noise}
+		\label{subsec:SimulationNoise}
 		
 		Now that we have a measure of the level of noise in current sequencing experiments, we would like to use those data to ensure our simulated replicated fraction has noise commensurate with experimental data.
 		Two steps were taken to make this happen: the first based on experimental procedures, the second by artificially adding Gaussian noise.
@@ -312,31 +320,68 @@ Except where special note is made, all computations were performed in IGOR Pro V
 		These two functions were used to estimate the noise in the simulation, $\sigma_\text{sim}$, using the same process as outlined in Sec.~\ref{subsec:SequencingNoise}.
 		Figure~\ref{fig:SimNoise} shows the distributions of the difference at each time-step.
 		Interestingly, there is an evolution in the noise from near-Laplace distributed at early time, to near-Gaussian, and back to near-Laplace distributed.
-		\textbf{Continuing to investigate this - June 27}
-		Figure~\ref{fig:Noise} shows our estimations of the noise in experiment and the noise in simulation.
-		We suspect the simulation has smaller estimated standard deviations due to other sources of noise in the experiment that were not reported \textbf{Check this}.
+		Figure~\ref{fig:Noise} shows our estimation of the noise in simulation, measured using built-in IGOR Pro tools that report the standard deviation of a set of data.
+		
+		There was some concern that the noise in simulations is distributed differently than the noise in experiment.
+		To address this concern, we qualitatively investigated a possible source of the noise.
+		We know that the greatest uncertainty in replicated fraction will coincide with the presence of forks of replication:
+		While regions that replicate early and regions that replicate late will simulate a replicated fraction of primarily ones and primarily zero respectively, regions that are in the process of replicating will return both values.
+		Therefore, we measured  the average number of replicated regions across the genome over simulation time (Fig.~\ref{fig:NumberIslands}).
+		Except when a fork has hit the end of the chromosome, the number of forks is twice the number of replicated regions.
+		We observed a peak in the number of replicated regions, and hence forks, at 30 minutes after the start of S phase.
+		This time coincides with the time at which the distribution of the simulated noise is most Gaussian (Fig.~\ref{fig:SimNoise}).
+		Thus, we believe that the noise in simulation is Laplace distributed when the number of forks is small, but the addition of more forks causes an evolution of the distribution toward Gaussian.
+		
+		\begin{SCfigure}[1][tbh]
+			\includegraphics[width=.47\textwidth]{Images/NumIslands.pdf}
+			\caption[Number of Replicated Regions in Simulation]{\label{fig:NumberIslands}
+				Histogram of the number of replicated region in the simulation, normalized to a single cell.
+				x-axis shows $t_\text{sim}$ in minutes.
+			}
+		\end{SCfigure}
+		
+		
+		\subsection{Adding Gaussian Noise to the MIM Simulator}
+		\label{subsec:AddingNoise}
 		
 		There are two features of the noise in simulation that we would like to change in order to better produce noise commensurate with experiments.
 		First, as shown in Fig.~\ref{fig:Noise}, the statistical noise that arises from the random sampling of the Monte Carlo process is not large enough to match the noise we estimated for the experiment.
-		Second, as shown in Figs.~\ref{fig:SimulatedExample} and~\ref{fig:ReplicatedFractionExample}, the experimental data has a relatively short correlation length when compared to the simulation over 100 cells.
+		Second, as shown in Figs.~\ref{fig:SimulatedExample}A and~\ref{fig:ReplicatedFractionExample}, the experimental data has a relatively short correlation length when compared to a simulation over 100 cells.
 		Therefore, we chose to artificially add noise to the simulated data such that it was commensurate with our findings in Sec.~\ref{subsec:SequencingNoise}.
 		To add the noise, we used our estimate the uncertainty from the simulation, $\sigma_\text{sim}$, then calculated the amount of Gaussian noise we had to add, $\sigma_\text{add}$, such that the resulting uncertainty matched the desired values:
-		\begin{equation}
+		\begin{equation} \label{eq:AddingNoise}
 			\sigma_\text{add} = \sqrt{{\sigma_t}^2 - {\sigma_\text{sim}}^2} \text{ ,}
 		\end{equation}
 		where $\sigma_t$ is the experimental noise calculated for the simulated time $t$ from experimental data (Sec.~\ref{subsec:SequencingNoise}).
+		The crosses in Fig.~\ref{fig:Noise} show the resulting values of $\sigma_\text{add}$ that were used for our simulations.
 		
-		We believe this is an effective first-approach to incorporating noise in the MIM Simulator.
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=\textwidth]{Images/NoisySimNoise.pdf}
+			\end{center}
+				\caption[Estimating Simulation Noise]{\label{fig:NoisySimNoise} Histograms of the point-by-point difference between two sets of simulated data with artificially added Gaussian noise.
+					Each set of axis is for a different time after the start of S phase (labeled).
+					y-axis shows the normalized distribution.
+					x-axis shows difference.
+					Grey circles are calculated from experiment.
+					Black lines show the best Gaussian distribution fit.
+				}
+		\end{figure}
+		
 		Adding artificial noise has three main benefits:
 		First, it effectively increases the uncertainty in the simulated data to match that seen experimentally.
 		Second, the artificial noise pushes the differences between simulations closer to the Gaussian distribution we see in experimental data.
 		Third, it decreases the correlation length of the simulated data to closer to what is seen experimentally.
+		Figure~\ref{fig:SimulatedExample} shows a comparison of simulated data before and after noise has been added artificially.
+		Figure~\ref{fig:NoisySimNoise} shows the distribution of noise, measured as outlined in Sec.~\ref{subsec:SequencingNoise}.
+		We see that these distributions are a much better match to those shown in Fig.~\ref{fig:HistDifference} with the addition of Gaussian noise.
+		The estimated standard deviations from the simulations with artificial noise (shown as dots in Fig.~\ref{fig:Noise}) are within a percent of those estimated from experimental data.
+
 		To better address the noise, the two features discussed above need to be addressed.
 		To address the first feature, one would need to fully understand the experimental procedures and equipment and the uncertainty inherent in both.
 		To address the second feature, the MIM Simulator would have to more accurately duplicate the experimental sampling process:
 		Simulating a large population of cells, measuring the replication of small segments of many cell, and combining the results.
-
-
+		Given that the analysis above shows adding Gaussian noise makes the simulation noise match experimental noise much more closely, we believe the presented method is an effective first-approach to incorporating noise in the MIM Simulator.
 
 
 
