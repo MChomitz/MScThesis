@@ -251,32 +251,36 @@ In other words, the program must be able to control the replication program such
 		Recent advances lowering the cost of sequencing have seen a transition from microarray experiments to sequencing experiments for measuring DNA replication~\cite{EndOfMicroarray}.
 		
 		
-	\section{Thesis map \textbf{UPDATE}}
+	\section{Reading This Thesis}
 	\label{sec:Map}
 
-	Here, we give a brief outline of the thesis. For now, this will serve as a plan for the outline. After the writing is complete this will be more of a road-map for readers than for me.
+	Here, we give a brief outline of the thesis.
 	
 	\textbf{Chapter 2 - Motivation}
 	Here we summarize the mathematical details of the KJMA-like model that describes DNA replication, and how to use it to calculate the replicated fraction from a theoretical model.
 	We then discuss the development of the Sigmoidal Model the correlation between origin firing time width and median that it measured.
-	This correlation motivated the creation of the Multiple Initiator Model, which we outline.
+	This correlation motivated the creation of the Multiple Initiator Mode (MIM)l, which we describe.
 	Finally, we introduce the recently experimental work done in N.~Rhind's lab that measured loaded MCM.
 	These measurements provided some surprising results that call into question part of the scenario assumed in the MIM.
 	With this chapter we hope to motivate our work in measuring the effect of the experimental results from the Rhind Lab on the MIM.
 	
 	\textbf{Chapter 3 - Method}
-	should talk about the different tools I used to try to understand the problem and its solution.
-	Phantom Nuclei Simulation.
-	Monte Carlo (compare to analytic, pros and cons).
-	Igor global fitting.
+	Here we discuss the MIM simulator program which was used in our analysis of the Multiple Initiator Model.
+	We start by outlining the simulation process in detail and motivate the assumptions and choices we made.
+	Our discussion of the MIM simulator transitions into an analysis of noise; we want our simulation to produce data similar to experiment, including the level of noise.
+	We estimate the noise in current cutting-edge sequencing data, and compare that to the noise in our simulation.
+	Because the noise in experiment is different from the noise in our simulated data, we motivate the introduction of two methods of increasing the noise in our simulations:
+	One method based on experimental limitations, and the other method involved adding Gaussian noise.
 	
 	\textbf{Chapter 4 - Results}
-	talk about results (GET THESE!)
+	Here we outline our three investigations in full.
+	We started with preliminary single-origin measurements comparing the analytical MIM to simulated data as a quick investigation.
+	After these measurements implied a deeper investigation would prove fruitful, we redesigned our methodology and performed more single-origin measurements.
+	Finally, we moved onto a \textbf{chromosome or genome} wide investigation, in which we measured how the fit from MIM changes when it is force to have high or low $n$.
+	With our final investigation, we show that \textbf{Finish this statement!}
 	
 	\textbf{Chapter 5 - Conclusions}
-	discuss the implications of my results.
-	where should research go from here?
-		
+	Here we discuss the implications of our results and suggest new directions for this research.
 		
 		
 		

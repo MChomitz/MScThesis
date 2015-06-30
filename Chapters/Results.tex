@@ -1,7 +1,23 @@
 \chapter{Results}
 \label{ch:Results}
 
-\textbf{Make an introductory paragraph(s) to outline the procedures and the results shown here.}
+In this chapter, we outline our investigations into the effects of small $n$ on the Multiple Initiator Model.
+Using the MIM simulator described in Ch.~\ref{Methods}, we performed three major investigations.
+
+Our preliminary investigation was a single-origin comparison between the analytical MIM and the MIM Simulator.
+We defined a parameter that measures the difference between the replicated fraction from simulation and from the MIM.
+In Sec.~\ref{subsec:earlywork}, our so-called ``difference parameter'' shows that small $n$ does create a disagreement between the analytical MIM and the MIM Simulator proportional to $n^-1$.
+The presence of this error and its large tail motivated further study into the effect of small $n$ on the MIM.
+
+Realizing that the difference parameter would not easily scale to more than one origin, the aim of our second investigation was to develop a new metric for measuring the error in the MIM at low $n$.
+Section~\ref{subsec:BiasedFits} outlines the new method, which consists of simulating the replicated fraction for a single origin of fixed $n$, followed by using the MIM to find the value of $n$ that best fits the simulated data.
+The results show that this metric produces a similar degree of error between the MIM and the simulation.
+
+Finally, we progressed to simulating and fitting an entire \textbf{Chromosome or Genome}.
+For this investigation, we used fit parameters with the MIM to data from DNA sequencing~\ref{StochasticTermination}.
+By fixing $t_{1/2}$ as high or low, were could force the MIM to produce small or high $n$ respectively.
+Using the parameters from the fits, we then simulated the \textbf{Chromosome or Genome}.
+By calculating the root-mean-squared difference between simulated data and experimental data we showed that \textbf{Finish this!}.
 
 	\section{Single-Origin Investigations}
 	\label{sec:SingleOrigin}
