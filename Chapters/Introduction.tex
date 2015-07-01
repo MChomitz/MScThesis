@@ -8,21 +8,23 @@ Complex biological machinery travels bidirectionally from the origin, separating
 The machinery between separated and non-separated DNA (``forks'') continues to propagate through the genome until it has been entirely separated and replicated.
 Prokaryotic organisms have such small genomes that replication can be completed using a single origin~\cite{MolecularCellBiology}.
 With this replication program, an \emph{E.~coli} bacterium can replicate its entire genome in about 40 minutes\footnote{
-The time to replicate the genome, $T=\frac{L}{2v}=\frac{4600\text{ kb}}{2\times1\text{ kb/s}} = 2300\text{ s}$, is just over 38 minutes.~\cite{EColi}}.
+Under fast-growth conditions, the time to replicate the genome, $T=\frac{L}{2v}=\frac{4600\text{ kb}}{2\times1\text{ kb/s}} = 2300\text{ s}$.~\cite{EColi}}.
 
-More complex organisms (``eukaryotes''), have genomes that are approximately 1000 times longer and have forks that propagate about 10 times slower than prokaryotes.
+More complex organisms (``eukaryotes'') have genomes that are approximately 1000 times longer and have forks that propagate about 10 times slower than prokaryotes.
 For example, compare the human genome, about 3000 Mb~\cite{HumanGenomeLength} with mean fork speed 1.5 kb/min~\cite{HumanForks}, to \emph{E. coli}, about 4600 kb long with fork speed 1 kb/s~\cite{EColi}.
 The replication forks from a single origin would take nearly 4 years to completely replicate the entire human genome.
-Many human cells replicate in about 24 hours, with DNA replication taking place during 8 of those hours~\cite{CellMolApproach}.
-This is much less than the four years needed if there were only a single active origin of replication.
+In many human cells, DNA replicates in about 8 hours~\cite{CellMolApproach}.
+This is much less than the four years that would be needed if there were only a single active origin of replication.
 Therefore, a single origin cannot be solely responsible for the replication of eukaryotic DNA.
-Eukaryotic DNA is thus replicated using a parallel process, with many origins along the genome that fire stochastically~\cite{eukaryotereview}.
+Eukaryotic DNA is thus replicated using a parallel process, with many origins along~\cite{eukaryotereview}.
+A considerable body of experimental evidence suggests that the timing (initiation) of origins is stochastic~\cite{}\textbf{FIND SOURCES}
 
 Using many origins in the replication program creates several non-obvious issues that must be addressed for the program to work effectively.
 One issue is the existence of separate replicated regions during the replication process.
 When the forks of two neighbouring replicated regions meet, the two coalesce into a single, larger replicated region.
-Another hurdle the program must overcome is the need to coordinate multiple origin-activation events that are driven by stochastic processes.
-In other words, the program must be able to control the replication program such that the stochastic events that drive replication do not cause errors that can potentially harm the organism~\cite{eukaryotereview}.
+Another is is the need to coordinate multiple origin-activation events that are driven by stochastic processes.
+The replication program describes the process by which the DNA is replicated using many origins of replication.
+These origins are somehow able to coordinate their stochastic initiation times such that it is rare for any part of the DNA to be left unreplicated by the end of S phase~\cite{eukaryotereview}.
 
 
 	\section{The Cell Cycle}
@@ -30,18 +32,21 @@ In other words, the program must be able to control the replication program such
 	
 	The cell cycle defines the steps taken during cellular reproduction and can be divided into four phases (see Fig.~\ref{fig:CellCycle})~\cite{MolecularCellBiology,CellMolApproach}:
 	the first gap (G1) phase, the synthesis (S) phase, the second gap (G2) phase, and the mitosis (M) phase.
-	The first two phases of the cell cycle (G1 and S) contain key processes for DNA replication.
+	The G1 phase of the cell cycle contain key processes that prepare the DNA for replication.
+	During S phase (the second phase in the cell cycle) the DNA is replicated.
 	The third phase of the cell cycle (G2) primarily acts as a buffer to ensure complete DNA replication.
 	During the fourth phase of the cell cycle (M), the cell physically divides into two daughter cells.
 	
-	\begin{SCfigure}[1][thb]
-		\includegraphics[width=0.45\textwidth]{images/CellCycle.png}
-		\caption[Cell Cycle]{\label{fig:CellCycle} The cell cycle has four phases: 
-			Mitosis (M), when a mother cell separates into two daughter cells; 
-			the first Gap (G1), when the daughter cell undergoes growth and chemical preparation for DNA replication;
-			Synthesis (S), when the DNA is replicated;
-			and the second Gap (G2), which acts as a buffer to ensure complete replication before the M phase.}
-	\end{SCfigure}
+	\begin{figure}[thb]
+		\begin{center}
+			\includegraphics[width=0.45\textwidth]{images/CellCycle.png}
+		\end{center}
+			\caption[Cell Cycle]{\label{fig:CellCycle} The cell cycle has four phases: 
+				Mitosis (M), when a mother cell separates into two daughter cells; 
+				the first Gap (G1), when the daughter cell undergoes growth and chemical preparation for DNA replication;
+				Synthesis (S), when the DNA is replicated;
+				and the second Gap (G2), which acts as a buffer to ensure complete replication before the M phase.}
+	\end{figure}
 	
 	
 		\subsection{The G1 Phase}
@@ -64,13 +69,13 @@ In other words, the program must be able to control the replication program such
 		\label{subsec:SPhase}
 		
 		The second phase in the cell cycle is S phase.
-		After licensing is completed in the G1 phase, the division of the genome into two identical copies occurs during S phase.
+		After licensing is completed in the G1 phase, the copying of the genome occurs during S phase.
 		There are three main processes that happen during S phase: initiation, elongation, and coalescence, shown in Fig.~\ref{fig:EarlyReplicationConcept}B.
 		
-		An origin initiates (or ``activates'', or ``fires') during S phase when five other proteins bind to each in a pair of MCM2-7 rings:
+		An origin initiates (or ``activates'', or ``fires'') during S phase when five other proteins bind to each in a pair of MCM2-7 rings:
 		Cdc45 and the tetrameric GINS complex (only Cdc45 is shown in Fig.~\ref{fig:EarlyReplicationConcept}A).
 		The total system of proteins is called the CMG complex (Cdc45, MCM2-7, GINS complex) and comprises a helicase that traverses the genome during S phase.
-		As an origin fires, the pre-RC disassembles and the activated pair of helicases unwind and separate the double helix of the dsDNA into two complementary ssDNA chains~\cite{GINSComplex}.
+		As an origin fires, the pre-RC disassembles and the activated pair of helicases unwind, separating the double helix of the dsDNA into two complementary ssDNA chains~\cite{GINSComplex}.
 		
 		After an origin has been initiated, there is a small region of ssDNA bounded on either side by the CMG complex helicases.
 		The locations where the dsDNA is separated into two ssDNA chains are called replication forks (or just ``forks'').
@@ -79,8 +84,8 @@ In other words, the program must be able to control the replication program such
 		DNA polymerases use the ssDNA as a template and backbone for synthesizing dsDNA; essentially, it adds the missing half back onto the separated strand.
 		DNA polymerase can only propagate in the $3'$ direction.
 		This poses a problem:
-		Because the two strands in dsDNA are oriented in opposing directions, the polymerase can only smoothly traverse one of the ssDNA chains (the ``leading strand'') at each fork.
-		On the other strand (the ``lagging strand''), the polymerase ``stutters:''
+		Because the two strands in dsDNA are oriented in opposing directions, the polymerase can smoothly traverse only one of the ssDNA chains (the ``leading strand'') at each fork.
+		On the other strand (the ``lagging strand''), the polymerase ``stutters'':
 		It replicates a small region in the direction opposite to that of fork propagation until it hits a region that has already been replicated.
 		The DNA polymerase then leapfrogs over and past the region it just replicated in the direction of fork propagation and repeats.
 		These small fragments are called Okizaki fragments.
@@ -94,10 +99,10 @@ In other words, the program must be able to control the replication program such
 			\includegraphics[width=\textwidth]{images/EarlyReplicationConcept.png}
 		\end{center}
 			\caption[Events During Replication]{\label{fig:EarlyReplicationConcept} Simplified schematic of the G1 and S phases of the cell cycle, containing only those parts that are necessary to understand the model presented in Ch.~[\textbf{CH 3}].
-				\textbf{A} In the G1 phase, origins are located and licensed when the ORC recruits pairs of MCM2-7 hexamers onto the dsDNA.
+				\textbf{A.} In the G1 phase, origins are located and licensed when the ORC recruits pairs of MCM2-7 hexamers onto the dsDNA.
 					During S phase, pairs of Mcm2-7 hexamers are activated by the Cdc45 protein.
 					After activation, the resulting structures become replicative forks that traverse the DNA unwinding the dsDNA allowing the DNA to be replicated.
-				\textbf{B} More detailed view of S phase.
+				\textbf{B.} More detailed view of S phase.
 					At the start of S phase, several origins are licensed along the genome (top of image).
 					As time progresses (down), origins fire independently (initiate), and replicative forks propagate along the genome (elongation).
 					It is common for some origins to be passively replicated; that is, they can be replicated by the replicative fork from a neighbouring origin before firing themselves.
@@ -108,8 +113,8 @@ In other words, the program must be able to control the replication program such
 	\section{Origins of Replication}
 	\label{sec:Origins}
 	
-	When prokaryotic DNA is replicated, a single origin suffices for a competent (i.e. timely and accurate) replication program.
-	In this case, the origin is located at a sequence-specific site, and there is no need to worry about the firing time except to ensure that it is early enough for complete replication.
+	When prokaryotic DNA is replicated, a single origin suffices for a competent (i.e., timely and accurate) replication program.
+	In this case, the origin is located at a sequence-specific site, and the firing time need only be early enough for complete replication.
 	However, eukaryotic DNA requires many origins of replication for a competent replication program.
 	The number of origins in the genome varies by species, from fewer than 800 in budding yeast~\cite{OriDB} to about 100 000 in humans~\cite{OriginsReview}.
 	When multiple origins exist on the genome, we can ask the following questions:
@@ -136,8 +141,8 @@ In other words, the program must be able to control the replication program such
 		During exponential growth, the cell cycles overlap, and more than one S phase can be active simultaneously~\cite{ExponentialGrowth}.
 		However, this phenomenon is outside the scope of this thesis.
 		
-		In eukaryotes the  need to initiate multiple origins leads to interesting timing dynamics.
-		The origins do not all initiate simultaneously, but origin-initiation events occur throughout S phase~\cite{DNAInitiation}.
+		In eukaryotes, the  need to initiate multiple origins leads to interesting timing dynamics.
+		The origins do not all initiate simultaneously, with origin-initiation events occurring throughout S phase~\cite{DNAInitiation}.
 		The mechanism that controls the relative timing of different origin initiation events is still a matter of some debate~\cite{ScottsPaper,Bechhoefer2012374,deMouraModel2,deMouraModel1} and is the topic of this thesis.
 		
 		
@@ -148,14 +153,14 @@ In other words, the program must be able to control the replication program such
 		Budding yeast is a useful model species because, unlike the other eukaryotic examples we discussed, the origins of \emph{S. cerevisiae} are localized.
 		In each cell cycle, origins of budding yeast may be licensed only in very narrow regions on the genome.
 		These regions are defined by specific sequences in the genome, called autonomously replicating sequences (ARS elements), that have been identified and cataloged\footnote{An online database can be found at http://cerevisiae.oridb.org/}~\cite{OriDB}.
-		Thus, by choosing budding yeast as the model species, the potential stochasticity in origin locations has conveniently been removed from consideration.
+		Thus, the advantage of choosing budding yeast as the model species is that the potential stochasticity in origin locations has conveniently been removed from consideration.
 		
-		Previous studies of the firing times of individual origins in budding yeast have found evidence that the process has some driving force~\cite{ScottsPaper,StochasticTermination}.
+		Previous studies of the firing times of individual origins in budding yeast have found a correlation between the median firing times and the width of the firing time distributions~\cite{ScottsPaper,StochasticTermination}.
 		Both studies measured the average firing time and the spread in firing times for each origin in budding yeast and discovered a correlation between them (see Fig.~\ref{fig:SigmoidalModel2}).
 		Essentially, origins that tend to fire early have narrowly defined firing times, while those that tend to fire late have loosely defined firing times.
-		This trend implies the existence of a mechanism that strongly controls the fire-time of origins at the start of S phase, but loses its potency as S phase progresses.
+		This trend implies the existence of a mechanism that strongly controls the firing time of origins at the start of S phase but loses its potency as S phase progresses.
 		
-		One theory that explains this observation is the Multiple Initiator Model, which supposes that the number of MCM2-7 hexamers loaded on an origin will impact the timing width and median for that origin.
+		One theory that explains this observation is the Multiple Initiator Model, which supposes that the number of MCM2-7 hexamers loaded on an origin will affect the timing width and median for that origin.
 		The MIM will be discussed in detail below in Sec.~\ref{sec:MIM}.
 		
 		
@@ -166,7 +171,7 @@ In other words, the program must be able to control the replication program such
 	Once an origin has fired, replication forks traverse the DNA bidirectionally, enclosing a growing region of replicated DNA between them.
 	When two regions of replicated DNA meet, they coalesce into a single, larger region.
 	
-	This process can be mapped to a crystallization process in one-dimension (Fig.~\ref{fig:CrystalVsReplication}):
+	This process can be mapped to a crystallization process in one dimension (Fig.~\ref{fig:CrystalVsReplication}):
 	Crystallization starts when the crystal nucleates at nucleation sites, which map to origins of replication.
 	From nucleation sites, the crystal grows bidirectionally, and the crystal domain is surrounded by boundaries that can be mapped to the replicative forks.
 	Finally, when two crystal regions meet, they coalesce into a larger region, which matches the coalescence of neighbouring regions of replicated DNA.
@@ -176,16 +181,16 @@ In other words, the program must be able to control the replication program such
 		\begin{center}
 			\includegraphics[width=\textwidth]{Images/CrystalVsReplication.png}
 		\end{center}
-			\caption[Comparing Crystallization with Replication]{\label{fig:CrystalVsReplication} Comparison between the one-dimensional KJMA crystallization model and the described replication model.
+			\caption[Comparing Crystallization with Replication]{\label{fig:CrystalVsReplication} Comparison between the one-dimensional KJMA crystallization model and DNA replication.
 				At left is the one-dimensional crystallization process, with round markers representing nucleation sites, and arrows representing crystal boundaries (pointing in the direction of propagation).
-				Thick lines represent crystal regions and thin lines are liquid.
-				Right is the DNA replication process, as described in Fig.~\ref{fig:EarlyReplicationConcept}.}
+				Thick lines represent crystal regions, and thin lines liquid regions.
+				Right: DNA replication process, as described in Fig.~\ref{fig:EarlyReplicationConcept}.}
 	\end{figure}
 	
 	Early in the 20\textsuperscript{th} century, Kolmogorov~\cite{Kolmogorov}, Johnson and Mehl~\cite{JohnsonAndMehl}, and Avrami~\cite{AvramiI,AvramiII,AvramiIII} independently developed a stochastic model to describe crystallization growth in three dimensions.
 	Since its inception, the ``KJMA model'' has been used for many studies that range from phase transition kinetics~\cite{AlloyPhaseTransitions} to R{\'e}nyi's car-parking problem in one dimension~\cite{CarParking}.
 	In 2002, J.~Herrick~\emph{et~al.} introduced a KJMA-like model of DNA replication to analyze experiments on \emph{X.~laevis} embryo extracts~\cite{KJMA2002}.
-	In 2005, the KJMA-like model was expanded, and a formalism was developed which can be used to infer the replication program of a genome given a set of parameters that describe the speed of replication forks and the origins' locations in time and space~\cite{KJMA1, KJMA2}.
+	In 2005, the KJMA-like model was expanded, and a formalism which can be used to infer the replication program of a genome given a set of parameters that describe the speed of replication forks and the origins' locations in time and space~\cite{KJMA1, KJMA2}.
 	
 	One of the quantities that can be inferred using the KJMA formalism is the replicated fraction, $f(x,t)$.
 	The replicated fraction can be interpreted as the probability that the genome at position $x$ has been replicated by a time $t$ after the start of S phase.
@@ -196,25 +201,26 @@ In other words, the program must be able to control the replication program such
 	\label{sec:ExperimentsBasics}
 	
 	The theory describing DNA replication has been driven by experimental results.
-	In this section, we answer the question, \emph{How can DNA replication be observed experimentally?}
-	There are several techniques available to scientists that answer this question, including flow cytometry~\cite{DeepSeq}, DNA combing~\cite{DNACombing}, microarray~\cite{MicroarrayReview, McCuneMicroArray}, and sequencing experiments~\cite{StochasticTermination,DeepSeq}.
+	In this section, we ask, \emph{How can DNA replication be observed experimentally?}
+	There are several techniques to help answer this question, including flow cytometry~\cite{DeepSeq}, DNA combing~\cite{DNACombing}, microarray~\cite{MicroarrayReview, McCuneMicroArray}, and sequencing experiments~\cite{StochasticTermination,DeepSeq}.
 	When designing an experimental procedure to measure DNA replication, there are two main considerations to take into account: the temporal scope and the scope of the desired measurement.
 	
-	There are two approaches that experiments use to study the time course of replication.
+	There are two experimental approaches to study the time course of replication.
 	The first is to synchronize the cell cycle.
-	A common way to do this is by arresting the cell cycle, although there are other techniques~\cite{CellCycleSynch}.
+	A common way to do this is by arresting the cell cycle~\cite{CellCycleSynch}.
 	Arresting usually entails using a chemical bath to stop the cells from progressing from one phase to another (for experiments related to DNA replication, this is generally just prior to entering the S phase).
 	After arresting the cell cycle, another chemical bath can be used to force the entire population of cells to enter the S phase synchronously.
-	The main drawbacks to this approach are that  it is difficult to arrest many species of eukaryotic organisms and that, although arresting will stop a cell from moving through the cell cycle, it will not stop a cell from growing, so cells that have been arrested may have altered replication profiles as a result~\cite{CellCycleSynch}.
+	The main drawbacks to this approach are that  it is difficult to arrest many species of eukaryotic organisms and that, although arresting will stop a cell from moving through the cell cycle, it will not stop a cell from growing.
+	Cells that have been arrested may have altered replication profiles as a result~\cite{CellCycleSynch}.
 	The second approach is to forego arresting the cell cycle and pull samples from an asynchronous population.
-	The main drawback to this method is it either creates time-averaged data or it relies on multiple techniques to infer the timing information.
+	The main drawback to this method is that it either creates time-averaged data or it relies on multiple techniques to infer the timing information.
 	For this research, the first strategy was investigated.
 	
 	Spatially, approaches range between two extremes: perfect resolution down to the scale of individual base pairs and no spatial information.
 	At one extreme, some experiments infer quantities that are averaged over the entire genome. 
 	For example, a common flow-cytometry technique called fluorescence-activated cell sorting (FACS)~\cite{DeepSeq, SequencingReview} measures only the total amount of DNA in the cell.
 	Techniques such as FACS provide only limited information but are simple and fast.
-	At the other extreme, techniques such as DNA sequencing and DNA microarray can spatially resolve windows as small as 1 kb~\cite{DeepSeq}.
+	At the other extreme, techniques such as DNA sequencing and DNA microarrays can spatially resolve windows as small as 1 kb~\cite{DeepSeq}.
 	Experiments with this level of resolution are quite complex but provide tremendous insight toward understanding DNA replication.
 	For this research, highly resolved DNA sequencing data were investigated.
 	
@@ -241,7 +247,7 @@ In other words, the program must be able to control the replication program such
 		A sequencing experiment determines the precise sequence of base pairs contained in the input segment of DNA~\cite{SequencingReview}.
 		To measure the replicated fraction using sequencing, one must start with with the fully mapped genome of the organism in question.
 		The DNA from a population of cells to be measured is harvested and broken into segments about 50 bp long~\cite{StochasticTermination}.
-		Each segment can be sequenced and matched to the previously mapped genome.
+		Each segment is sequenced and matched to the previously mapped genome.
 		The normalized histogram of reads over the genome then provides the replicated fraction:
 		Regions that have not replicated are measured once, and regions that have replicated are measured twice.
 		

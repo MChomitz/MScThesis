@@ -4,15 +4,16 @@
 Previous work on quantitative modelling of DNA replication has investigated the timing of origin initiation~\cite{ScottsPaper,deMouraModel1,StochasticTermination,Goldar2009,OriginTimingReview}.
 In 2010, Yang~\emph{et~al.} developed the ``Sigmoidal Model,'' which uses three parameters per origin (position, median firing time, and spread in firing time) to describe the replication program of budding yeast~\cite{ScottsPaper}.
 After fitting these parameters to microarray data, the authors observed a correlation between the median firing time and spread in firing time.
-This result (discussed in detail in Sec.~\ref{sec:SigmoidalModel}) was confirmed by Hawkins~\emph{et~al.} when they used a similar model to analyze sequencing data in 2013~\cite{StochasticTermination}.
+This result (discussed in detail in Sec.~\ref{sec:SigmoidalModel}) was confirmed by Hawkins~\emph{et~al.} who used a similar model to analyze sequencing data in 2013~\cite{StochasticTermination}.
 
 The work of Yang~\emph{et~al.} led to the development of a second analytical model, ``the Multiple Initiator Model'' (MIM)~\cite{ScottsPaper}, which we present in Sec.~\ref{sec:MIM}.
 The MIM proposes a biological hypothesis that explains the observed correlation between median firing time and spread in firing time.
 The benefit of the MIM over the Sigmoidal Model is that the MIM uses only two parameters per origin to define the replicated fraction, effectively removing one third of the parameters from the model.
 
-However, recent work performed in N. Rhind's lab~\cite{Rhind} has shown that one part of the scenario assumed in the MIM may not be biologically realistic (Sec.~\ref{sec:ExperimentsMIM}).
-The purpose of this thesis is to explore the impact of these new experimental data on the MIM and show that \textbf{conclusion}.
-
+However, recent work performed in N. Rhind's lab\footnote{
+Rhind's lab is at the University of Massachusetts Medical School in Worcester MA, USA}~\cite{Rhind}
+has shown that one part of the scenario assumed in the MIM may not be biologically realistic (Sec.~\ref{sec:ExperimentsMIM}).
+The purpose of this thesis is to explore the impact of these new experimental data on the MIM.
 This chapter will expand on the above story.
 
 
@@ -33,7 +34,7 @@ This chapter will expand on the above story.
 		
 		Before we describe in detail the KJMA-like model of DNA replication, we will build some valuable intuition.
 		In DNA sequencing experiments, the replicated fraction is measured spatially in windows about 1 kb wide and temporally in steps of 5 minutes~\cite{StochasticTermination}.
-		Since the budding yeast genome has about 800 origins of replication, and is about $12\time10^3$ kb long, origins are, on average, spaced every 15 kb~\cite{OriDB,BuddingYeastSequence}.
+		Since the budding yeast genome has about 800 origins of replication, and is about 12 Mb long, origins are, on average, spaced every 15 kb~\cite{OriDB,BuddingYeastSequence}.
 		Thus, a spatial resolution of 1kb is narrow enough to uniquely identify and observe many origins individually. 
 		However, there are generally no more than ten time points measured experimentally~\cite{StochasticTermination,DeepSeq,McCuneMicroArray}.
 		(Indeed, the data analyzed in Sec.~\ref{subsec:SequencingNoise} has only six.)
@@ -60,13 +61,13 @@ This chapter will expand on the above story.
 		
 		The gaps in Fig.~\ref{fig:ReplicatedFractionExample} exist because of a limitation of the sequencing experiment used to gather this data.
 		Sequencing experiments match short sequences of DNA to the fully mapped genome (Sec.~\ref{subsec:Sequencing}).
-		The budding yeast genome contains repeated patterns: sequences longer than 50 bp that appear more than once~[\textbf{FIND SOURCE}].
+		The budding yeast genome contains repeated patterns, defined here as sequences longer than 50 bp that appear more than once~[\textbf{FIND SOURCE}].
 		When a sequence of DNA extracted from one of these patterns is measured, it is not counted because it cannot be uniquely located.
 		
 		The replicated fraction in Fig.~\ref{fig:ReplicatedFractionExample} has a range that goes below zero and above one.
 		This surprising feature results from two assumptions: first, that the measured sequences were evenly distributed spatially; and, second, that all cells have the same average replicated fraction at the time measured, $f(t=t_i)$.
 		In~\cite{StochasticTermination}, Hawkins~\emph{et~al.} extracted and measured about $10^7$ sequences.
-		However, there is no guarantee that these sequences are evenly distributed, therefore there will be regions of the genome that are sequenced more and regions that are sequenced less.
+		However, there is no guarantee that these sequences are evenly distributed; therefore, there will be regions of the genome that are sequenced more and regions that are sequenced less.
 		Additionally, Hawkins~\emph{et~al.} normalized the measured replicated fraction by setting the average replicated fraction, $f(t=t_i)$, equal to the replicated fraction measured using FACS on the bulk sample.
 		This normalization assumes that the measured cells have the same average replicated fraction as the population measured with FACS.
 		The error in regions that have been over-extracted or under-extracted can be exaggerated by normalizing incorrectly, leading to values of $f$ greater than one or less than zero.
@@ -180,15 +181,17 @@ This chapter will expand on the above story.
 	The model calculates $f(x,t)$ from a set of origins defined by three parameters ($x_i$, $t_i^{(1/2)}$, and $t^{(\text{w})}_i$), where $t_{1/2}$ and $t_\text{w}$ are defined by Eqs.~\ref{eq:SigmoidalModel} and~\ref{eq:SigmoidalModel2}~\cite{ScottsThesis}.
 	With this, the entire set of experimental data was used to characterize every origin simultaneously (not illustrated).
 	
-	\begin{SCfigure}[1][tbh]
-		\includegraphics[width=.47\textwidth]{Images/ScottTFig3-4.pdf}
-		\caption[Sigmoidal model]{\label{fig:SigmoidalModel2} Scatter plot of origin parameters from fitting the replicated fraction of the entire genome with the Sigmoidal Model reveals a correlation.
-			Solid points are specific origins identified for discussion in Yang's thesis.
-			Figure reproduced with permission from S.~Yang~\cite{ScottsThesis}}
-	\end{SCfigure}
+	\begin{figure}[tbh]
+		\begin{center}
+			\includegraphics[width=.47\textwidth]{Images/ScottTFig3-4.pdf}
+		\end{center}
+			\caption[Sigmoidal model]{\label{fig:SigmoidalModel2} Scatter plot of origin parameters from fitting the replicated fraction of the entire genome with the Sigmoidal Model reveals a correlation.
+				Solid points are specific origins identified for discussion in Yang's thesis.
+				Figure reproduced with permission from S.~Yang~\cite{ScottsThesis}}
+	\end{figure}
 	
 	Figure~\ref{fig:SigmoidalModel2} graphs the intrinsic $t_{1/2}$ vs $t_{\text{w}}$ calculated from fitting the Sigmoidal Model to microarray data.
-	Notice the strong correlation between timing width and median observed in the crude analysis of Fig.~\ref{fig:SigmoidalModel}C is present in the intrinsic parameters as well.
+	Notice that the strong correlation between timing width and median observed in the crude analysis of Fig.~\ref{fig:SigmoidalModel}C is present in the intrinsic parameters as well.
 	This correlation means that early origins have narrowly defined firing times, while late origins have loosely defined firing times.
 	An implication is that there is a mechanism that controls origin firing time that is strong at the start of S phase but weakens as S phase progresses~\cite{ScottsThesis}.
 	This observation suggested the Multiple Initiator Model (MIM).
@@ -290,7 +293,7 @@ This chapter will expand on the above story.
 					These labels refer to other parts of the data presented by Das~\emph{et al.}, but not presented here.
 					ARS1 origin is labeled with text.
 					Line represents the best linear fit to green dots ($r=0.56$).
-					Figure reproduced with permission from N.~Rhind~\cite{Rhind}}
+					Figure reproduced with permission from N.~Rhind~\cite{Rhind}}.
 		\end{figure}
 	
 		\subsection{Relative Number of Initiators}
@@ -315,7 +318,7 @@ This chapter will expand on the above story.
 					ARS1 and ARS1$\Delta$B2 are shown as the thick black and thick grey curves respectively.
 					The removal of the B2 element of ARS1 causes that origin to fire, on average, 13 minutes later in S phase.
 					Note that, on the y-axis, $f = [\text{Relative copy number}] - 1$.
-					Figure reproduced with permission from N.~Rhind~\cite{Rhind}}
+					Figure reproduced with permission from N.~Rhind~\cite{Rhind}}.
 		\end{figure}
 		
 		
@@ -328,12 +331,14 @@ This chapter will expand on the above story.
 		The expectation, based on the MIM, is that the mutant ARS1-$\Delta$B2 will have a later mean firing time because of the reduced number of initiators loaded.
 		By measuring the replicated fraction of cells with both wild-type and mutant ARS1 origins independently, Das~\emph{et~al.} saw a marked (13 minute) delay in the average replication timing of ARS1 caused by the $\Delta$B2 mutation (Fig.~\ref{fig:Das2}).
 		
-		\begin{SCfigure}[1][tbh]
-			\includegraphics[width=.47\textwidth]{Images/DasFig3.png}
-			\caption[Absolute number of loaded MCMs at ARS1]{\label{fig:Das3} Quantization of data from a western blot experiment that measured the amounts of MCM, ORC and Zif268 present in populations of G1 arrested plasmids and G2 arrested plasmids.
-				The left-most column shows that, on average, there are about 3 initiators loaded at ARS1 during the G1 phase.
-				Figure reproduced with permission from N.~Rhind~\cite{Rhind}}
-		\end{SCfigure}
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=.47\textwidth]{Images/DasFig3.png}
+			\end{center}
+				\caption[Absolute number of loaded MCMs at ARS1]{\label{fig:Das3} Quantization of data from a western blot experiment that measured the amounts of MCM, ORC and Zif268 present in populations of G1 arrested plasmids and G2 arrested plasmids.
+					The left-most column shows that, on average, there are about 3 initiators loaded at ARS1 during the G1 phase.
+					Figure reproduced with permission from N.~Rhind~\cite{Rhind}}.
+		\end{figure}
 		
 		
 		\subsection{Number of Initiators Loaded}

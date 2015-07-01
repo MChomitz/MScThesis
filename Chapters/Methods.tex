@@ -29,21 +29,17 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 	Note that while the preparation and the phantom-nuclei modules both simulate only a single cell at a time, the housekeeping module loops over many cells to find the average behaviour of a population.
 	These three modules will be discussed in more detail below.
 		
-	\begin{figure}[1][tbh]
+	\begin{figure}[tbh!]
 		\begin{center}
 			\includegraphics[width=.8\textwidth]{Images/ProgramStructure.pdf}
 		\end{center}
-% EDIT THIS
 			\caption[MIM Simulator Program Structure]{\label{fig:ProgramStructure} 
 				Flow chart illustrating the MIM simulator structure.
-				The user inputs the parameters to be simulated.
-				The housekeeping module loops over the population of cells to be simulated.
-				The preparation module randomly generates numbers of initiators and firing times.
-				The phantom-nuclei module pre-processes the origin data.
-				Looping over every time step, the phantom-nuclei module calculates the replicated fraction in a 3 step process.
-				Finally, the housekeeping module adds artificial noise to the replicated fraction, performs any additional required analysis, and outputs the results.
+				The program contains three modules: 
+				The housekeeping module loops over every cell in the population being simulated, calls the preparation and phantom nuclei modules, adds noise to the results and performs analysis.
+				The preparation module generates two sets of random data, the number of initiators at each origin and the firing times of each initiator.
+				The phantom-nuclei module pre-processes the data passed to it, and calculates the replicated fraction for each time step using the phantom nuclei algorithm, which is broken into three steps.
 			}
-%
 	\end{figure}
 	
 	
@@ -65,20 +61,16 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		We are unaware of any experiments that have measured the distribution in the number of initiators between cell cycles.
 		
 		In discussion with collaborators, another hypothetical distribution was considered.
-		Vogelauer~\emph{et~al.} showed in 2002 that an origin's firing time can be determined by the histone acetylation status in its vicinity~\cite{Histone}.
-		In other words, early firing origins tend to be placed near acetylated histones.
-		Histones, large, octameric proteins that make up part of the system that organizes DNA into its three-dimensional shape can exist in two states: acetylated and deacetylated~\ref{MolecularCellBiology}.
-		When deacetylated, the histones are positively charged and attract the negatively charged DNA into a crowded configuration.
-		In simpler terms, regions with high concentrations of deacetylated histones will be tightly bound and difficult for the MCM protiens to access, which highly acetylated regions will be open and easily accessible.
-		In contrast, when acetylated, the histones are not charged and do not exert a strong force on the DNA.
-		Chiani~\emph{et~al.} suggested in their 2006 paper that histone acetylation in budding yeast is a signal for the recruitment of additional factors, such as the MCM2-7 hexamer~\cite{histone2}.
-		Our hypothesis states that there are regions of various length in the genome that are highly acetylated. These regions are large enough to house some number of initiators.
-		After an initiator is loaded, it move away from the ORC so there is room to recruit more initiators; however, it's mobility will be limited by the openness of the surrounding genome.
-		In a region that is bound, acetylation must take place before the initiator can move away from the ORC.
-		In our hypothesis, the acetylation of histones near an origin doesn't act as a signal for the recruitment of initiators, but is instead a step in the process of making room for more initiators.
-		Thus, the rate at which initiators are loaded may depend on both the concentration of acetylated histones, and the rate of acetylation in the region of the origin.
-		A more accurate model for initiator loading then may be described by each origin having some base number of easy-to-load initiators, with the number of additional initiators Poisson (or otherwise) distributed.
-		However, without any experimental evidence to motivate the selection of a complex model, the simple Poisson model was used.
+		Several studies have shown that Histon activity\footnote{
+		Histones are large, octameric protiens that are used in organizing DNA into its three-dimensional structure in the cell.}
+		is correlated with origin locations~\cite{Histone,Histone2,Histone3}; origins tend to be in open-easily accessible regions of the DNA
+		We hypothesis that the accessibility also affects the rate of initiator loading, and that the first initiator at an origin may load much faster than additional initiators.
+		Thus, a distribution closer to the biological truth may not include the case with zero initiators loaded at an origin.
+		
+		We chose to use the Poisson distribution for setting the number of initiators at an origin for two reasons:
+		First, without any experimental evidence to motivate the selection of a complex model, the simple model is preferred.
+		Second, since we are testing the efficacy of the MIM, which assumes constant $n$, the Poisson distribution represents a worst-case scenario, since it includes the possibility of loading zero initiators.
+		Zero initiators is a large perturbation from the assumption made in the MIM.
 		Therefore, the preparation module selects the number of initiators at origin $i$ from a Poisson distribution defined by the average $n_i$.
 		The preparation module makes this selection using a built-in IGOR function that outputs Poisson-distributed random numbers given a desired average.
 		
@@ -275,16 +267,18 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		We assume that the two measurements are equally noisy, which implies that the standard deviations of the differences are $\sqrt{2}$ times larger than the standard deviation of a single measurement.
 		Our estimation of the noise is shown in Fig.~\ref{fig:Noise}.
 		
-		\begin{SCfigure}[1][tbh]
-			\includegraphics[width=.47\textwidth]{Images/SigmaEstimate.pdf}
-			\caption[Estimated Simulation and Experimental Noise]{\label{fig:Noise} 
-				Scatter plot of estimated $\sigma$ vs time since the start of S phase for experimental data and simulation data.
-				Open circles show experimental estimates.
-				Black circles show simulation estimates.
-				Crosses show calculated values for $\sigma_\text{add}$ (Eq.~\ref{eq:AddingNoise})
-				dots show estimates from simulations with added Gaussian noise.
-			}
-		\end{SCfigure}
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=.8\textwidth]{Images/SigmaEstimate.pdf}
+			\end{center}
+				\caption[Estimated Simulation and Experimental Noise]{\label{fig:Noise} 
+					Scatter plot of estimated $\sigma$ vs time since the start of S phase for experimental data and simulation data.
+					Open circles show experimental estimates.
+					Black circles show simulation estimates.
+					Crosses show calculated values for $\sigma_\text{add}$ (Eq.~\ref{eq:AddingNoise})
+					dots show estimates from simulations with added Gaussian noise.
+				}
+		\end{figure}
 		
 		There are three features of the histograms in Fig.~\ref{fig:HistDifference} that should be discussed.
 		First, unlike the microarray data that Yang~\emph{et al.} analyzed, the histograms extracted from sequencing data are Gaussian distributed.
@@ -338,13 +332,15 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		This time coincides with the time at which the distribution of the simulated noise is most Gaussian (Fig.~\ref{fig:SimNoise}).
 		Thus, we believe that the noise in simulation is Laplace distributed when the number of forks is small, but the addition of more forks causes an evolution of the distribution toward Gaussian.
 		
-		\begin{SCfigure}[1][tbh]
-			\includegraphics[width=.47\textwidth]{Images/NumIslands.pdf}
+		\begin{figure}[tbh]
+			\begin{center}
+				\includegraphics[width=.8\textwidth]{Images/NumIslands.pdf}
+			\end{center}
 			\caption[Number of Replicated Regions in Simulation]{\label{fig:NumberIslands}
 				Histogram of the number of replicated region in the simulation, normalized to a single cell.
 				x-axis shows $t_\text{sim}$ in minutes.
 			}
-		\end{SCfigure}
+		\end{figure}
 		
 		
 		\subsection{Adding Gaussian Noise to the MIM Simulator}
