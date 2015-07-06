@@ -51,7 +51,7 @@ This chapter will expand on the above story.
 			\begin{center}
 				\includegraphics[width=\textwidth]{Images/CHR4Exp.png}
 			\end{center}
-				\caption[Budding yeast Chromosome IV replicated fraction]{\label{fig:ReplicatedFractionExample} Example graph of replicated fraction.
+				\caption[Replicated Fraction of Chromosome IV of Budding Yeast]{\label{fig:ReplicatedFractionExample} Example graph of replicated fraction.
 					Data from chromosome IV of budding yeast as measured by Hawkins~\emph{et~al.} (\cite{StochasticTermination} supplementary data).
 					x-axis represents the spatial organization of the genome as if it had been stretched out straight.
 					y-axis is the replicated fraction.
@@ -95,7 +95,7 @@ This chapter will expand on the above story.
 			\begin{center}
 				\includegraphics[width=\textwidth]{Images/KJMA.png}
 			\end{center}
-				\caption[Replicated fraction from KJMA]{\label{fig:KJMA} KJMA approach to calculating $f(x,t)$.
+				\caption[Illustration of Inferring the Replicated Fraction With KJMA]{\label{fig:KJMA} KJMA approach to calculating $f(x,t)$.
 					In order for the point at $(x,t)$ to not have been replicated, there cannot be any initiation events within the shaded triangle.
 				}
 		\end{figure}
@@ -158,17 +158,17 @@ This chapter will expand on the above story.
 		t_{\text{width}} = \left(3^{1/r}-3^{-1/r}\right)t_{\text{rep}}\text{ .}
 	\end{equation}
 	
-	\begin{figure}[tbh]
+	\begin{figure}[tbh!]
 		\begin{center}
-			\includegraphics[width=.82\textwidth]{Images/ScottFig3-1.pdf}
+			\includegraphics[width=.8\textwidth]{Images/ScottFig3-1.pdf}
 		\end{center}
-			\caption[Early analysis of budding yeast]{\label{fig:SigmoidalModel} Schematic of the initial analysis of budding yeast data that led to the creation of the Sigmoidal Model.
-				\textbf{A} Sample replicated fraction: smoothed data from microarray measurements of Chromosome I (solid lines)~\cite{McCuneMicroArray}.
+			\caption[Schematic of Pre-Sigmoidal Model Analysis of Budding Yeast]{\label{fig:SigmoidalModel} Schematic of the initial analysis of budding yeast data that led to the creation of the Sigmoidal Model.\\
+				\textbf{A.} Sample replicated fraction: smoothed data from microarray measurements of Chromosome I (solid lines)~\cite{McCuneMicroArray}.
 				The black triangles indicate the locations of previously identified origins~\cite{OriginLocations}.
-				Data from the replicated fraction at a single origin (grey region) at a time were analyzed.
-				\textbf{B} Equation~\ref{eq:SigmoidalModel} fitted to the extracted replicated fraction at an origin.
-				The fit function has parameters, $t_{\text{rep}}$ and $t_{\text{width}}$, which are shown.
-				\textbf{C} Scatter plot of origin parameters from fitting the replicated fraction at every origin reveals a correlation.
+				Data from the replicated fraction at a single origin (grey region) at a time were analyzed.\\
+				\textbf{B.} Equation~\ref{eq:SigmoidalModel} fitted to the extracted replicated fraction at an origin.
+				The fit function has parameters, $t_{\text{rep}}$ and $t_{\text{width}}$, which are shown.\\
+				\textbf{C.} Scatter plot of origin parameters from fitting the replicated fraction at every origin reveals a correlation.
 				The dashed line shows $t_{\text{width}}=t_{\text{rep}}$.
 				Figure reproduced with permission from S.~Yang~\cite{ScottsThesis}}
 	\end{figure}
@@ -185,7 +185,7 @@ This chapter will expand on the above story.
 		\begin{center}
 			\includegraphics[width=.47\textwidth]{Images/ScottTFig3-4.pdf}
 		\end{center}
-			\caption[Sigmoidal model]{\label{fig:SigmoidalModel2} Scatter plot of origin parameters from fitting the replicated fraction of the entire genome with the Sigmoidal Model reveals a correlation.
+			\caption[Scatter Plot of median-vs.-width Firing Times]{\label{fig:SigmoidalModel2} Scatter plot of origin parameters from fitting the replicated fraction of the entire genome with the Sigmoidal Model reveals a correlation.
 				Solid points are specific origins identified for discussion in Yang's thesis.
 				Figure reproduced with permission from S.~Yang~\cite{ScottsThesis}}
 	\end{figure}
@@ -281,13 +281,13 @@ This chapter will expand on the above story.
 		
 		\begin{figure}[tbh!]
 			\begin{center}
-				\includegraphics[width=.8\textwidth]{Images/DasFig1.png}
+				\includegraphics[width=.75\textwidth]{Images/DasFig1.png}
 			\end{center}
-				\caption[Relative amounts of loaded MCM]{\label{fig:Das1} Results from ChIP-seq experiments measuring the relative number of loaded MCMs throughout the budding yeast genome.
-					\textbf{A} ChIP-seq measurements for Chromosome X from G1 arrested wild-type cells.
+				\caption[CHiP-seq Measurements of MCM on Chromosome X]{\label{fig:Das1} Results from ChIP-seq experiments measuring the relative number of loaded MCMs throughout the budding yeast genome.\\
+					\textbf{A.} ChIP-seq measurements for Chromosome X from G1 arrested wild-type cells.
 					Red histogram shows uniquely located reads, grey is multiply-located reads.
-					Circles along x-axis show the locations of identified origins.
-					\textbf{B} Scatter plot of ChIP-seq data at origins vs their $n$ values calculated from the MIM.
+					Circles along x-axis show the locations of identified origins.\\
+					\textbf{B.} Scatter plot of ChIP-seq data at origins vs their $n$ values calculated from the MIM.
 					Blue origins are believed to be affected by chromatin structure~\cite{Chromatin}; green are not.
 					Some origins are labeled with double circles.
 					These labels refer to other parts of the data presented by Das~\emph{et al.}, but not presented here.
@@ -313,7 +313,7 @@ This chapter will expand on the above story.
 			\begin{center}
 				\includegraphics[width=.8\textwidth]{Images/DasFig2.png}
 			\end{center}
-				\caption[Replication profile of various origins]{\label{fig:Das2} Replication profiles of various origins.
+				\caption[Replication Profiles of a Selection of Origins]{\label{fig:Das2} Replication profiles of various origins.
 					Many of the origins are outside the scope of this discussion.
 					ARS1 and ARS1$\Delta$B2 are shown as the thick black and thick grey curves respectively.
 					The removal of the B2 element of ARS1 causes that origin to fire, on average, 13 minutes later in S phase.
@@ -335,7 +335,7 @@ This chapter will expand on the above story.
 			\begin{center}
 				\includegraphics[width=.47\textwidth]{Images/DasFig3.png}
 			\end{center}
-				\caption[Absolute number of loaded MCMs at ARS1]{\label{fig:Das3} Quantization of data from a western blot experiment that measured the amounts of MCM, ORC and Zif268 present in populations of G1 arrested plasmids and G2 arrested plasmids.
+				\caption[Absolute Number of Loaded MCMs at ARS1]{\label{fig:Das3} Quantization of data from a western blot experiment that measured the amounts of MCM, ORC and Zif268 present in populations of G1 arrested plasmids and G2 arrested plasmids.
 					The left-most column shows that, on average, there are about 3 initiators loaded at ARS1 during the G1 phase.
 					Figure reproduced with permission from N.~Rhind~\cite{Rhind}}.
 		\end{figure}
