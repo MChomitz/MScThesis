@@ -33,7 +33,7 @@ This chapter will expand on the above story.
 		\label{subsec:QualitiesReplicatedFraction}
 		
 		Before we describe in detail the KJMA-like model of DNA replication, we will build some valuable intuition.
-		In DNA sequencing experiments, the replicated fraction is measured spatially in windows about 1 kb wide and temporally in steps of 5 minutes~\cite{StochasticTermination}.
+		In DNA sequencing experiments the replicated fraction is measured spatially in windows about 1 kb wide and temporally in steps of 5 minutes~\cite{StochasticTermination}.
 		Since the budding yeast genome has about 800 origins of replication, and is about 12 Mb long, origins are, on average, spaced every 15 kb~\cite{OriDB,BuddingYeastSequence}.
 		Thus, a spatial resolution of 1kb is narrow enough to uniquely identify and observe many origins individually. 
 		However, there are generally no more than ten time points measured experimentally~\cite{StochasticTermination,DeepSeq,McCuneMicroArray}.
@@ -62,7 +62,7 @@ This chapter will expand on the above story.
 		The gaps in Fig.~\ref{fig:ReplicatedFractionExample} exist because of a limitation of the sequencing experiment used to gather this data.
 		Sequencing experiments match short sequences of DNA to the fully mapped genome (Sec.~\ref{subsec:Sequencing}).
 		The budding yeast genome contains repeated patterns, defined here as sequences longer than 50 bp that appear more than once~[\textbf{FIND SOURCE}].
-		When a sequence of DNA extracted from one of these patterns is measured, it is not counted because it cannot be uniquely located.
+		When a sequence of DNA extracted from one of these patterns is measured it is not counted because it cannot be uniquely located.
 		
 		The replicated fraction in Fig.~\ref{fig:ReplicatedFractionExample} has a range that goes below zero and above one.
 		This surprising feature results from two assumptions: first, that the measured sequences were evenly distributed spatially; and, second, that all cells have the same average replicated fraction at the time measured, $f(t=t_i)$.
@@ -73,7 +73,7 @@ This chapter will expand on the above story.
 		The error in regions that have been over-extracted or under-extracted can be exaggerated by normalizing incorrectly, leading to values of $f$ greater than one or less than zero.
 		
 		The most important observation is that some regions of the genome start replicating much earlier than others.
-		This can be seen in the peaks in Fig.~\ref{fig:ReplicatedFractionExample}, for example at $x \approx 910$.
+		This can be seen in the peaks in Fig.~\ref{fig:ReplicatedFractionExample}; for example, at $x \approx 910$.
 		Because replication starts at an origin and propagates outward, peaks in the replicated fraction imply early replication and, hence, the presence of origins.
 		Additionally, early origins should create stronger peaks, and late origins should create weaker peaks.
 		
@@ -146,7 +146,9 @@ This chapter will expand on the above story.
 	Developed by S. Yang as part of his PhD thesis, this model assumes that the functional form of $I_i(t)$ is a sigmoidal function that has a range from zero to one and that is defined by three parameters for each origin, $i$, on the genome~\cite{ScottsPaper,ScottsThesis}.
 	
 	Figure~\ref{fig:SigmoidalModel} shows the preliminary observations that motivated the sigmoidal model.
-	First, the replicated fractin at an origin, $f(x=x_i,t)$, was extracted from experimental data of the entire genome, $f(x,t)$ (Fig.~\ref{fig:SigmoidalModel}A).
+	First, the replicated fraction\footnote{
+	Yang used the term ``replication fraction'' in his thesis.}
+	 at an origin, $f(x=x_i,t)$, was extracted from experimental data of the entire genome, $f(x,t)$ (Fig.~\ref{fig:SigmoidalModel}A).
 	The figure shows the analysis of microarray data~\cite{McCuneMicroArray}.
 	Second, a sigmoidal curve was fit to $f(x=x_i,t)$ (Fig.~\ref{fig:SigmoidalModel}B).
 	This sigmoidal curve is parameterized by the median replication time, $t_{\text{rep}}$, and by the spread of replication times, $t_{\text{width}}$:
@@ -202,7 +204,7 @@ This chapter will expand on the above story.
 	\label{sec:MIM}
 	
 	The MIM, in its simplest form, assumes that each origin has a given number of potential initiators that may be initiated during S phase~\cite{ScottsThesis}.
-	If each of these potential initiators have equally opportunity to fire, then origins with large numbers of initiators should tend to fire earlier than origins with few initiators.
+	If each of these potential initiators has equally opportunity to fire, then origins with large numbers of initiators should tend to fire earlier than origins with few initiators.
 	Effectively, origins with more initiators loaded will tend to fire earlier in S phase than origins with fewer pairs.
 	However, it is important to note that other factors, such as chromatin structure (the three-dimensional organization of the genome), can affect the relative firing times of origins~\cite{Chromatin}.
 	
@@ -264,7 +266,7 @@ This chapter will expand on the above story.
 		This means in a large population of cells, if a particular origin has a mean number of initiators, $n$, the standard deviation of $N$ will be $\sqrt{n}$~\cite{cowan}.
 		Therefore, as $n$ grows, the relative fluctuations within the population shrinks as $n^{-1/2}$.
 		Thus, for large-enough $n$, we can neglect fluctuations in $n$ and Eq.~\ref{eq:CPDEffectiveN} becomes accurate.
-		However, recent experimental evidence suggests that typically, $n$ ranges between one and five, which is not large.
+		However, recent experimental evidence suggests that, typically, $n$ ranges between one and five, which is not as large as the MIM assumes.
 		
 	\section{Experimental Measurement of the Number of Initiators}
 	\label{sec:ExperimentsMIM}
@@ -275,7 +277,7 @@ This chapter will expand on the above story.
 	
 	Das~\emph{et~al.} made several measurements to test the strength of the MIM.
 	First, they measured the relative number of initiators loaded at each origin; according to the MIM, origins that fire earlier should have more initiators than those that fire later.
-	The relative number of initiators indicates which origins have more initiators, but cannot measure exactly how many initiators there are (i.e. it can say that origin $a$ has twice as many initiators as origin $b$ but cannot differentiate between $n_a=2$, $n_b=1$ and $n_a=200$, $n_b=100$).
+	The relative number of initiators indicates which origins have more initiators, but cannot measure exactly how many initiators there are (i.e., it can say that origin $a$ has twice as many initiators as origin $b$ but cannot differentiate between $n_a=2$, $n_b=1$ and $n_a=200$, $n_b=100$).
 	Second, Das~\emph{et~al.} measured the effect of reducing the number of initiators at an origin; according to the MIM, reducing the number of loaded initiators should delay the mean firing time of that origin.
 	Third, they measured the average absolute number of initiators loaded on a particular early origin; according to the MIM, an early-firing origin should have many initiators loaded, on average.
 		

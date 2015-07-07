@@ -3,7 +3,7 @@
 %% Fill in below, the values here are fine for a physics masters (just put the name of the thesis and your name and update the date and previous degrees info).
 
 %% No quotes in the title, do NOT end it with a period
-\title{How Variance in Initiation Factors Affects the Replication Profile of Budding Yeast DNA}
+\title{Variance in Initiation Factors Does Not Strongly Affect the Replication Profile of Budding Yeast DNA}
 \thesistype{Thesis}
 \author{Mike Chomitz}
 \previousdegrees{%
@@ -14,7 +14,7 @@
 \faculty{Faculty of Science}
 \copyrightyear{2015}
 \semester{Fall 2015}
-\date{UPDATE THIS}
+\date{August 19, 2015}
 
 %% Choose words or phrases that will help people locate your thesis via search tools (library catalogues, Google, etc.)
 %% Keywords appear under the abstract and must be entered into the Thesis Registration System.
@@ -25,7 +25,7 @@
 	\chair{Dr.\ Some Body}{POSITION IN DEPARTMENT}
 	\member{Dr.\ John Bechhoefer}{Senior Supervisor\\Professor}
 	\member{Dr.\ Malcolm Kennet}{Supervisor\\Associate Professor}
-	\member{Dr.\ Some One}{Internal Examiner\\POSITION IN DEPARTMENT}
+	\member{Dr.\ Eldon Emberly}{Internal Examiner\\Associate Professor}
 %% add or remove \members as need
 }
 
@@ -74,28 +74,19 @@
 
 \begin{abstract}
 	DNA replication starts at many sites (origins) throughout eukaryotic DNA.
-	To fully understand the replication program in these higher organisms, one needs to have a strong understanding of the behaviour of these origins.
-	In \emph{Saccharomyces cerevisiae} (budding yeast), the spatial organization of the origins is well understood: they are confined to specific sites on the genome called autonomously replicating regions.
-	However, when analyzed temporally, the origins in budding yeast are not as rigidly defined.
-	The origins are generally categorized as early-firing and late-firing, but the mean fire times of origins exist on a spectrum.
-	Past analysis of the budding yeast replication program motivated the creation of the Multiple Initiator Model (MIM).
+	To fully understand the replication program in higher organisms, one needs to understand the behaviour of these origins.
+	In \emph{Saccharomyces cerevisiae} (budding yeast), the spatial organization of the origins is simple: The origins are confined to known specific sites on the genome.
+	The temporal behaviour of origins in budding yeast is more complex: They fire stochastically with a broad distribution of firing times.
 	
-	The MIM is a powerful analytic model that can predict the replicated fraction of a genome given a set of parameters describing the genome.
-	Based on an observed correlation between the mean firing time ($t_{1/2}$) and the spread in firing times $(t_\text{width}$) for each origin, the MIM is based on a simple biological hypothesis:
-	These parameters are defined for each origin by the number of initiators loaded at that origin ($n$).
-	The MIM makes a simplifying assumption that the number of initiators is, on average, large; therefore the size of fluctuations between cells will be small.
-	However, recent experimental observations contradict this assumption.
-
-	In three main investigations, we measure the effect of small $n$ on the efficacy of the MIM.
-	For these investigations we developed the MIM simulator, a modular program that simulates the replication process in an input genome.
-	Our first, preliminary measurements show that for a single origin there is a strong negative change in the accuracy of the MIM as $n$ decreases, which has a growth proportional to $n^{-1}$.
-	However, in this naive investigation we use a metric that does not scale to more than on origin.
-	Therefore, our second investigation also measured a single origin, with an updated metric for defining the error in the MIM.
-	With the updated metric, we again show that for a single origin the MIM does not perform as well for small $n$ as it does for large $n$.
-	For our third investigation, we expand the genome from one origin to many to represent Chromosome I of budding yeast.
-	We generate two sets of parameters by fitting the MIM to experimental sequencing data, constrained to produce high $n$ and low $n$ results.
-	We showed with our simulations of Chromosome I that, unlike the single-origin case, the MIM is equally effective for high and low $n$.
-	We then investigate the MIM fit to simulations of small sub-sequences of Chromosome I and show that origins in close proximity cooperate to mitigate the effects of small $n$ on the MIM. 
+	Several key proteins take part in the DNA replication process.
+	The MCM2-7 hexamer in particular forms a helicase that unwinds DNA locally, allowing access for other proteins to replicate the separated DNA.
+	Past analysis of the budding yeast replication program suggested the Multiple Initiator Model (MIM), which hypothesizes that the number of these MCMs loaded at an origin predicts the firing time of that origin.
+	Part of the MIM formalism assumes that the number of loaded MCMs is large; in this case the relative fluctuations between cells will be small and are ignored.
+	However, a recent experiment measuring the number of loaded MCMs has revealed that the number is low, and thus, cell-to-cell fluctuations may be larger than expected.
+	The purpose of this thesis is to investigate the impact of large relative fluctuations in the number of MCMs on the MIM.
+	To measure this effect, we built the ``MIM simulator,'' a modular program that simulates the replication process.
+	Although a naive argument suggests that the MIM should fail when the number of MCMs is low, the impact of these fluctuations is mitigated by the contributions from neighbouring origins.
+	We conclude that inferences made with the MIM remain accurate in the case that the number of MCMs is lower than first assumed.
 \end{abstract}
 
 

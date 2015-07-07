@@ -11,19 +11,19 @@ The presence of this error and its large tail motivated further study into how s
 
 In our second investigation, our goal was to develop a new metric for measuring the error in the MIM at low $n$.
 The difference parameter does not scale to more than one origin.
-Section~\ref{subsec:BiasedFits} outlines the new method, which consists of simulating the replicated fraction for a single origin of fixed $n$, followed by using the MIM to find the value of $n$ that best fits the simulated data.
+Section~\ref{subsec:BiasedFits} outlines the new method which consists of simulating the replicated fraction for a single origin of fixed $n$, followed by using the MIM to find the value of $n$ that best fits the simulated data.
 The results of this investigation show that our first approach, while qualitatively in agreement, overestimates the difference between the MIM and the simulation.
 
 Third, we progressed to simulating and fitting the more complex Chromosome I.
 For this investigation, we started by fitting parameters with the MIM to data from DNA sequencing~\cite{StochasticTermination}.
-We fit two sets of parameters by fixing $t_{1/2}$ as high and low
+We fit two sets of parameters by fixing $t_{1/2}$ as high and low.
 In this way, we forced the MIM to produce small and high $n$ respectively.
 Using the parameters from the fits, we then simulated the replication of Chromosome I.
 By calculating the root-mean-squared difference between simulated data and experimental data we showed that the two simulations are effectively indistinguishable from each other.
-Further, analysis of the fit parameters shows that the small-$n$ values are proportional to the large-$n$ values.
+Additionally, analysis of the fit parameters shows that the small-$n$ values are proportional to the large-$n$ values.
 
 The surprising results from our third investigation motivated additional work that we use to explain why the MIM is inaccurate for a single origin but produces good chromosome-wide results.
-We expanded our single-origin analysis to a genome with two origins and more and show that multiple origins interact to reduce the inaccuracy in the MIM.
+We expanded our single-origin analysis to a genome with two origins and more and show that multiple origins interact to reduce the inaccuracy in inferences made by the MIM.
 
 	\section{Single-Origin Investigations}
 	\label{sec:SingleOrigin}
@@ -31,13 +31,13 @@ We expanded our single-origin analysis to a genome with two origins and more and
 	Our early work consisted of single-origin simulations intended to motivate further study.
 	In 2014, we received the results discussed in Sec.~\ref{sec:ExperimentsMIM} from N.~Rhind's lab~\cite{Rhind}.
 	As mentioned, these results called into question the assumption that $n$ is large enough to ignore variations in $N$.
-	Our first goal, therefore, was to discover whether or not simulations of small $n$ agreed with the MIM predictions for small $n$.
+	Therefore, our first goal was to discover whether or not simulations of small $n$ agreed with the MIM predictions for small $n$.
 	In this naive investigation, discussed further below, we developed the ``difference parameter,'' a metric to measure the difference between the simulated and predicted $f(x,t,n)$ of a single origin.
 	The investigation shows that the difference parameter decreases as $n^{-1}$ and motivated the deeper research presented in this thesis.
 	
 	The single-origin investigations that followed our preliminary work consisted of simulating $f(n)$ and fitting the MIM parameters to the result.
-	Thus our metric charged from the difference parameter to a comparison between the simulated $n_\text{sim}$ and the fitted $n_\text{fit}$.
-	With these investigations, we refined the simulation program to run more efficiently, and to create data similar to that measured in sequencing experiments.
+	Thus, our metric changed from the difference parameter to a comparison between the simulated $n_\text{sim}$ and the fitted $n_\text{fit}$.
+	With these investigations, we refined the simulation program to run more efficiently and to create data similar to that measured in sequencing experiments.
 	We show that our new metric reveals a qualitatively similar behaviour for the MIM; the difference between $n_\text{sim}$ and  $n_\text{fit}$ goes approximately as $n^{-1/2}$.
 	We attribute the change in the rate to the change in how the metric is defined.
 		
@@ -61,7 +61,7 @@ We expanded our single-origin analysis to a genome with two origins and more and
 		\label{subsec:earlywork}
 		
 		When starting this project, we performed a quick investigation into the difference between $f_\text{sim}(n)$ and $f_\text{MIM}(n)$ for a single origin.
-		To generate $f_\text{sim}(n)$, the MIM simulator calculated the average replicated fraction for about $10^6$ sequences, producing data with very little statistical error (in contrast to the noisy data shown in Sec~\ref{sec:Noise}.
+		To generate $f_\text{sim}(n)$, the MIM simulator calculated the average replicated fraction for about $10^6$ sequences, producing data with very little statistical error (in contrast to the noisy data shown in Sec~\ref{sec:Noise}).
 		The global parameters used for the simulation were set equal to those measured previously by fitting the MIM to microarray measurements of budding yeast~\cite{ScottsPaper}.
 		The difference parameter was then defined as
 		\begin{equation} \label{DifferenceParameter}
@@ -70,12 +70,14 @@ We expanded our single-origin analysis to a genome with two origins and more and
 		where $\Delta P(x)$ is the difference between $f_\text{sim}(n)$ and $f_\text{MIM}(n)$ (illustrated in Fig.~\ref{fig:DifferenceParameter}), and $P$ is the peak value of $f_\text{MIM}(n)$.
 		
 		Figure~\ref{fig:DifferenceParameter} shows the analysis process of the difference parameter for a single origin.
-		First, $f_\text{sim}(n)$ and $f_\text{MIM}(n)$ were calculated over several time steps and $n$ ranging from one to 128, example replicated fractions are shown in the insets of Fig.~\ref{fig:DifferenceParameter}.
+		First, $f_\text{sim}(n)$ and $f_\text{MIM}(n)$ were calculated over several time steps and $n$ ranging from 1 to 128.
+		Example replicated fractions are shown in the insets of Fig.~\ref{fig:DifferenceParameter}.
 		From these data, we calculated $DP(n,t)$, shown in the main graph of Fig.~\ref{fig:DifferenceParameter}.
 		Note the value for $DP$ ``saturates'' as $t$ increases, we call this value the ``saturated difference parameter.''
 		Figure~\ref{fig:SaturatedDifferenceParameter} shows\footnote{
 		The reader may notice a change in the $n$ values displayed in the graphics. Figure~\ref{fig:DifferenceParameter} the saturated difference parameter as a function of $n$ is illustrative and contains old data; accurate, but not useful.
-		After producing that graph we used a slightly different set of parameters in the simulation and changed the range of $n$ simulated when producing Fig.~\ref{fig:SaturatedDifferenceParameter}}.
+		After producing that graph we used a slightly different set of parameters in the simulation and changed the range of $n$ simulated when producing Fig.~\ref{fig:SaturatedDifferenceParameter}}
+		our measurements of the saturated difference parameter as a function of $n$.
 		This initial investigation showed the saturated difference parameter decreases as $n^{-1}$.
 		
 		\begin{figure}[tbh]
@@ -83,7 +85,7 @@ We expanded our single-origin analysis to a genome with two origins and more and
 				\includegraphics[width=0.8\textwidth]{Images/SaturatedDifferenceParameterGraph.pdf}
 			\end{center}
 				\caption[Saturated Difference Parameter vs. $n$]{\label{fig:SaturatedDifferenceParameter} Saturated difference parameter vs. $n$.
-				The large uncertainty in low $n$ arises because the time-steps not going far enough to accurately measure the saturated difference parameter.
+				The large uncertainty in low $n$ arises because the simulation time is too short to accurately measure the saturated difference parameter.
 				The line is proportional to $n^{-1}$ ($\text{[Saturated Difference Parameter]} \approx \frac{0.3}{n}$).
 				}
 		\end{figure}
@@ -99,7 +101,7 @@ We expanded our single-origin analysis to a genome with two origins and more and
 		The definition of the difference parameter does not scale to more than one origin.
 		The saturated difference parameter is only measurable when the theory curve has a peak value near one.
 		Additionally, the difference parameter is defined as a single value for the whole simulated genome; therefore, we cannot infer anything about more than one origin.
-		Thus, we developed a second investigation that measures how the parameters fitted with the MIM to a simulation of small $n$ may be biased.
+		Thus, we developed a second investigation that measures the bias in parameters inferred with the MIM from a simulation of small $n$.
 		
 		\begin{figure}[tbh]
 			\begin{center}
@@ -110,14 +112,14 @@ We expanded our single-origin analysis to a genome with two origins and more and
 			}
 		\end{figure}
 		
-		The process of this investigation was to calculate $f_\text{sim}(n)$ followed that by fitting the parameters of the MIM to the result.
+		The process of this investigation was to calculate $f_\text{sim}(n)$ followed by fitting the parameters of the MIM to the result.
 		Thus, we have two parameters: $n_\text{sim}$, the value for $n$ input to the simulation, and $n_\text{fit}$, the value for $n$ that results from the MIM fit.
-		Initially, we performed these measurements using simulations of large populations sets of sequences (about $10^6$ and more 100 kb sequences).
-		Figure~\ref{fig:LargePopPopulation} shows the preliminary results from our biased fit investigation on large-population simulations.
-		The graph is a scatter plot of $n_\text{sim}$ vs. $n_\text{MIM}$, the dashed line shows unity.
-		As we expected, the biased is relatively large for low $n_\text{sim}$, but decreases as $n_\text{sim}$ grows.
+		Initially, we performed these measurements using simulations of large populations of sequences (about $10^6$ and more 100 kb sequences).
+		Figure~\ref{fig:LargePopulation} shows the preliminary results from our biased fit investigation on large-population simulations.
+		The graph is a scatter plot of $n_\text{sim}$ vs. $n_\text{fit}$, the dashed line shows unity.
+		As we expected, the bias is relatively large for low $n_\text{sim}$, but decreases as $n_\text{sim}$ grows.
 		However, even using a C++ module to increase performance, these simulations were slow and were far more accurate than the current experimental standard (Sec.~\ref{sec:Noise}).
-		Therefore, we limited our simulations as described in the previous chapter; in this way we simulated data comparable to those generated experimentally.
+		Therefore, we limited our simulations as described in the previous chapter; in this way, we simulated data comparable to those generated experimentally.
 		
 		\begin{figure}[tbh]
 			\begin{center}
@@ -137,7 +139,7 @@ We expanded our single-origin analysis to a genome with two origins and more and
 		Figure~\ref{fig:NoisyBias} is a scatter plot of $n_{sim}$ vs. the resulting $n_\text{fit}$.
 		In this case, because of the increased noise in the simulated data, we performed this procedure fifty times per $n_\text{sim}$ value (red dots).
 		The blue circles show the mean for each value of $n_\text{sim}$.
-		Here, again, we see that the bias is largest for small $n_\text{sim}$, and decreases $n_\text{sim}$ grows.
+		Here, we see that the bias is largest for small $n_\text{sim}$, and decreases as $n_\text{sim}$ grows, in agreement with our earlier investigation.
 		In the inset to Fig.~\ref{fig:NoisyBias} we show the percent difference given by $[n_\text{sim} - n_\text{fit}]/n_\text{sim}$.
 		The dashed line shows $0.315/\sqrt{n_\text{sim}}$, but that trend is presented only for comparison with the difference parameter; there is either no simple fit or we are underestimating the error.
 		
@@ -185,8 +187,8 @@ We expanded our single-origin analysis to a genome with two origins and more and
 	\end{figure} 
 
 	The origin parameters were set by fitting the MIM to the replicated fraction for wild-type budding yeast reported by Hawkins~\emph{et al.}~\cite{StochasticTermination}.
-	To test the effect of small $n$, the fitted parameter $t_{1/2}$ was fixed at a high value (90 minutes) to produce high values for $n$, and, at a low value (40 minutes) to produce low values for $n$.
-	To be sure that any effects we observed were due only to the fitted values of $n$, the origin positions were fitted once, then held constant for the second fit.
+	To test the effect of small $n$, the fitted parameter $t_{1/2}$ was fixed at a high value (90 minutes) to produce high values for $n$ and at a low value (40 minutes) to produce low values for $n$.
+	To be sure that any effects we observed were due only to the fitted values of $n$, the origin positions were fitted once then held constant for the second fit.
 	The resulting values for $n$ at each origin can be seen in Tab.~\ref{tab:LargeAndSmallN}.
 		
 	\begin{figure}[tbh]
@@ -217,7 +219,7 @@ We expanded our single-origin analysis to a genome with two origins and more and
 	
 	We simulated the two sets of parameters that resulted from the high-$n$ and low-$n$ fits.
 	The resulting replicated fractions are shown in Fig.~\ref{fig:ThisFigure}.
-	To quantitatively measure the quality of the two fits, we calculated the root mean squared difference $\Delta f_\text{rms}$ between each replicated fraction and the experimental data.
+	To quantify the quality of the two fits, we calculated the root mean squared difference $\Delta f_\text{rms}$ between each replicated fraction and the experimental data.
 	We simulated each set of parameters fifty times and averaged $\Delta f_\text{rms}$ at each time step over the fifty simulations.
 	Figures~\ref{fig:RMSDiff}A and B show $\Delta f_\text{rms}(x,t)$ for high and low $n$ respectively and Fig.~\ref{fig:RMSDiff}C shows the average value for each time step, $\Delta f_\text{rms}(t)$.
 	Surprisingly, and in contrast to the results presented so far, these data imply that the quality of the MIM fits is nearly identical\footnote{
@@ -227,7 +229,7 @@ We expanded our single-origin analysis to a genome with two origins and more and
 	Further, we were interested in the relationship between the large-$n$ values from the fit and the small-$n$ values from the fit.
 	The MIM does not claim that $n$ is the absolute number of initiators on an origin; rather, the fitted parameter should be proportional to the absolute number of initiators.
 	If this is true, the values for low-$n$ and high-$n$ should be linearly related.
-	Our suspicion, based on the results of our single-origin investigation, was that the relationship would not be linear, but go approximately as $n^{-1/2}$.
+	Our suspicion, based on the results of our single-origin investigation, was that the relationship would not be linear but go approximately as $n^{-1/2}$.
 	However, our results from fitting to Chromosome I seem to contradict this suspicion.
 	Indeed, Fig.~\ref{fig:ChrISims}A shows that the relationship is linear: $n_\text{small} \propto n_\text{large}$.
 		
@@ -245,10 +247,10 @@ We expanded our single-origin analysis to a genome with two origins and more and
 			}
 	\end{figure} 
 	
-	Using the same technique as outline in Sec.\ref{subsec:BiasedFits}, we used the MIM to calculate $n_\text{fit}$ values for each origin that we simulated on Chromosome I.
-	For the six origins we simulated, we calculated the percentage difference between $n_\text{fit}$ and $n_\text{sim}$ (shown in Figs.~\ref{fig:ChrIFitVsSim} B and D).
+	Using the same technique as outlined in Sec.\ref{subsec:BiasedFits}, we used the MIM to calculate $n_\text{fit}$ values for each origin that we simulated on Chromosome I.
+	For the six origins we simulated, we calculated the percent difference between $n_\text{fit}$ and $n_\text{sim}$ (shown in Figs.~\ref{fig:ChrIFitVsSim} B and D).
 	The trend we observe in the single origin case of decreasing percentage difference with increasing $n$ is no longer present.
-	In the case of Chromosome I, our measurements indicate that the MIM is approximately equally effective for both high-$n$ and low-$n$.
+	Our measurements of Chromosome I indicate that the MIM is approximately equally effective for both high-$n$ and low-$n$.
 	
 	We suspected that the spatial organization of the origins in Chromosome I played a role in the observed equality in the fit.
 	Therefore, Fig.~\ref{fig:ChrISims}B shows the percentage difference as a function of location within the genome.
@@ -262,7 +264,7 @@ We expanded our single-origin analysis to a genome with two origins and more and
 	Therefore, we ask the question: \emph{What is different between the single-origin simulations and the simulations of Chromosome I?}
 	The immediate answer is that the number of origins has changed from one to six.
 	Perhaps then, multiple origins cooperate somehow to reduce the effect of small $n$ on the predictive power of the MIM.
-	Here we show our investigations of genomes with more than one origin.
+	Here, we show our investigations of genomes with more than one origin.
 	
 		\subsection{Two-Origin Investigation}
 		\label{subsec:TwoOrigins}
@@ -270,7 +272,7 @@ We expanded our single-origin analysis to a genome with two origins and more and
 		To test our hypothesis that multiple origins cooperate to increase the efficacy of the MIM in the small-$n$ regime, we expanded our single-origin investigation to a genome with two origins.
 		With the addition of a second origin, there is a new consideration: By what distance should the two origins be separated?
 		The obvious maximum distance the origins should be separated is $2vt_\text{sim}^\text{(max)}$, because if they are any further apart, their replicated regions will never overlap.
-		For our simulations, that is 180 kb.
+		For our simulations that is 180 kb.
 		However, it is very rare for an origin to fire at the start of S phase, so placing the two origins 180 kb apart is not wise.
 		We looked to the fitted locations of origins on Chromosome I shown in Tab.~\ref{tab:LargeAndSmallN} as a guide.
 		Here, we see the two closest origins are 18.4 kb separated, and the two furthest origins are 54.2 kb separated.
@@ -288,7 +290,7 @@ We expanded our single-origin analysis to a genome with two origins and more and
 			}
 	\end{figure} 
 		
-		Figure~\ref{fig:TwoOrigins} shows the percent difference between $n_\text{sim}$ and $n_\text{fit}$ resulting from these simulations for $n$ ranging from 2 to 64 Compared to single-origins simulations.
+		Figure~\ref{fig:TwoOrigins} shows the percent difference between $n_\text{sim}$ and $n_\text{fit}$ resulting from these simulations for $n$ ranging from 2 to 64 compared to single-origins simulations.
 		Contrary to our hypothesis, these results show that two origins are fitted less accurately than single origins.
 		
 		
@@ -305,19 +307,20 @@ We expanded our single-origin analysis to a genome with two origins and more and
 		\end{center}
 			\caption[Sketch of Sub-sequences of Chromosome I]{\label{fig:ChrISubSeq} 
 				Sketch of sub-sequences of Chromosome I used in simulations.
-				Vertical grey lines denote chosen edge points for sub-sequences.
+				Vertical lines denote chosen edge points for sub-sequences.
 				Circles represent origins.
-				Horizontal black lines represent sub-sequences (number of origins labeled and the full chromosome (labeled).
+				Horizontal lines represent sub-sequences (number of origins labeled and the full chromosome (labeled).
+				Star indicates the sub-sequence highlighted in Fig.~\ref{fig:IncreasingOrigins}.
 			}
 	\end{figure} 
 
 		We would like to see a transition from the inaccurate 2-origin system to the accurate 6-origin case.
 		To accomplish this, we chose to simulate sub-sequences of Chromosome I containing 2 origins, 3 origins, and 4 origins.
-		Figure~\ref{fig:ChrISubSeq} illustrates how the sub-sequences were selected, with divisions occurring directly in the middle\footnote{
+		Figure~\ref{fig:ChrISubSeq} illustrates how the sub-sequences were selected with divisions occurring directly in the middle\footnote{
 		Due to a calculation error, the second division was 4 kb off the midpoint. This should not have a strong impact on the results.}
 		of neighbouring origins.
 		There may be better selection criteria for where the endpoints of sub-sequences should fall;
-		for example, the fifth origin has higher $n$ than both of its neighbours, and therefore it will have a larger region of influence than them.
+		for example, the fifth origin has higher $n$ than both of its neighbours; therefore, it will have a larger region of influence than they.
 		However, as the results will show, in addition to its simplicity, this method is effective.
 		
 	\begin{figure}[tbh]
@@ -334,12 +337,12 @@ We expanded our single-origin analysis to a genome with two origins and more and
 	\end{figure} 
 		
 		We simulated the sub-sequences of Chromosome I using the $n$ values shown in Tab.~\ref{tab:LargeAndSmallN}.
-		Figure~\ref{fig:IncreasingOrigins} shows a scatter plot of $n_\text{fit}$ vs. $n\text{sim}$ for two-origin (left), three-origin (middle), and four-origin (right) sub-sequences (labeled with a star in Fig.~\ref{fig:ChrISubSeq}) of Chromosome I in the high-$n$ (black circles) and low-$n$ (open circles) regimes.
-		The two dotted lines show the four origins on a single sub-sequence in order.
+		Figure~\ref{fig:IncreasingOrigins} shows a scatter plot of $n_\text{fit}$ vs. $n_\text{sim}$ for two-origin (left), three-origin (middle), and four-origin (right) sub-sequences (labeled with a star in Fig.~\ref{fig:ChrISubSeq}) of Chromosome I in the high-$n$ (black circles) and low-$n$ (open circles) regimes.
+		The two dotted lines show the four origins on a single sub-sequence, in order.
 		In this data we observe two trends:
-		First, as the number of origins in the sequence increases, the MIM fits grow in accuracy.
+		First, as the number of origins in the sequence increases the MIM fits grow in accuracy.
 		While between high $n$ and low $n$, the accuracy is still better in the high-$n$ regime, we suspect that as $n$ grows the difference will become negligible.
-		Second, as illustrated by the dotted lines in Fig.~\ref{fig:IncreasingOrigins}, we observe that origins in the center of the sequence (surrounded by origins) are fitted more accurately than origins on the edges, with a single neighbour only.
+		Second, as illustrated by the dotted lines in Fig.~\ref{fig:IncreasingOrigins}, we observe that origins in the center of the sequence (surrounded by origins) are fitted more accurately than origins on the edges that have a single neighbour only.
 		These two trends appear to work together to make the MIM accurate for all values of $n$ on sequences with many origins.
 		
 

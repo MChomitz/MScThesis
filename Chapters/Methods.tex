@@ -76,7 +76,7 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		The second task of the preparation module is to assign a firing time to each initiator on the genome.
 		This is different from assigning a firing time to each origin: If there are $k$ origins, then the number of initiators is given by $\sum\nolimits_{i=0}^k N_i = K$.
 		Therefore, $K$ randomly generated firing times are required.
-		The MIM dictates the desired firing time distribution of an initiator, which we derive from the cumulative firing time probability shown in Eq.~\ref{eq:CPDInitiator} (and again below).
+		The MIM dictates the desired firing time distribution of an initiator, which we derive from the cumulative firing time probability shown in Eq.~\ref{eq:CPDInitiator} (and again in Eq.~\ref{eq:CPDInitiator2}).
 		\begin{equation} \label{eq:CPDInitiator2}
 			\Phi_0(t) = \frac{1}{1+\left(\frac{t^*_{1/2}}{t}\right)^{r^*}}\text{ ,}
 		\end{equation}
@@ -99,7 +99,7 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		Figure~\ref{fig:phantom} illustrates the key features of the phantom-nuclei method.
 		There are three major steps in our phantom nuclei module: pre-processing the parameters, simulating replication, and compiling the replicated fraction.
 		In taking these three steps, the phantom nuclei module quickly calculates the regions on the genome of a single cell which have been replicated.
-		These steps have been separated for the sake of clarity, however, there is some overlap between them in our implementation to increase performance.
+		These steps have been separated for the sake of clarity; however, there is some overlap between them in our implementation to increase performance.
 		
 		\begin{figure}[tbh]
 			\begin{center}
@@ -214,7 +214,7 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		In their experiment, Hawkins~\emph{et~al.} used DNA sequencing to calculate the replicated fraction of two strains of budding yeast: wild-type budding yeast and a mutant with three origins of replication removed.
 		Figure~\ref{fig:ReplicatedFractionExample} shows their results for Chromosome IV of the wild-type genome.
 		Notice that the noise in the experiment leads to replication fraction estimates that lie outside the possible range between zero and one.
-		Our goal was to create simulated replicated fraction data that closely resembled data from experiment.
+		Our goal was to create simulated replicated fraction data that closely resembles data from sequencing experiments.
 		To do this, we need to include noise in our data commensurate with that seen experimentally and must therefore estimate experimental noise.
 		
 		\begin{figure}[tbh]
@@ -239,7 +239,7 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		To estimate the distribution of fluctuations, we considered how the differences between the experiments, calculated point-by-point, were distributed.
 		Figure~\ref{fig:MeanDifference} shows the mean difference for each chromosome ($x$-axis) at each time step (separate axis, labeled).
 		Since the differences vary in time, they are analyzed at each time step separately.
-		Within each time point, the fluctuations are much more stable, except for a downward trend in Chromosome III.
+		Within each time point the fluctuations are much more stable, except for a downward trend in Chromosome III.
 		Thus, in addition to the three chromosomes that were mutated, Chromosome III was removed from our analysis.
 		
 		\begin{figure}[tbh]
@@ -260,7 +260,7 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		After removing the data from the four chromosomes mentioned, we compiled histograms for the six time steps measured.
 		These histograms (shown in Fig.~\ref{fig:HistDifference}) estimate the probability distribution between the two noisy measurements.
 		To properly duplicate the noise of a single experiment, we need the distribution of a single noisy measurement.
-		From elementary properties of the variance,two independent random variables $A$ and $B$ have $\text{Var}[A-B] = \text{Var}[A] + \text{Var}[B]$.
+		From elementary properties of the variance, two independent random variables $A$ and $B$ have $\text{Var}[A-B] = \text{Var}[A] + \text{Var}[B]$.
 		We assume that the two measurements are equally noisy, which implies that the standard deviations of the differences are $\sqrt{2}$ times larger than the standard deviation of a single measurement.
 		Our estimates of the noise are shown as open circles in Fig.~\ref{fig:Noise}.
 		
@@ -280,7 +280,7 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		
 		There are three features of the histograms in Fig.~\ref{fig:HistDifference} that should be discussed.
 		First, unlike the microarray data that Yang~\emph{et al.} analyzed, the histograms extracted from sequencing data are Gaussian distributed.
-		This implies that it is better suited to analysis with the MIM, since the MIM approach assumes Gaussian-distributed noise~\cite{ScottsPaper}.
+		This implies that the data sequencing experiments are better suited to analysis with the MIM, since the MIM approach assumes Gaussian-distributed noise~\cite{ScottsPaper}.
 		Second, the standard deviation evolves as time progresses.
 		This is expected: Early in the replication program and late in the replication program, many of the cells will be mostly unreplicated and mostly replicated  respectively.
 		Therefore, we expect that the noise will be diminished at early time and late time.
@@ -301,7 +301,7 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		\end{figure}
 		
 		In addition to measuring the distribution of the point-by-point differences in experimental data, we measured the correlation length.
-		Figure~\ref{fig:correlation}C shows the autocorrelation of the differences, after the mean difference had been subtracted.
+		Figure~\ref{fig:correlation}C shows the autocorrelation of the differences after the mean difference had been subtracted.
 		We observe two features in the autocorrelation function.
 		There is a delta function at $\Delta x=0$, implying that the noise between neighbouring data points is large.
 		However, there is also a non-negligible tail, implying long-range order in the experimental data.
@@ -389,10 +389,10 @@ Except when noted, all computations were performed in IGOR Pro Version 6.3.6.4.
 		
 		Figure~\ref{fig:correlation}B shows the autocorrelation function for the simulated data with artificial noise.
 		With the addition of the noise, we have acquired the delta function at $x=0$ but lost much of the long-range order.
-		To try understand the effect that creates the long-range order in experiment, and potentially improve our simulation, we tried a second approach to creating noise.
-		This new approach, called the ``sequencing simulation,'' simulated 1000 cells, recorded only one tenth of the data, and does not add any artificial noise.
+		To understand the effect that creates the long-range order in experiment, and potentially improve our simulation, we tried a second approach to creating noise.
+		This new approach, called the ``sequencing simulation,'' simulates 1000 cells, records only one tenth of the data, and does not add any artificial noise.
 		With this method, the simulation is closer to sequencing experiments which pull 50 kb sequences from an effectively infinite population.
-		Analysis of the point-by-point difference shows a similar evolution from Laplace distributed noise, to Gaussian (figure not shown).
+		Analysis of the point-by-point difference shows a similar evolution from Laplace distributed noise to Gaussian (figure not shown).
 		The estimated standard deviations, shown as black squares in Fig.~\ref{fig:Noise}, are closer to the experimental estimates than our initial simulation but do not coincide.
 		However, as shown in Fig.~\ref{fig:correlation}D, the correlation length is shorter in this case than in the simulation with added noise.
 		
