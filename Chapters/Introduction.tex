@@ -17,7 +17,7 @@ In many human cells DNA replicates in about 8 hours~\cite{CellMolApproach}.
 This is much less time than the four years that would be needed if there was only a single active origin of replication.
 Therefore, a single origin cannot be solely responsible for the replication of eukaryotic DNA.
 Eukaryotic DNA is thus replicated using a parallel process, with many origins along~\cite{eukaryotereview}.
-A considerable body of experimental evidence suggests that the timing (initiation) of origins is stochastic~\cite{}\textbf{FIND SOURCES}.
+A considerable body of experimental evidence suggests that the timing (initiation) of origins is stochastic~\cite{DNACombing,Stochastic}\textbf{FIND SOURCES}.
 
 Using many origins in the replication program creates several non-obvious issues that must be addressed for the program to work effectively.
 One issue is the existence of separate replicated regions during the replication process.
@@ -98,7 +98,7 @@ These origins are able to coordinate their stochastic initiation times such that
 		\begin{center}
 			\includegraphics[width=\textwidth]{images/EarlyReplicationConcept.png}
 		\end{center}
-			\caption[Schematic of G1 and S Phases]{\label{fig:EarlyReplicationConcept} Simplified schematic of the G1 and S phases of the cell cycle, containing only those parts that are necessary to understand the model presented in Ch.~[\textbf{CH 3}].\\
+			\caption[Schematic of G1 and S Phases]{\label{fig:EarlyReplicationConcept} Simplified schematic of the G1 and S phases of the cell cycle, containing only those parts that are necessary to understand the model presented in Ch.~\ref{ch:Methods}.\\
 				\textbf{A.} In the G1 phase, origins are located and licensed when the ORC recruits pairs of MCM2-7 hexamers onto the dsDNA.
 					During S phase, pairs of Mcm2-7 hexamers are activated by the Cdc45 protein.
 					After activation, the resulting structures become replicative forks that traverse the DNA unwinding the dsDNA allowing the DNA to be replicated.\\
@@ -263,30 +263,34 @@ These origins are able to coordinate their stochastic initiation times such that
 	Here, we give a brief outline of the thesis.
 	
 	\textbf{Chapter 2 - Motivation}
-	Here we summarize the mathematical details of the KJMA-like model that describes DNA replication, and how to use it to calculate the replicated fraction from a theoretical model.
+	In Chapter 2, we summarize the mathematical details of the KJMA-like model that describes DNA replication, and how to use it to calculate the replicated fraction from a theoretical model.
 	We then discuss the development of the Sigmoidal Model and the correlation between origin firing time width and median that it revealed.
-	This correlation motivated the creation of the Multiple Initiator Mode (MIM)l, which we describe.
-	Finally, we introduce the recently experimental work done in N.~Rhind's lab that measured loaded MCM.
-	These measurements provided some surprising results that call into question part of the scenario assumed in the MIM.
-	With this chapter we hope to motivate our work in measuring the effect of the experimental results from the Rhind Lab on the MIM.
+	This correlation led to the creation of the Multiple Initiator Mode (MIM), which we describe.
+	Finally, we introduce the recent experimental work done in N.~Rhind's lab that measured loaded MCM.
+	These experiments measured lower number of MCMs than assumed by the MIM.
+	With this chapter we hope to motivate our work in measuring the effect of small numbers of MCMs on the MIM.
 	
-	\textbf{Chapter 3 - Method}
-	Here we discuss the MIM simulator program which was used in our analysis of the Multiple Initiator Model.
+	\textbf{Chapter 3 - Methods}
+	Here, we discuss the MIM simulator program which was used in our analysis of the Multiple Initiator Model.
 	We start by outlining the simulation process in detail and motivate the assumptions and choices we made.
-	Our discussion of the MIM simulator transitions into an analysis of noise; we want our simulation to produce data similar to experiment, including the level of noise.
+	Our discussion of the MIM simulator transitions into an analysis of noise; We want our simulation to produce data similar to experiment, including the level of noise.
 	We estimate the noise in current cutting-edge sequencing data, and compare that to the noise in our simulation.
-	Because the noise in experiment is different from the noise in our simulated data, we motivate the introduction of two methods of increasing the noise in our simulations:
-	One method based on experimental limitations, and the other method involved adding Gaussian noise.
+	Because the noise in experiment is different from the noise in our simulated data, we introduce two methods of increasing the noise in our simulations:
+	One method is based on experimental limitations, and the other method involves adding Gaussian noise.
 	
 	\textbf{Chapter 4 - Results}
-	Here we outline our three investigations in full.
+	In this chapter, we outline the four investigations we undertook in our exploration of the affect of small numbers of MCMs on the MIM.
 	We started with preliminary single-origin measurements comparing the analytical MIM to simulated data as a quick investigation.
-	After these measurements implied a deeper investigation would prove fruitful, we redesigned our methodology and performed more single-origin measurements.
-	We moved onto simulating Chromosome I, in which we measured how the fit from MIM changes when it is forced to have high or low $n$.
-	With our final investigation, we show that \textbf{Finish this statement!}
+	These simple measurements indicated that there a large effect and this avenue of research is meaningful.
+	Thus, for our second investigation, we redesigned our methodology and performed more single-origin measurements.
+	Third, we moved onto simulating Chromosome I of budding yeast.
+	In this investigation we measured how the fit from MIM changes when it is forced to have high or low numbers of MCMs.
+	The results from our third investigation contradicted our findings in the first two.
+	Therefore, in our fourth investigation we simulated artificial genomes contains two, three and four origins.
+	In these multiple-origin simulations, we observe two trends that contribute such that inferences made with the MIM grow in accuracy as the number of origins increases.
 	
 	\textbf{Chapter 5 - Conclusions}
-	Here we discuss the implications of our results and suggest new directions for this research.
+	Here, we discuss the implications of our results and suggest new directions for this research.
 		
 		
 		
